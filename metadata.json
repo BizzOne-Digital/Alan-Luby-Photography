@@ -1,0 +1,6 @@
+{
+  "name": "Alan Luby Photography",
+  "description": "Premium editorial, journalism, events, and portrait photography by Alan Luby. Capturing authentic moments and compelling visual stories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
