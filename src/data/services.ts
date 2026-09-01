@@ -74,6 +74,6 @@ export const servicesData: ServiceItem[] = [
       'Fast-turnaround post-production and dedicated support',
     ],
     idealFor: ['Multi-City Tours', 'Specialized Visual Briefs', 'Private Creative Commissions', 'Hybrid Event-Editorial Projects', 'Long-term Retainers'],
-    imageSrc: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: 'https://images.pexels.com/photos/14532556/pexels-photo-14532556.jpeg',
   },
 ];

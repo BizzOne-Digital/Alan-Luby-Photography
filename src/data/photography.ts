@@ -2,7 +2,7 @@ import { PhotoItem, PhotoCategory } from '../types';
 
 /**
  * ALAN LUBY PHOTOGRAPHY - MASTER IMAGE REPOSITORY
- * 
+ *
  * INSTRUCTIONS FOR CLIENT / DEVELOPER:
  * To replace or add images with Alan's real photographs:
  * 1. Replace the `imageSrc` URL with your hosted image URL or a local path in `/public/images/`.
@@ -93,7 +93,7 @@ export const photographyCollection: PhotoItem[] = [
     category: 'journalism',
     categoryLabel: 'Photojournalism',
     aspectRatio: 'tall',
-    imageSrc: 'https://images.unsplash.com/photo-1477959858617-67f30bc75b82?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: 'https://images.pexels.com/photos/39302320/pexels-photo-39302320.jpeg',
     altText: 'Black and white graphic street architecture with long shadows and lone pedestrian',
     story: 'Geometric study of scale and human solitude in the modern metropolis.',
     location: 'Downtown District',
@@ -108,7 +108,7 @@ export const photographyCollection: PhotoItem[] = [
     category: 'editorial',
     categoryLabel: 'Editorial Story',
     aspectRatio: 'square',
-    imageSrc: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: 'https://images.pexels.com/photos/37217504/pexels-photo-37217504.jpeg',
     altText: 'Artisan working with glowing metal, sparks flying in a dark moody workshop',
     story: 'Behind-the-scenes essay celebrating heritage trades and focused manual mastery.',
     location: 'Heritage Foundry',
