@@ -13,6 +13,31 @@ export const AboutPage: React.FC = () => {
     <div id="about-page" className="min-h-screen bg-[#050505] text-[#F5F5F4] pt-28 pb-20">
       
       {/* Page Header */}
+      <div className="relative isolate">
+        {/* Hero background */}
+        <div className="absolute inset-0 -top-28 -z-10 overflow-hidden" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=1920&auto=format&fit=crop"
+            srcSet="https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=75&w=768&auto=format&fit=crop 768w,
+                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=75&w=1280&auto=format&fit=crop 1280w,
+                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=1920&auto=format&fit=crop 1920w,
+                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=2560&auto=format&fit=crop 2560w"
+            sizes="100vw"
+            alt=""
+            className="w-full h-full object-cover object-center filter brightness-[0.75] grayscale contrast-[1.1]"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
+          {/* Dark wash keeps the existing hero text legible */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/15" />
+          {/* Left scrim: keeps the image's bright area clear of the left-aligned text */}
+          <div className="absolute inset-0
+            bg-[linear-gradient(to_right,rgba(5,5,5,0.94)_0%,rgba(5,5,5,0.88)_70%,rgba(5,5,5,0.8)_100%)]
+            md:bg-[linear-gradient(to_right,#050505_0%,rgba(5,5,5,0.92)_45%,rgba(5,5,5,0.45)_70%,transparent_100%)]" />
+          <div className="absolute inset-0 subtle-noise opacity-20" />
+        </div>
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="border-b border-white/10 pb-10 space-y-4 max-w-4xl">
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
@@ -26,6 +51,7 @@ export const AboutPage: React.FC = () => {
           </p>
         </div>
       </section>
+      </div>
 
       {/* Main Bio & Portrait Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">

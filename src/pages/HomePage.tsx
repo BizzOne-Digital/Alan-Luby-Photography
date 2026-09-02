@@ -5,6 +5,7 @@ import { testimonialsData } from '../data/testimonials';
 import { PhotoCard } from '../components/PhotoCard';
 import { ImageModal } from '../components/ImageModal';
 import { ContactCTASection } from '../components/ContactCTASection';
+import { QuantumNebula } from '../components/ui/quantum-nebula';
 import { PhotoItem } from '../types';
 import { 
   ArrowRight, 
@@ -53,6 +54,10 @@ export const HomePage: React.FC = () => {
           />
           {/* Subtle noise and radial gradients */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-black/80" />
+          {/* Interactive particle nebula, above the wash so the glow survives it */}
+          <QuantumNebula className="absolute inset-0 w-full h-full pointer-events-none
+            opacity-30 [mask-image:radial-gradient(ellipse_at_top_right,black_0%,rgba(0,0,0,0.3)_45%,transparent_78%)]
+            md:opacity-70 md:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.18)_28%,rgba(0,0,0,0.55)_55%,black_85%)]" />
           <div className="absolute inset-0 subtle-noise opacity-20" />
         </div>
 
