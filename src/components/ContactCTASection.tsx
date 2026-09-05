@@ -26,7 +26,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                 <span>Accepting Commissions</span>
               </div>
 
-              <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.92]">
+              <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-[0.02em] uppercase leading-[0.92]">
                 {headline}
               </h2>
 

@@ -38,7 +38,7 @@ export const TestimonialsPage: React.FC = () => {
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
             <span>Reputation & Reliability</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-none">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             Client Experiences
           </h1>
           <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
@@ -61,20 +61,20 @@ export const TestimonialsPage: React.FC = () => {
             </div>
 
             <p className="font-serif-editorial text-2xl sm:text-3xl md:text-4xl text-white italic leading-snug">
-              “Alan captured the moments we needed without interrupting the moment itself. Professional, adaptable, and incredibly easy to work with.”
+              “Alan Luby did a superb job last night! Walter Kriestch on our desk was raving about the quality of the prints.”
             </p>
 
             <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 gap-4">
               <div>
-                <span className="font-display font-black text-sm uppercase tracking-wide text-white block">
-                  Event Organizer & Executive Director
+                <span className="font-display font-semibold text-sm uppercase tracking-wide text-white block">
+                  Sherry Johnson, Assistant Sports Editor/Broward
                 </span>
                 <span className="text-xs text-white/50 font-light">
-                  Annual Leadership Conference & Live Gala
+                  The Miami Herald
                 </span>
               </div>
               <div className="text-[9px] font-mono uppercase tracking-widest text-white/40 font-bold">
-                [Client Feedback Representative Sample]
+                [Verified Client Feedback]
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ export const TestimonialsPage: React.FC = () => {
 
               <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                 <div>
-                  <span className="font-display font-black text-xs uppercase tracking-wide text-white block">
+                  <span className="font-display font-semibold text-xs uppercase tracking-wide text-white block">
                     {item.clientRole}
                   </span>
                   <span className="text-[10px] uppercase tracking-wider text-white/50 font-mono">
@@ -130,7 +130,7 @@ export const TestimonialsPage: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
               Consistent Values
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
               The Client Partnership
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light">
@@ -141,7 +141,7 @@ export const TestimonialsPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-8 bg-[#050505] border border-white/10 space-y-3 text-center">
               <HeartHandshake className="w-7 h-7 text-[#E11D48] mx-auto" />
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Discreet & Focused
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -151,7 +151,7 @@ export const TestimonialsPage: React.FC = () => {
 
             <div className="p-8 bg-[#050505] border border-white/10 space-y-3 text-center">
               <CheckCircle2 className="w-7 h-7 text-[#E11D48] mx-auto" />
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Punctual Delivery
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -161,7 +161,7 @@ export const TestimonialsPage: React.FC = () => {
 
             <div className="p-8 bg-[#050505] border border-white/10 space-y-3 text-center">
               <ShieldCheck className="w-7 h-7 text-[#E11D48] mx-auto" />
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Technical Consistency
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">

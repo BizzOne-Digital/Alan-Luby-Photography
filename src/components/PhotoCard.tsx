@@ -90,7 +90,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block mb-1">
               {photo.categoryLabel}
             </span>
-            <h4 className="font-display text-lg font-black uppercase text-white leading-tight tracking-tight">
+            <h4 className="font-display text-lg font-semibold uppercase text-white leading-tight tracking-[0.02em]">
               {photo.title}
             </h4>
             <p className="text-xs text-white/60 line-clamp-1 mt-0.5 font-light">

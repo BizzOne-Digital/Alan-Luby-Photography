@@ -43,7 +43,7 @@ export const AboutPage: React.FC = () => {
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
             <span>Behind The Lens</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-none">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             About Alan Luby
           </h1>
           <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
@@ -73,7 +73,7 @@ export const AboutPage: React.FC = () => {
                 <span className="text-[9px] font-mono uppercase tracking-widest text-[#E11D48] block mb-1 font-bold">
                   PRINCIPAL PHOTOGRAPHER
                 </span>
-                <p className="font-display text-base font-black text-white uppercase tracking-tight">
+                <p className="font-display text-base font-semibold text-white uppercase tracking-[0.02em]">
                   Alan Luby
                 </p>
                 <p className="text-xs text-white/50 font-mono">
@@ -101,21 +101,28 @@ export const AboutPage: React.FC = () => {
           <div className="lg:col-span-7 space-y-8">
             
             <div className="space-y-4">
-              <h2 className="font-display text-2xl sm:text-4xl font-black uppercase tracking-tighter text-white">
+              <h2 className="font-display text-2xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white">
                 The Story Behind the Frame
               </h2>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Alan Luby began his photography journey immersed in the fast-paced, high-observation world of 
-                <strong className="text-white font-semibold"> journalism, live events, and candid portraiture</strong>. In these demanding settings, there are no second takes—you learn to anticipate human emotion, read evolving ambient light, and capture decisive moments with composure and technical precision.
+                Alan Luby is a freelance photographer who currently resides in
+                <strong className="text-white font-semibold"> Boynton Beach, Florida</strong>, with
+                <strong className="text-white font-semibold"> over 30 years of photography experience</strong>. He is a member of the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, The American Society of Media Photographers.
               </p>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Over the course of his career, Alan has diversified his visual practice to encompass comprehensive event coverage, executive and environmental portraits, documentary photo essays, and commercial brand assignments.
+                He has been hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida Sun-Sentinel, the Associated Press and numerous other publications. Alan also served as team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the Continental Basketball Association.
+              </p>
+              <p className="text-base text-white/70 font-light leading-relaxed">
+                As a freelance photographer he has had the opportunity to cover the Miami Dolphins, Miami Heat, Miami Marlins, the University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott, and numerous other news, sports and feature assignments for various publications.
+              </p>
+              <p className="text-base text-white/70 font-light leading-relaxed">
+                Alan is also a portrait and wedding photographer who has provided event photography with on-site printing for Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters of Palm Beach County, BB King's, and numerous other profit and not-for-profit organizations.
               </p>
             </div>
 
             {/* A DIFFERENT KIND OF PHOTOGRAPHER */}
             <div className="p-8 bg-[#0A0A0A] border border-white/10 border-l-4 border-l-[#E11D48] space-y-4 shadow-xl">
-              <h3 className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-[0.02em] text-white">
                 A Different Kind of Photographer
               </h3>
               <p className="text-sm sm:text-base text-white/60 font-light leading-relaxed">
@@ -143,7 +150,7 @@ export const AboutPage: React.FC = () => {
 
             {/* Photography Philosophy */}
             <div className="space-y-4 pt-2">
-              <h3 className="font-display text-xl font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-xl font-semibold uppercase tracking-[0.02em] text-white">
                 Photography Philosophy
               </h3>
               <div className="space-y-4 text-sm text-white/70 font-light leading-relaxed">
@@ -171,7 +178,7 @@ export const AboutPage: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
               The Workflow
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
               Professional Approach
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light">
@@ -186,7 +193,7 @@ export const AboutPage: React.FC = () => {
                 <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 01</span>
                 <HeartHandshake className="w-5 h-5 text-white/40" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Pre-Shoot Discovery
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -199,7 +206,7 @@ export const AboutPage: React.FC = () => {
                 <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 02</span>
                 <Camera className="w-5 h-5 text-white/40" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Live Execution
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -212,7 +219,7 @@ export const AboutPage: React.FC = () => {
                 <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 03</span>
                 <Sliders className="w-5 h-5 text-white/40" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Editorial Curation
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -225,7 +232,7 @@ export const AboutPage: React.FC = () => {
                 <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 04</span>
                 <FileText className="w-5 h-5 text-white/40" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
                 Archival Delivery
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">

@@ -130,7 +130,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({
 
             {/* Title & Assignment */}
             <div>
-              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
+              <h3 className="font-display text-2xl sm:text-3xl font-semibold uppercase text-white tracking-[0.02em]">
                 {photo.title}
               </h3>
               <p className="text-xs uppercase tracking-widest text-[#E11D48] font-bold mt-1">

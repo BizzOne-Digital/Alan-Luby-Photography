@@ -43,7 +43,7 @@ export const ServicesPage: React.FC = () => {
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
             <span>Core Capabilities</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-none">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             Services & Disciplines
           </h1>
           <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
@@ -82,7 +82,7 @@ export const ServicesPage: React.FC = () => {
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
                   {service.tagline}
                 </span>
-                <h2 className="font-display text-2xl sm:text-4xl font-black uppercase tracking-tighter text-white">
+                <h2 className="font-display text-2xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white">
                   {service.title}
                 </h2>
               </div>
@@ -154,7 +154,7 @@ export const ServicesPage: React.FC = () => {
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
               CUSTOM BRIEFING // SPECIAL COMMISSIONS
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
               Need something different? <br />
               <span className="text-[#E11D48]">Let's discuss your project.</span>
             </h2>

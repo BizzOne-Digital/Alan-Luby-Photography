@@ -90,7 +90,7 @@ export const WorkPage: React.FC = () => {
             <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
               <span>Selected Works</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-none">
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
               Photography Archive
             </h1>
             <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
@@ -166,7 +166,7 @@ export const WorkPage: React.FC = () => {
         {filteredPhotos.length === 0 ? (
           <div className="py-24 text-center space-y-4 border border-dashed border-white/10 bg-[#0A0A0A]">
             <Layers className="w-12 h-12 text-white/20 mx-auto" />
-            <h3 className="font-display text-xl font-black uppercase text-white tracking-tight">
+            <h3 className="font-display text-xl font-semibold uppercase text-white tracking-[0.02em]">
               No Photographs In This Category
             </h3>
             <p className="text-sm text-white/50 font-light">

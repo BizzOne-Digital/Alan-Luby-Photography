@@ -26,7 +26,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', variant = 'full' }) 
 
       {variant !== 'monogram' && (
         <div className="flex flex-col justify-center">
-          <span className="font-display text-xl sm:text-2xl font-black tracking-tighter leading-none text-[#F5F5F4] uppercase transition-colors group-hover:text-white">
+          <span className="font-display text-xl sm:text-2xl font-semibold tracking-[0.02em] leading-none text-[#F5F5F4] uppercase transition-colors group-hover:text-white">
             ALAN LUBY
           </span>
           <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.3em] text-[#E11D48] uppercase mt-0.5">

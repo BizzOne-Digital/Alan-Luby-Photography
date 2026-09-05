@@ -71,7 +71,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-[0.92]">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
               Photography <br />
               <span className="text-white/80">
                 That Tells
@@ -83,8 +83,8 @@ export const HomePage: React.FC = () => {
 
             {/* Supporting Copy */}
             <p className="text-base sm:text-xl text-white/70 font-light leading-relaxed max-w-2xl">
-              From decisive moments and major events to portraits and editorial commissions, 
-              <strong className="text-white font-bold"> Alan Luby </strong> 
+              From decisive moments and major events to portraits and editorial commissions,
+              <strong className="text-white font-bold"> Alan Luby </strong>
               brings a versatile eye and seasoned professional experience to every frame.
             </p>
 
@@ -146,7 +146,7 @@ export const HomePage: React.FC = () => {
                 THE CORE PHILOSOPHY
               </span>
               
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-none">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
                 One photographer. <br />
                 <span className="text-[#E11D48]">Many stories.</span> Built around the moment.
               </h2>
@@ -189,7 +189,7 @@ export const HomePage: React.FC = () => {
                 </p>
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <div>
-                    <span className="font-display font-black text-sm uppercase tracking-wide text-white block">
+                    <span className="font-display font-semibold text-sm uppercase tracking-wide text-white block">
                       Alan Luby
                     </span>
                     <span className="text-xs text-white/50 font-light">Principal Photographer</span>
@@ -213,7 +213,7 @@ export const HomePage: React.FC = () => {
               <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
                 <span>Selected Frames</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+              <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
                 Featured Archive
               </h2>
             </div>
@@ -308,7 +308,7 @@ export const HomePage: React.FC = () => {
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
               VERSATILE CAPABILITIES
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
               Photography Disciplines
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light leading-relaxed">
@@ -331,7 +331,7 @@ export const HomePage: React.FC = () => {
                     </span>
                     <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-[#E11D48] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                   </div>
-                  <h3 className="font-display text-2xl font-black uppercase tracking-tight text-white group-hover:text-[#E11D48] transition-colors">
+                  <h3 className="font-display text-2xl font-semibold uppercase tracking-[0.02em] text-white group-hover:text-[#E11D48] transition-colors">
                     {cat.label}
                   </h3>
                   <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -358,7 +358,7 @@ export const HomePage: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
               The Alan Luby Advantage
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
               Why Work With Alan
             </h2>
             <p className="text-base text-white/60 font-light">
@@ -373,7 +373,7 @@ export const HomePage: React.FC = () => {
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Layers className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-lg font-semibold uppercase tracking-[0.02em] text-white">
                 VERSATILE
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -386,7 +386,7 @@ export const HomePage: React.FC = () => {
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Flame className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-lg font-semibold uppercase tracking-[0.02em] text-white">
                 STORY-DRIVEN
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -399,7 +399,7 @@ export const HomePage: React.FC = () => {
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Compass className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-lg font-semibold uppercase tracking-[0.02em] text-white">
                 ADAPTABLE
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -412,7 +412,7 @@ export const HomePage: React.FC = () => {
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-white">
+              <h3 className="font-display text-lg font-semibold uppercase tracking-[0.02em] text-white">
                 PROFESSIONAL
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
@@ -440,7 +440,7 @@ export const HomePage: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-[#050505]/90 border border-white/10 p-3">
-                  <p className="font-display text-xs font-black uppercase tracking-wider text-white">
+                  <p className="font-display text-xs font-semibold uppercase tracking-wider text-white">
                     Alan Luby
                   </p>
                   <p className="text-[10px] font-mono text-[#E11D48] font-bold uppercase tracking-widest">
@@ -456,7 +456,7 @@ export const HomePage: React.FC = () => {
                 MEET THE PHOTOGRAPHER
               </span>
 
-              <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white leading-none">
+              <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
                 A Different Kind of <br />
                 <span className="text-white/70">
                   Photographer.
@@ -504,7 +504,7 @@ export const HomePage: React.FC = () => {
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
                 Client Trust
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tighter text-white mt-1">
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white mt-1">
                 Client Experiences
               </h2>
             </div>
@@ -537,7 +537,7 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 <div className="pt-6 border-t border-white/10">
-                  <span className="font-display font-black text-xs uppercase tracking-wide text-white block">
+                  <span className="font-display font-semibold text-xs uppercase tracking-wide text-white block">
                     {item.clientRole}
                   </span>
                   <span className="text-[10px] uppercase font-mono tracking-wider text-white/50">

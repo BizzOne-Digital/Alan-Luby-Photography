@@ -83,7 +83,7 @@ export const ContactPage: React.FC = () => {
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
             <span>Direct Inquiries</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-none">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             Contact Alan Luby
           </h1>
           <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
@@ -105,7 +105,7 @@ export const ContactPage: React.FC = () => {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#E11D48] font-bold block mb-1">
                   OFFICIAL STUDIO DIRECTORY
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
+                <h2 className="font-display text-2xl sm:text-3xl font-semibold uppercase tracking-[0.02em] text-white">
                   Alan Luby Photography
                 </h2>
                 <p className="text-sm font-semibold text-white/60">
@@ -163,7 +163,7 @@ export const ContactPage: React.FC = () => {
 
             {/* Social Channels Card */}
             <div className="p-8 bg-[#0A0A0A] border border-white/10 space-y-4">
-              <h3 className="font-display text-sm font-black uppercase tracking-widest text-white">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-white">
                 Social Channels
               </h3>
               <p className="text-xs text-white/60 font-light">
@@ -212,7 +212,7 @@ export const ContactPage: React.FC = () => {
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
+                    <h3 className="font-display text-2xl sm:text-3xl font-semibold uppercase text-white tracking-[0.02em]">
                       Message Received
                     </h3>
                     <p className="text-sm text-white/70 max-w-md mx-auto leading-relaxed font-light">
@@ -247,7 +247,7 @@ export const ContactPage: React.FC = () => {
                 <form onSubmit={handleSubmit} id="booking-inquiry-form" className="space-y-6">
                   
                   <div className="space-y-2 border-b border-white/10 pb-4">
-                    <h2 className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+                    <h2 className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-[0.02em] text-white">
                       Start a Project Inquiry
                     </h2>
                     <p className="text-xs text-white/50 font-light">
