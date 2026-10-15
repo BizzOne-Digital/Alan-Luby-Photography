@@ -8,8 +8,8 @@ interface ContactCTASectionProps {
 }
 
 export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
-  headline = "ONE PHOTOGRAPHER. MANY STORIES.",
-  subhead = "From corporate galas and live events to executive portraits and editorial documentary assignments, let's create something enduring.",
+  headline = "LET'S PHOTOGRAPH YOUR NEXT EVENT.",
+  subhead = "Events, portrait sessions, sports and performances. Share your date and what you need photographed.",
 }) => {
   return (
     <section id="contact-cta-section" className="relative py-20 lg:py-28 bg-[#050505] border-t border-white/10 overflow-hidden">
@@ -23,7 +23,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
             {/* Left Content (8 cols on lg) */}
             <div className="lg:col-span-8 space-y-6">
               <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-                <span>Accepting Commissions</span>
+                <span>Now Booking</span>
               </div>
 
               <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-[0.02em] uppercase leading-[0.92]">
@@ -60,7 +60,7 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                 id="cta-start-project"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest py-4 px-6 rounded-none transition-all duration-200 text-center"
               >
-                <span>WORK WITH ALAN</span>
+                <span>REQUEST A QUOTE</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               
@@ -73,9 +73,6 @@ export const ContactCTASection: React.FC<ContactCTASectionProps> = ({
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
 
-              <p className="text-[10px] text-white/40 uppercase tracking-widest text-center pt-1 font-bold">
-                Direct client response within 24 business hours.
-              </p>
             </div>
 
           </div>

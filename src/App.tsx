@@ -20,7 +20,7 @@ const NotFoundPage: React.FC = () => {
           Frame Not Found
         </h1>
         <p className="text-sm text-zinc-400">
-          The requested page does not exist in the Alan Luby Photography archive.
+          The requested page does not exist on the Alan Luby Photography website.
         </p>
         <Link
           to="/"

@@ -19,19 +19,19 @@ export const Footer: React.FC = () => {
             <Logo />
             <p className="text-sm text-white/60 font-light leading-relaxed max-w-sm">
               <strong className="text-[#F5F5F4] font-bold uppercase tracking-tight block text-base mb-1">
-                Photography That Tells The Story.
+                Real Moments. Real People.
               </strong>
-              One photographer. Many stories. Built with an editorial eye, journalistic truth, and dedication to authentic moments.
+              Event and portrait photography, plus sports, entertainment and business coverage, from Boynton Beach, Florida.
             </p>
             
             <div className="pt-1 flex flex-wrap items-center gap-3 text-[10px] uppercase font-bold tracking-widest">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#111111] border border-white/10 text-white/70">
                 <Camera className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span>Events • Portraits • Journalism</span>
+                <span>Events • Portraits • Sports</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#111111] border border-white/10 text-white/70">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span>Available for Travel</span>
+                <span>Boynton Beach, FL</span>
               </span>
             </div>
           </div>
@@ -92,13 +92,13 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/work?category=journalism" className="hover:text-white transition-colors">
-                  Journalism
+                <Link to="/work?category=sports" className="hover:text-white transition-colors">
+                  Sports
                 </Link>
               </li>
               <li>
-                <Link to="/work?category=editorial" className="hover:text-white transition-colors">
-                  Editorial
+                <Link to="/work?category=entertainment" className="hover:text-white transition-colors">
+                  Entertainment
                 </Link>
               </li>
               <li>
@@ -163,8 +163,8 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] text-white/40 tracking-widest uppercase font-bold gap-4">
           <div className="flex flex-wrap items-center gap-6">
-            <span>Based in FL • Working Worldwide</span>
-            <span className="text-[#E11D48]">Available for Commissions</span>
+            <span>Based in Boynton Beach, FL</span>
+            <span className="text-[#E11D48]">Now Booking Events &amp; Portraits</span>
           </div>
           <div>
             © {currentYear} Alan Luby Photography. All Rights Reserved.

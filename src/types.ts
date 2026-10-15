@@ -1,39 +1,48 @@
-export type PhotoCategory = 'all' | 'events' | 'portraits' | 'journalism' | 'editorial' | 'commercial';
+export type PhotoCategory = 'all' | 'events' | 'portraits' | 'sports' | 'entertainment' | 'commercial';
 
 export interface PhotoItem {
   id: string;
   title: string;
   category: Exclude<PhotoCategory, 'all'>;
   categoryLabel: string;
-  aspectRatio: 'landscape' | 'portrait' | 'square' | 'wide' | 'tall';
+  aspectRatio: 'landscape' | 'portrait';
+  /** Web derivative (1600px) used for display */
   imageSrc: string;
+  /** 800w + 1600w derivatives */
+  srcSet: string;
+  /** Untouched original in /public/JPEG */
+  originalSrc: string;
+  /** CSS object-position used when the card crops the frame */
+  focus: string;
   altText: string;
-  story: string;
-  location?: string;
-  assignmentType: string;
+  description: string;
   featuredOnHome?: boolean;
-  editorialNote?: string;
-  isPlaceholder?: boolean;
 }
 
 export interface ServiceItem {
   id: string;
   title: string;
   categoryKey: PhotoCategory;
+  /** Must match a contact-form option value */
+  inquiryValue: string;
   tagline: string;
   description: string;
   deliverables: string[];
   idealFor: string[];
-  imageSrc: string;
+  image: PhotoItem;
 }
 
 export interface TestimonialItem {
   id: string;
   quote: string;
   clientRole: string;
-  projectType: string;
-  isPlaceholder?: boolean;
+  /** Organization or event name, when known */
+  organization?: string;
+  /** City/state, when that is all the source gives */
+  location?: string;
+  /** Editorial summary written by us, not part of the quote */
   highlight?: string;
+  featured?: boolean;
 }
 
 export interface ContactFormValues {

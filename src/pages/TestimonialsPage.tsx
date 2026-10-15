@@ -1,48 +1,29 @@
 import React from 'react';
 import { testimonialsData } from '../data/testimonials';
 import { ContactCTASection } from '../components/ContactCTASection';
+import { PageHeroImage } from '../components/PageHeroImage';
+import { heroImages } from '../data/photography';
 import { Quote, ShieldCheck, HeartHandshake, CheckCircle2 } from 'lucide-react';
 
 export const TestimonialsPage: React.FC = () => {
+  const lead = testimonialsData.find((t) => t.featured) ?? testimonialsData[0];
+  const rest = testimonialsData.filter((t) => t.id !== lead.id);
   return (
     <div id="testimonials-page" className="min-h-screen bg-[#050505] text-[#F5F5F4] pt-28 pb-20">
       
       {/* Page Header */}
       <div className="relative isolate">
-        {/* Hero background */}
-        <div className="absolute inset-0 -top-28 -z-10 overflow-hidden" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1920&auto=format&fit=crop"
-            srcSet="https://images.unsplash.com/photo-1511578314322-379afb476865?q=75&w=768&auto=format&fit=crop 768w,
-                    https://images.unsplash.com/photo-1511578314322-379afb476865?q=75&w=1280&auto=format&fit=crop 1280w,
-                    https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1920&auto=format&fit=crop 1920w,
-                    https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2560&auto=format&fit=crop 2560w"
-            sizes="100vw"
-            alt=""
-            className="w-full h-full object-cover object-center filter brightness-[0.75] grayscale contrast-[1.1]"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            referrerPolicy="no-referrer"
-          />
-          {/* Dark wash keeps the existing hero text legible */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/15" />
-          {/* Left scrim: keeps the image's bright area clear of the left-aligned text */}
-          <div className="absolute inset-0
-            bg-[linear-gradient(to_right,rgba(5,5,5,0.94)_0%,rgba(5,5,5,0.88)_70%,rgba(5,5,5,0.8)_100%)]
-            md:bg-[linear-gradient(to_right,#050505_0%,rgba(5,5,5,0.92)_45%,rgba(5,5,5,0.45)_70%,transparent_100%)]" />
-          <div className="absolute inset-0 subtle-noise opacity-20" />
-        </div>
+        <PageHeroImage photo={heroImages.testimonials} />
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="border-b border-white/10 pb-10 space-y-4 max-w-4xl">
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-            <span>Reputation & Reliability</span>
+            <span>In Their Own Words</span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             Client Experiences
           </h1>
-          <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
-            What clients, event planners, and creative directors value most when collaborating with Alan Luby.
+          <p className="text-base sm:text-xl text-white/70 font-light leading-relaxed">
+            Feedback shared by clients, event organizers and organizations Alan has photographed for.
           </p>
         </div>
       </section>
@@ -56,26 +37,23 @@ export const TestimonialsPage: React.FC = () => {
           </div>
 
           <div className="relative z-10 max-w-4xl space-y-6">
-            <div className="inline-block bg-[#111] border border-white/15 px-3 py-1 text-[9px] font-mono text-[#E11D48] font-bold uppercase tracking-widest">
-              CORE CLIENT EXPERIENCE
-            </div>
-
-            <p className="font-serif-editorial text-2xl sm:text-3xl md:text-4xl text-white italic leading-snug">
-              “Alan Luby did a superb job last night! Walter Kriestch on our desk was raving about the quality of the prints.”
-            </p>
-
-            <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 gap-4">
-              <div>
-                <span className="font-display font-semibold text-sm uppercase tracking-wide text-white block">
-                  Sherry Johnson, Assistant Sports Editor/Broward
-                </span>
-                <span className="text-xs text-white/50 font-light">
-                  The Miami Herald
-                </span>
+            {lead.highlight && (
+              <div className="inline-block bg-[#111] border border-white/15 px-3 py-1 text-[9px] font-mono text-[#E11D48] font-bold uppercase tracking-widest">
+                {lead.highlight}
               </div>
-              <div className="text-[9px] font-mono uppercase tracking-widest text-white/40 font-bold">
-                [Verified Client Feedback]
-              </div>
+            )}
+
+            <blockquote className="font-serif-editorial text-xl sm:text-2xl md:text-3xl text-white italic leading-snug">
+              “{lead.quote}”
+            </blockquote>
+
+            <div className="pt-4 border-t border-white/10">
+              <span className="font-display font-semibold text-sm uppercase tracking-wide text-white block">
+                {lead.clientRole}
+              </span>
+              <span className="text-xs text-white/50 font-light">
+                {[lead.organization, lead.location].filter(Boolean).join(' · ')}
+              </span>
             </div>
           </div>
         </div>
@@ -84,7 +62,7 @@ export const TestimonialsPage: React.FC = () => {
       {/* Testimonials Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonialsData.map((item, idx) => (
+          {rest.map((item) => (
             <div
               key={item.id}
               className="p-8 bg-[#0A0A0A] border border-white/10 flex flex-col justify-between hover:border-[#E11D48] transition-all space-y-6"
@@ -97,9 +75,9 @@ export const TestimonialsPage: React.FC = () => {
                   <Quote className="w-4 h-4 text-white/20" />
                 </div>
                 
-                <p className="font-serif-editorial text-lg text-white/90 italic leading-relaxed">
-                  "{item.quote}"
-                </p>
+                <blockquote className="font-serif-editorial text-lg text-white/90 italic leading-relaxed">
+                  “{item.quote}”
+                </blockquote>
               </div>
 
               <div className="pt-6 border-t border-white/10 flex items-center justify-between">
@@ -108,14 +86,9 @@ export const TestimonialsPage: React.FC = () => {
                     {item.clientRole}
                   </span>
                   <span className="text-[10px] uppercase tracking-wider text-white/50 font-mono">
-                    {item.projectType}
+                    {[item.organization, item.location].filter(Boolean).join(' · ')}
                   </span>
                 </div>
-                {item.isPlaceholder && (
-                  <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest bg-[#111] px-2 py-0.5 border border-white/10">
-                    SLOT // 0{idx + 1}
-                  </span>
-                )}
               </div>
             </div>
           ))}
@@ -134,7 +107,7 @@ export const TestimonialsPage: React.FC = () => {
               The Client Partnership
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light">
-              Every client engagement is managed with rigorous standards of punctuality, discretion, and communication.
+              The themes clients mention most: comfort, punctuality and photographs they are proud to share.
             </p>
           </div>
 
@@ -152,10 +125,10 @@ export const TestimonialsPage: React.FC = () => {
             <div className="p-8 bg-[#050505] border border-white/10 space-y-3 text-center">
               <CheckCircle2 className="w-7 h-7 text-[#E11D48] mx-auto" />
               <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Punctual Delivery
+                On Time & Prepared
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Prompt communication before, during, and after the shoot, with expedited turnarounds for time-sensitive PR and press.
+                Clear communication before the shoot and a punctual, prepared arrival so your schedule stays on track.
               </p>
             </div>
 
@@ -176,8 +149,8 @@ export const TestimonialsPage: React.FC = () => {
       {/* Conversion Banner */}
       <div className="mt-20">
         <ContactCTASection
-          headline="WORK WITH A PROVEN STORYTELLER."
-          subhead="Join clients who rely on Alan Luby for decisive, professional photography."
+          headline="LET'S PHOTOGRAPH YOUR NEXT OCCASION."
+          subhead="Tell Alan about your event, portrait session or project."
         />
       </div>
 

@@ -1,127 +1,136 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photographyCollection, photoCategories } from '../data/photography';
+import { photographyCollection, photoCategories, heroImages } from '../data/photography';
 import { testimonialsData } from '../data/testimonials';
 import { PhotoCard } from '../components/PhotoCard';
 import { ImageModal } from '../components/ImageModal';
 import { ContactCTASection } from '../components/ContactCTASection';
-import { QuantumNebula } from '../components/ui/quantum-nebula';
 import { PhotoItem } from '../types';
-import { 
-  ArrowRight, 
-  ArrowUpRight, 
-  Layers, 
-  Compass, 
-  Flame, 
-  CheckCircle2, 
-  Quote 
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Layers,
+  Compass,
+  Flame,
+  CheckCircle2,
+  Quote
 } from 'lucide-react';
+
+// Featured grid: one entry per featured photo, in photography.ts order.
+// Portrait-oriented photos get the tall slot so faces and gestures are not cropped away.
+const FEATURED_LAYOUT = [
+  { span: 'md:col-span-7', aspect: 'aspect-[3/2]' },
+  { span: 'md:col-span-5', aspect: 'aspect-[4/5] md:aspect-auto md:h-full' },
+  { span: 'md:col-span-6', aspect: 'aspect-[3/2]' },
+  { span: 'md:col-span-6', aspect: 'aspect-[3/2]' },
+  { span: 'md:col-span-6', aspect: 'aspect-[3/2]' },
+  { span: 'md:col-span-6', aspect: 'aspect-[3/2]' },
+];
+
+// Cover photo per category card (chosen to avoid repeating the hero and featured grid)
+const CATEGORY_COVERS: Record<string, string> = {
+  events: 'dsc-88579',
+  portraits: 'dsc-01779',
+  sports: 'dsc-9457',
+  entertainment: 'dsc-11947',
+  commercial: 'dsc-3522',
+};
 
 export const HomePage: React.FC = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
 
-  const featuredPhotos = photographyCollection.filter((p) => p.featuredOnHome);
+  const featuredPhotos = photographyCollection.filter((p) => p.featuredOnHome).slice(0, FEATURED_LAYOUT.length);
+  const featuredTestimonials = testimonialsData.filter((t) => t.featured);
   const homeCategoryCards = photoCategories.filter((c) => c.key !== 'all');
+  const hero = heroImages.home;
+  const teaserPhoto = photographyCollection.find((p) => p.id === 'jws-26102')!;
 
+  const selectedIndex = selectedPhoto ? featuredPhotos.findIndex((p) => p.id === selectedPhoto.id) : -1;
   const handleNextPhoto = () => {
-    if (!selectedPhoto) return;
-    const currentIndex = photographyCollection.findIndex((p) => p.id === selectedPhoto.id);
-    if (currentIndex < photographyCollection.length - 1) {
-      setSelectedPhoto(photographyCollection[currentIndex + 1]);
-    }
+    if (selectedIndex >= 0 && selectedIndex < featuredPhotos.length - 1) setSelectedPhoto(featuredPhotos[selectedIndex + 1]);
   };
-
   const handlePrevPhoto = () => {
-    if (!selectedPhoto) return;
-    const currentIndex = photographyCollection.findIndex((p) => p.id === selectedPhoto.id);
-    if (currentIndex > 0) {
-      setSelectedPhoto(photographyCollection[currentIndex - 1]);
-    }
+    if (selectedIndex > 0) setSelectedPhoto(featuredPhotos[selectedIndex - 1]);
   };
 
   return (
     <div id="home-page" className="min-h-screen bg-[#050505] text-[#F5F5F4]">
-      
-      {/* 1. CINEMATIC HERO SECTION */}
-      <section id="hero-section" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden border-b border-white/10">
-        {/* Hero Background Image with Editorial Vignette */}
+
+      {/* 1. HERO SECTION */}
+      <section id="hero-section" className="relative min-h-[92vh] flex items-end md:items-center justify-center pt-24 pb-16 overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=2000&auto=format&fit=crop"
-            alt="Cinematic background photography by Alan Luby"
-            className="w-full h-full object-cover object-center filter brightness-[0.3] grayscale contrast-[1.15] scale-105 transition-transform duration-1000"
-            referrerPolicy="no-referrer"
+            src={hero.imageSrc}
+            srcSet={`${hero.srcSet}, ${hero.originalSrc} 2300w`}
+            sizes="100vw"
+            alt={hero.altText}
+            // Mobile crops the sides away, so centre on the dancer's face; desktop shows the full width
+            className="w-full h-full object-cover object-[42%_12%] md:object-[68%_8%]"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
-          {/* Subtle noise and radial gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-black/80" />
-          {/* Interactive particle nebula, above the wash so the glow survives it */}
-          <QuantumNebula className="absolute inset-0 w-full h-full pointer-events-none
-            opacity-30 [mask-image:radial-gradient(ellipse_at_top_right,black_0%,rgba(0,0,0,0.3)_45%,transparent_78%)]
-            md:opacity-70 md:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.18)_28%,rgba(0,0,0,0.55)_55%,black_85%)]" />
-          <div className="absolute inset-0 subtle-noise opacity-20" />
+          {/* Scrims keep the headline legible; on desktop the dancer on the right stays in full color */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent md:via-[#050505]/10" />
+          <div className="absolute inset-0
+            bg-[linear-gradient(to_right,rgba(5,5,5,0.75)_0%,rgba(5,5,5,0.45)_100%)]
+            md:bg-[linear-gradient(to_right,rgba(5,5,5,0.92)_0%,rgba(5,5,5,0.7)_38%,rgba(5,5,5,0.1)_68%,transparent_100%)]" />
         </div>
 
-        {/* Hero Content Container */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="max-w-4xl space-y-8">
-            
-            {/* Editorial Badge */}
+          <div className="max-w-3xl space-y-8">
+
             <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-              <span>ALAN LUBY // EDITORIAL & EVENT PHOTOGRAPHY</span>
+              <span>ALAN LUBY // EVENT & PORTRAIT PHOTOGRAPHY</span>
             </div>
 
-            {/* Main Headline */}
             <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
-              Photography <br />
-              <span className="text-white/80">
-                That Tells
+              Real Moments. <br />
+              <span className="text-white/85">
+                Real People.
               </span> <br />
               <span className="text-[#E11D48]">
-                The Story.
+                Real Energy.
               </span>
             </h1>
 
-            {/* Supporting Copy */}
-            <p className="text-base sm:text-xl text-white/70 font-light leading-relaxed max-w-2xl">
-              From decisive moments and major events to portraits and editorial commissions,
-              <strong className="text-white font-bold"> Alan Luby </strong>
-              brings a versatile eye and seasoned professional experience to every frame.
+            <p className="text-base sm:text-xl text-white/85 font-light leading-relaxed max-w-xl">
+              <strong className="text-white font-bold">Alan Luby </strong>
+              photographs events, portraits, sports and performances across South Florida, with more than 30 years behind the camera.
             </p>
 
-            {/* CTAs */}
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
                 to="/work"
                 id="hero-cta-portfolio"
                 className="inline-flex items-center justify-center gap-3 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-8 py-4 transition-all duration-200"
               >
-                <span>VIEW THE ARCHIVE</span>
+                <span>VIEW PORTFOLIO</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              
+
               <Link
                 to="/contact"
                 id="hero-cta-contact"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-7 py-4 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 border border-white/30 bg-black/30 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-7 py-4 transition-all duration-200"
               >
-                <span>COMMISSION ALAN</span>
+                <span>CHECK YOUR DATE</span>
                 <ArrowUpRight className="w-4 h-4 text-[#E11D48]" />
               </Link>
             </div>
 
-            {/* Quick Meta Footer */}
-            <div className="pt-8 border-t border-white/10 flex flex-wrap items-center gap-y-2 gap-x-8 text-[11px] text-white/50 font-mono tracking-widest uppercase">
+            <div className="pt-8 border-t border-white/15 flex flex-wrap items-center gap-y-2 gap-x-8 text-[11px] text-white/70 font-mono tracking-widest uppercase">
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#E11D48]" />
-                Journalism & Documentary
+                Events & Celebrations
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#E11D48]" />
-                Live Event Coverage
+                Portrait Sessions
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#E11D48]" />
-                Executive & Editorial Portraits
+                Sports & Entertainment
               </span>
             </div>
 
@@ -135,66 +144,58 @@ export const HomePage: React.FC = () => {
         <div className="absolute bottom-8 right-8 hidden lg:block h-6 w-6 border-b border-r border-white/30 pointer-events-none" />
       </section>
 
-      {/* 2. BRAND MANIFESTO & POSITIONING SECTION */}
+      {/* 2. POSITIONING SECTION */}
       <section id="positioning-section" className="py-20 lg:py-28 bg-[#0A0A0A] border-b border-white/10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Statement */}
+
             <div className="lg:col-span-7 space-y-6">
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
-                THE CORE PHILOSOPHY
+                HOW ALAN WORKS
               </span>
-              
+
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
-                One photographer. <br />
-                <span className="text-[#E11D48]">Many stories.</span> Built around the moment.
+                Present for the moment. <br />
+                <span className="text-[#E11D48]">Ready</span> before it happens.
               </h2>
 
               <p className="text-base sm:text-lg text-white/70 font-light leading-relaxed">
-                Great photography is not confined to a single cookie-cutter category. 
-                Whether documenting the high-stakes atmosphere of a corporate summit, 
-                capturing raw authenticity in photojournalism, or creating a commanding editorial portrait, 
-                Alan Luby adapts his eye to the subject, the atmosphere, and the client's vision.
+                The laugh during a toast, the leap at the peak of a dance, the catch in traffic: these moments
+                last a fraction of a second. Years of covering fast-moving sports and live events taught Alan to
+                anticipate them, and his portrait work taught him to put people at ease so they look like themselves.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-1.5">
                   <span className="text-xs font-black uppercase tracking-widest text-[#E11D48] block">
-                    Authentic Moments
+                    Real Expression
                   </span>
                   <p className="text-xs text-white/60 font-light leading-relaxed">
-                    Unforced, genuine candid emotion without disruptive interference.
+                    Candid emotion and connection, captured without interrupting the occasion.
                   </p>
                 </div>
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-1.5">
                   <span className="text-xs font-black uppercase tracking-widest text-[#E11D48] block">
-                    Editorial Craft
+                    Precise Timing
                   </span>
                   <p className="text-xs text-white/60 font-light leading-relaxed">
-                    Deliberate composition, strong contrast, and refined post-production.
+                    Anticipating action on the field, the stage and the dance floor.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Right Quote / Highlight Block */}
             <div className="lg:col-span-5">
               <div className="relative p-8 sm:p-10 bg-[#050505] border border-white/10 border-l-4 border-l-[#E11D48] shadow-2xl space-y-6">
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
-                  01 // VERSATILITY FIRST
+                  WHAT TO EXPECT
                 </span>
-                <p className="font-serif-editorial text-xl sm:text-2xl text-white italic leading-relaxed">
-                  "Photography is not about forcing a scene into a template. It is about understanding the light, anticipating the motion, and capturing the story as it unfolds."
+                <p className="font-serif-editorial text-xl sm:text-2xl text-white leading-relaxed">
+                  A photographer who reads the room, respects the program, and keeps working until the last
+                  meaningful moment has been captured.
                 </p>
-                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                  <div>
-                    <span className="font-display font-semibold text-sm uppercase tracking-wide text-white block">
-                      Alan Luby
-                    </span>
-                    <span className="text-xs text-white/50 font-light">Principal Photographer</span>
-                  </div>
-                  <div className="text-[#E11D48] font-mono text-xs font-bold">AL/P</div>
+                <div className="pt-6 border-t border-white/10 text-xs text-white/50 font-light">
+                  Events • Portraits • Sports • Entertainment • Commercial
                 </div>
               </div>
             </div>
@@ -203,96 +204,49 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. FEATURED WORK (EDITORIAL ASYMMETRIC GRID) */}
+      {/* 3. FEATURED WORK */}
       <section id="featured-work-section" className="py-20 lg:py-28 bg-[#050505] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
+
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-white/10 gap-6">
             <div className="space-y-2">
               <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-                <span>Selected Frames</span>
+                <span>Selected Work</span>
               </div>
               <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
-                Featured Archive
+                Featured Photographs
               </h2>
             </div>
-            
+
             <Link
               to="/work"
               id="featured-section-view-all"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
             >
-              <span>EXPLORE ALL ARCHIVES</span>
+              <span>VIEW FULL PORTFOLIO</span>
               <ArrowRight className="w-4 h-4 text-[#E11D48]" />
             </Link>
           </div>
 
-          {/* Asymmetric Editorial Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            
-            {/* Top Large Hero Image (7 cols) */}
-            {featuredPhotos[0] && (
-              <div className="md:col-span-7">
+            {featuredPhotos.map((photo, i) => (
+              <div key={photo.id} className={FEATURED_LAYOUT[i].span}>
                 <PhotoCard
-                  photo={featuredPhotos[0]}
+                  photo={photo}
                   onSelect={setSelectedPhoto}
-                  aspectClass="aspect-[16/10] sm:aspect-[16/9]"
+                  aspectClass={FEATURED_LAYOUT[i].aspect}
+                  sizes="(min-width: 768px) 58vw, 100vw"
                 />
               </div>
-            )}
-
-            {/* Top Right Portrait Image (5 cols) */}
-            {featuredPhotos[1] && (
-              <div className="md:col-span-5">
-                <PhotoCard
-                  photo={featuredPhotos[1]}
-                  onSelect={setSelectedPhoto}
-                  aspectClass="aspect-[4/5] md:aspect-[3/4]"
-                />
-              </div>
-            )}
-
-            {/* Middle Row: 3 Column Asymmetric */}
-            {featuredPhotos[2] && (
-              <div className="md:col-span-5">
-                <PhotoCard
-                  photo={featuredPhotos[2]}
-                  onSelect={setSelectedPhoto}
-                  aspectClass="aspect-[4/3]"
-                />
-              </div>
-            )}
-
-            {featuredPhotos[3] && (
-              <div className="md:col-span-4">
-                <PhotoCard
-                  photo={featuredPhotos[3]}
-                  onSelect={setSelectedPhoto}
-                  aspectClass="aspect-[3/4]"
-                />
-              </div>
-            )}
-
-            {featuredPhotos[4] && (
-              <div className="md:col-span-3">
-                <PhotoCard
-                  photo={featuredPhotos[4]}
-                  onSelect={setSelectedPhoto}
-                  aspectClass="aspect-[3/4] md:aspect-square"
-                />
-              </div>
-            )}
-
+            ))}
           </div>
 
-          {/* Bottom Grid Actions */}
           <div className="mt-12 text-center">
             <Link
               to="/work"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] text-white text-xs font-bold uppercase tracking-widest transition-all"
             >
-              <span>VIEW FULL GALLERY ARCHIVE ({photographyCollection.length}+ FRAMES)</span>
+              <span>VIEW ALL {photographyCollection.length} PHOTOGRAPHS</span>
               <ArrowRight className="w-4 h-4 text-[#E11D48]" />
             </Link>
           </div>
@@ -300,19 +254,19 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. PHOTOGRAPHY DISCIPLINES / CATEGORIES PREVIEW */}
+      {/* 4. CATEGORIES PREVIEW */}
       <section id="categories-section" className="py-20 lg:py-28 bg-[#0A0A0A] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="max-w-2xl mb-14 space-y-3">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
-              VERSATILE CAPABILITIES
+              WHAT ALAN PHOTOGRAPHS
             </span>
             <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
-              Photography Disciplines
+              Services
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light leading-relaxed">
-              Alan approaches every category with dedicated technical precision and a commitment to narrative depth.
+              Events and portraits are at the heart of Alan's work, supported by sports, entertainment and business photography.
             </p>
           </div>
 
@@ -322,8 +276,26 @@ export const HomePage: React.FC = () => {
                 key={cat.key}
                 to={`/work?category=${cat.key}`}
                 id={`category-card-${cat.key}`}
-                className="group relative bg-[#050505] border border-white/10 p-8 hover:border-[#E11D48] transition-all duration-300 flex flex-col justify-between min-h-[220px]"
+                className="group relative bg-[#050505] border border-white/10 hover:border-[#E11D48] transition-all duration-300 flex flex-col overflow-hidden"
               >
+                {(() => {
+                  const cover = photographyCollection.find((p) => p.id === CATEGORY_COVERS[cat.key]);
+                  return cover && (
+                    <div className="aspect-[3/2] overflow-hidden bg-[#111]">
+                      <img
+                        src={cover.imageSrc}
+                        srcSet={cover.srcSet}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        alt={cover.altText}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ objectPosition: cover.focus }}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                  );
+                })()}
+                <div className="p-8 flex flex-col justify-between flex-1 gap-6">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs text-[#E11D48] font-bold">
@@ -340,8 +312,9 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between text-[10px] uppercase font-bold tracking-widest text-white/40 group-hover:text-white">
-                  <span>Explore Discipline</span>
+                  <span>View Work</span>
                   <span className="text-[#E11D48] font-bold">→</span>
+                </div>
                 </div>
               </Link>
             ))}
@@ -350,10 +323,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. "WHY ALAN" SECTION - KEY DIFFERENTIATORS */}
+      {/* 5. WHY ALAN */}
       <section id="why-alan-section" className="py-20 lg:py-28 bg-[#050505] border-b border-white/10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
               The Alan Luby Advantage
@@ -362,13 +335,12 @@ export const HomePage: React.FC = () => {
               Why Work With Alan
             </h2>
             <p className="text-base text-white/60 font-light">
-              A dependable, adaptable, and seasoned professional focused on delivering photographs that serve your goals.
+              A dependable, experienced professional focused on photographs you'll be proud to share.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            {/* Differentiator 1: VERSATILE */}
+
             <div className="p-7 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] transition-colors space-y-4">
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Layers className="w-5 h-5" />
@@ -377,24 +349,22 @@ export const HomePage: React.FC = () => {
                 VERSATILE
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Comfortable working across events, portraits, journalism, and specialized visual assignments without missing a beat.
+                Comfortable moving between a banquet program, a family portrait session, a game and a stage show.
               </p>
             </div>
 
-            {/* Differentiator 2: STORY-DRIVEN */}
             <div className="p-7 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] transition-colors space-y-4">
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Flame className="w-5 h-5" />
               </div>
               <h3 className="font-display text-lg font-semibold uppercase tracking-[0.02em] text-white">
-                STORY-DRIVEN
+                PEOPLE-FOCUSED
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Focused on genuine human interactions and narrative context rather than simply snapping technically standard photos.
+                Focused on genuine expressions and connection, not just the shot list.
               </p>
             </div>
 
-            {/* Differentiator 3: ADAPTABLE */}
             <div className="p-7 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] transition-colors space-y-4">
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <Compass className="w-5 h-5" />
@@ -403,11 +373,10 @@ export const HomePage: React.FC = () => {
                 ADAPTABLE
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Able to seamlessly respond to shifting event schedules, unpredictable natural lighting, and rapid on-the-fly assignments.
+                Ready for shifting schedules, changing light and fast-moving action.
               </p>
             </div>
 
-            {/* Differentiator 4: PROFESSIONAL */}
             <div className="p-7 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] transition-colors space-y-4">
               <div className="h-10 w-10 bg-[#111] border border-white/10 text-[#E11D48] flex items-center justify-center">
                 <CheckCircle2 className="w-5 h-5" />
@@ -416,7 +385,7 @@ export const HomePage: React.FC = () => {
                 PROFESSIONAL
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                A dependable, respectful client experience from the first scoping conversation through final curated asset delivery.
+                On time, prepared and respectful, from the first conversation to the final gallery.
               </p>
             </div>
 
@@ -425,51 +394,49 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. ABOUT ALAN TEASER */}
+      {/* 6. ABOUT ALAN TEASER (portfolio image; no confirmed portrait of Alan was supplied) */}
       <section id="about-teaser-section" className="py-20 lg:py-28 bg-[#0A0A0A] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Image on left */}
+
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[3/4] bg-[#050505] border border-white/10 overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/3] bg-[#050505] border border-white/10 overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop"
-                  alt="Alan Luby Photography Profile"
-                  className="w-full h-full object-cover grayscale contrast-115"
-                  referrerPolicy="no-referrer"
+                  src={teaserPhoto.imageSrc}
+                  srcSet={teaserPhoto.srcSet}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  alt={teaserPhoto.altText}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: teaserPhoto.focus }}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-4 left-4 right-4 bg-[#050505]/90 border border-white/10 p-3">
-                  <p className="font-display text-xs font-semibold uppercase tracking-wider text-white">
-                    Alan Luby
-                  </p>
-                  <p className="text-[10px] font-mono text-[#E11D48] font-bold uppercase tracking-widest">
-                    Journalism • Events • Portraits • Editorial
-                  </p>
-                </div>
               </div>
+              <p className="mt-2 text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                Photograph by Alan Luby
+              </p>
             </div>
 
-            {/* Content on right */}
             <div className="lg:col-span-7 space-y-6">
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
                 MEET THE PHOTOGRAPHER
               </span>
 
               <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
-                A Different Kind of <br />
+                30+ Years <br />
                 <span className="text-white/70">
-                  Photographer.
+                  Behind the Camera.
                 </span>
               </h2>
 
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Alan Luby brings a diverse foundation rooted in journalism, event coverage, and authentic portraiture. 
-                Rather than treating photography as an isolated transaction or rigid template, Alan approaches every client and project with curiosity, composure, and visual craftsmanship.
+                Based in Boynton Beach, Florida, Alan Luby photographs conventions, banquets, celebrations, portraits
+                and performances for individuals, families and organizations.
               </p>
 
               <p className="text-sm text-white/50 font-light leading-relaxed">
-                Whether you are organizing a national event, publishing an editorial spread, or requiring elevated executive portraits, Alan provides the versatile eye and calm professionalism necessary to capture the definitive moments.
+                Earlier in his career he photographed sports and news for South Florida newspapers. That experience
+                shows today in his timing and his calm under pressure.
               </p>
 
               <div className="pt-4 flex flex-wrap items-center gap-4">
@@ -478,7 +445,7 @@ export const HomePage: React.FC = () => {
                   id="about-teaser-learn-more"
                   className="inline-flex items-center gap-2 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-6 py-3.5 transition-all"
                 >
-                  <span>READ ALAN'S FULL STORY</span>
+                  <span>ABOUT ALAN</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
@@ -498,11 +465,11 @@ export const HomePage: React.FC = () => {
       {/* 7. SELECTED TESTIMONIALS */}
       <section id="home-testimonials-section" className="py-20 lg:py-24 bg-[#050505] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-6 border-b border-white/10 gap-4">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
-                Client Trust
+                Client Feedback
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white mt-1">
                 Client Experiences
@@ -518,8 +485,8 @@ export const HomePage: React.FC = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonialsData.slice(0, 2).map((item) => (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {featuredTestimonials.map((item) => (
               <div
                 key={item.id}
                 className="p-8 bg-[#0A0A0A] border border-white/10 relative flex flex-col justify-between space-y-6"
@@ -531,9 +498,9 @@ export const HomePage: React.FC = () => {
                     </span>
                     <Quote className="w-4 h-4 text-white/20" />
                   </div>
-                  <p className="font-serif-editorial text-lg text-white/90 italic leading-relaxed">
-                    "{item.quote}"
-                  </p>
+                  <blockquote className="font-serif-editorial text-lg text-white/90 italic leading-relaxed">
+                    “{item.quote}”
+                  </blockquote>
                 </div>
 
                 <div className="pt-6 border-t border-white/10">
@@ -541,7 +508,7 @@ export const HomePage: React.FC = () => {
                     {item.clientRole}
                   </span>
                   <span className="text-[10px] uppercase font-mono tracking-wider text-white/50">
-                    Assignment: {item.projectType}
+                    {[item.organization, item.location].filter(Boolean).join(' · ')}
                   </span>
                 </div>
               </div>
@@ -551,20 +518,19 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 8. CALL TO ACTION & CONTACT BANNER */}
+      {/* 8. CALL TO ACTION */}
       <ContactCTASection
-        headline="PHOTOGRAPHY BUILT AROUND THE MOMENT."
-        subhead="Let's discuss your upcoming event, portrait session, or editorial assignment."
+        headline="LET'S PHOTOGRAPH YOUR NEXT EVENT."
+        subhead="Tell Alan about your event, portrait session, game or performance."
       />
 
-      {/* LIGHTBOX MODAL */}
       <ImageModal
         photo={selectedPhoto}
         onClose={() => setSelectedPhoto(null)}
         onNext={handleNextPhoto}
         onPrev={handlePrevPhoto}
-        hasNext={selectedPhoto ? photographyCollection.findIndex((p) => p.id === selectedPhoto.id) < photographyCollection.length - 1 : false}
-        hasPrev={selectedPhoto ? photographyCollection.findIndex((p) => p.id === selectedPhoto.id) > 0 : false}
+        hasNext={selectedIndex >= 0 && selectedIndex < featuredPhotos.length - 1}
+        hasPrev={selectedIndex > 0}
       />
 
     </div>

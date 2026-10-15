@@ -1,5 +1,9 @@
 import React from 'react';
 import { ContactCTASection } from '../components/ContactCTASection';
+import { PageHeroImage } from '../components/PageHeroImage';
+import { heroImages, careerImage, photographyCollection } from '../data/photography';
+
+const bioPhoto = photographyCollection.find((p) => p.id === 'dsc-46779')!;
 import { 
   Camera, 
   Check, 
@@ -14,40 +18,17 @@ export const AboutPage: React.FC = () => {
       
       {/* Page Header */}
       <div className="relative isolate">
-        {/* Hero background */}
-        <div className="absolute inset-0 -top-28 -z-10 overflow-hidden" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=1920&auto=format&fit=crop"
-            srcSet="https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=75&w=768&auto=format&fit=crop 768w,
-                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=75&w=1280&auto=format&fit=crop 1280w,
-                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=1920&auto=format&fit=crop 1920w,
-                    https://images.unsplash.com/photo-1469488865564-c2de10f69f96?q=80&w=2560&auto=format&fit=crop 2560w"
-            sizes="100vw"
-            alt=""
-            className="w-full h-full object-cover object-center filter brightness-[0.75] grayscale contrast-[1.1]"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            referrerPolicy="no-referrer"
-          />
-          {/* Dark wash keeps the existing hero text legible */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/45 to-[#050505]/15" />
-          {/* Left scrim: keeps the image's bright area clear of the left-aligned text */}
-          <div className="absolute inset-0
-            bg-[linear-gradient(to_right,rgba(5,5,5,0.94)_0%,rgba(5,5,5,0.88)_70%,rgba(5,5,5,0.8)_100%)]
-            md:bg-[linear-gradient(to_right,#050505_0%,rgba(5,5,5,0.92)_45%,rgba(5,5,5,0.45)_70%,transparent_100%)]" />
-          <div className="absolute inset-0 subtle-noise opacity-20" />
-        </div>
+        <PageHeroImage photo={heroImages.about} />
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="border-b border-white/10 pb-10 space-y-4 max-w-4xl">
           <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-            <span>Behind The Lens</span>
+            <span>The Photographer</span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
             About Alan Luby
           </h1>
-          <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
-            A versatile photographer with a foundation in journalism, events, and portrait photography who approaches every assignment with a storyteller's eye.
+          <p className="text-base sm:text-xl text-white/75 font-light leading-relaxed">
+            Event and portrait photographer based in Boynton Beach, Florida, also covering sports, entertainment and business photography.
           </p>
         </div>
       </section>
@@ -59,28 +40,24 @@ export const AboutPage: React.FC = () => {
           
           {/* Left Column: Portrait & Details (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="relative aspect-[3/4] bg-[#111] border border-white/10 overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop"
-                alt="Alan Luby Photographer Portrait"
-                className="w-full h-full object-cover grayscale contrast-125"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute top-3 left-3 h-3 w-3 border-t-2 border-l-2 border-[#E11D48]" />
-              <div className="absolute bottom-3 right-3 h-3 w-3 border-b-2 border-r-2 border-[#E11D48]" />
-              
-              <div className="absolute bottom-4 left-4 right-4 bg-[#0A0A0A]/95 border border-white/10 p-4 backdrop-blur-md">
-                <span className="text-[9px] font-mono uppercase tracking-widest text-[#E11D48] block mb-1 font-bold">
-                  PRINCIPAL PHOTOGRAPHER
-                </span>
-                <p className="font-display text-base font-semibold text-white uppercase tracking-[0.02em]">
-                  Alan Luby
-                </p>
-                <p className="text-xs text-white/50 font-mono">
-                  Journalism • Events • Portraits • Editorial
-                </p>
+            {/* Portfolio image. No confirmed portrait of Alan was supplied, so none is shown. */}
+            <figure className="space-y-2">
+              <div className="relative aspect-[4/3] bg-[#111] border border-white/10 overflow-hidden shadow-2xl">
+                <img
+                  src={bioPhoto.imageSrc}
+                  srcSet={bioPhoto.srcSet}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  alt={bioPhoto.altText}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: bioPhoto.focus }}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </div>
+              <figcaption className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                Portrait session · Photograph by Alan Luby
+              </figcaption>
+            </figure>
 
             {/* Quick Contact Box */}
             <div className="p-6 bg-[#0A0A0A] border border-white/10 space-y-3">
@@ -88,7 +65,7 @@ export const AboutPage: React.FC = () => {
                 Direct Inquiries
               </span>
               <p className="text-xs text-white/60 font-light">
-                Available for local, regional, and travel assignments.
+                Booking events, portrait sessions, games and performances.
               </p>
               <div className="pt-2 flex flex-col space-y-1.5 text-xs text-white/80 font-mono">
                 <span>Email: <strong className="text-white font-sans font-bold">aluby1441@aol.com</strong></span>
@@ -102,31 +79,64 @@ export const AboutPage: React.FC = () => {
             
             <div className="space-y-4">
               <h2 className="font-display text-2xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white">
-                The Story Behind the Frame
+                What Alan Offers Today
               </h2>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Alan Luby is a freelance photographer who currently resides in
+                Alan Luby is a freelance photographer based in
                 <strong className="text-white font-semibold"> Boynton Beach, Florida</strong>, with
-                <strong className="text-white font-semibold"> over 30 years of photography experience</strong>. He is a member of the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, The American Society of Media Photographers.
+                <strong className="text-white font-semibold"> over 30 years of photography experience</strong>. He photographs
+                events and portraits for individuals, families and organizations, along with sports, entertainment and
+                business photography.
               </p>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                He has been hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida Sun-Sentinel, the Associated Press and numerous other publications. Alan also served as team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the Continental Basketball Association.
+                He is a portrait and wedding photographer who has provided event photography with on-site printing for
+                Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters of
+                Palm Beach County, BB King's, and numerous other profit and not-for-profit organizations. He is a member of
+                the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, the American Society of
+                Media Photographers.
+              </p>
+
+              <h3 className="font-display text-xl font-semibold uppercase tracking-[0.02em] text-white pt-4">
+                Career Background
+              </h3>
+              <p className="text-base text-white/70 font-light leading-relaxed">
+                Earlier in his career, Alan was hired to cover events by the Miami Herald, Palm Beach Post, South Florida
+                Times, South Florida Sun-Sentinel, the Associated Press and numerous other publications. He served as team
+                photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
+                Continental Basketball Association.
               </p>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                As a freelance photographer he has had the opportunity to cover the Miami Dolphins, Miami Heat, Miami Marlins, the University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott, and numerous other news, sports and feature assignments for various publications.
+                As a freelancer he covered the Miami Dolphins, Miami Heat, Miami Marlins, the University of Miami,
+                President Barack Obama, the victory party for Florida Gov. Rick Scott, and numerous other news, sports and
+                feature assignments. That background in fast-moving, high-pressure coverage shapes how he works today.
               </p>
-              <p className="text-base text-white/70 font-light leading-relaxed">
-                Alan is also a portrait and wedding photographer who has provided event photography with on-site printing for Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters of Palm Beach County, BB King's, and numerous other profit and not-for-profit organizations.
-              </p>
+              <figure className="pt-2 space-y-2">
+                <div className="relative aspect-[3/2] bg-[#111] border border-white/10 overflow-hidden">
+                  <img
+                    src={careerImage.imageSrc}
+                    srcSet={careerImage.srcSet}
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    alt={careerImage.altText}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ objectPosition: careerImage.focus }}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <figcaption className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                  {careerImage.title} · {careerImage.description}
+                </figcaption>
+              </figure>
             </div>
 
             {/* A DIFFERENT KIND OF PHOTOGRAPHER */}
             <div className="p-8 bg-[#0A0A0A] border border-white/10 border-l-4 border-l-[#E11D48] space-y-4 shadow-xl">
               <h3 className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-[0.02em] text-white">
-                A Different Kind of Photographer
+                How Alan Works
               </h3>
               <p className="text-sm sm:text-base text-white/60 font-light leading-relaxed">
-                Alan is not restricted to a single rigid photography category. Rather than forcing clients into predetermined templates, he adapts his visual approach to the atmosphere of each setting, the personalities involved, and the specific narrative required.
+                Every event and every person is different. Alan adapts to the room, the light and the personalities
+                involved, so the photographs feel natural rather than staged.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-white/80 font-medium">
                 <div className="flex items-center gap-2">
@@ -139,7 +149,7 @@ export const AboutPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
-                  <span>Documentary truth & narrative pacing</span>
+                  <span>Timing for action and performance</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
@@ -155,7 +165,7 @@ export const AboutPage: React.FC = () => {
               </h3>
               <div className="space-y-4 text-sm text-white/70 font-light leading-relaxed">
                 <p>
-                  <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">01 // Respect for the Subject:</strong> Whether photographing a high-profile keynote speaker, an artisan at work, or an individual portrait client, Alan creates an atmosphere of ease and mutual respect where authenticity thrives naturally.
+                  <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">01 // Respect for the Subject:</strong> Whether photographing a keynote speaker, a family or an individual portrait client, Alan creates an atmosphere of ease and mutual respect where authenticity thrives naturally.
                 </p>
                 <p>
                   <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">02 // Visual Storytelling:</strong> Every photograph should communicate context, atmosphere, and emotion. A collection of images should tell a coherent story from beginning to end.
@@ -182,7 +192,7 @@ export const AboutPage: React.FC = () => {
               Professional Approach
             </h2>
             <p className="text-sm sm:text-base text-white/60 font-light">
-              A transparent, dependable process from initial creative consultation to final deliverable delivery.
+              A clear, dependable process from the first conversation to your final gallery.
             </p>
           </div>
 
@@ -197,7 +207,7 @@ export const AboutPage: React.FC = () => {
                 Pre-Shoot Discovery
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Understanding your schedule, shot list priorities, brand tone, and visual goals before arriving on location.
+                Understanding your schedule, must-have shots and the people involved before the day arrives.
               </p>
             </div>
 
@@ -210,7 +220,7 @@ export const AboutPage: React.FC = () => {
                 Live Execution
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Professional, punctual, and attentive coverage. Capturing both keynote moments and nuanced candid interactions.
+                Punctual, attentive coverage of both the planned moments and the candid ones.
               </p>
             </div>
 
@@ -220,10 +230,10 @@ export const AboutPage: React.FC = () => {
                 <Sliders className="w-5 h-5 text-white/40" />
               </div>
               <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Editorial Curation
+                Selection & Editing
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                Meticulous image selection, color grading, and contrast refinement preserving natural tonality and sharpness.
+                Careful selection and color correction that keeps skin tones and colors natural.
               </p>
             </div>
 
@@ -233,10 +243,10 @@ export const AboutPage: React.FC = () => {
                 <FileText className="w-5 h-5 text-white/40" />
               </div>
               <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Archival Delivery
+                Gallery Delivery
               </h3>
               <p className="text-xs text-white/60 font-light leading-relaxed">
-                High-resolution files delivered via secure digital download, ready for immediate publication, marketing, or print.
+                High-resolution digital files, ready to share, print or use on your website.
               </p>
             </div>
 
@@ -249,7 +259,7 @@ export const AboutPage: React.FC = () => {
       <div className="mt-20">
         <ContactCTASection
           headline="READY TO WORK WITH ALAN?"
-          subhead="Let's discuss how Alan Luby can bring your visual vision to life."
+          subhead="Tell Alan about your event, portrait session or project."
         />
       </div>
 

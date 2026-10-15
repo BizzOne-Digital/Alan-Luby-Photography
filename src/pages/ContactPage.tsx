@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ContactFormValues } from '../types';
+import { inquiryOptions } from '../data/services';
 import { 
   Mail, 
   Phone, 
@@ -14,14 +15,16 @@ import {
 
 export const ContactPage: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const prefilledService = searchParams.get('service') || '';
+  // Only accept known values (old links may still say e.g. "Journalism & Editorial")
+  const requestedService = searchParams.get('service') || '';
+  const prefilledService = inquiryOptions.includes(requestedService) ? requestedService : '';
   const prefilledSubject = searchParams.get('subject') || '';
 
   const [formValues, setFormValues] = useState<ContactFormValues>({
     name: '',
     email: '',
     phone: '',
-    photographyType: prefilledService || 'Event Photography',
+    photographyType: prefilledService || inquiryOptions[0],
     eventDate: '',
     location: '',
     estimatedBudget: '',
@@ -65,7 +68,7 @@ export const ContactPage: React.FC = () => {
       name: '',
       email: '',
       phone: '',
-      photographyType: 'Event Photography',
+      photographyType: inquiryOptions[0],
       eventDate: '',
       location: '',
       estimatedBudget: '',
@@ -87,7 +90,7 @@ export const ContactPage: React.FC = () => {
             Contact Alan Luby
           </h1>
           <p className="text-base sm:text-xl text-white/60 font-light leading-relaxed">
-            Let's discuss your upcoming event, portrait session, editorial feature, or commercial assignment.
+            Tell Alan about your event, portrait session, game, performance or business photography needs.
           </p>
         </div>
       </section>
@@ -156,7 +159,7 @@ export const ContactPage: React.FC = () => {
                 {/* Response Note */}
                 <div className="flex items-center gap-2 text-xs text-white/50 pt-1 font-light">
                   <Clock className="w-3.5 h-3.5 text-[#E11D48]" />
-                  <span>Typically responds within 24 business hours.</span>
+                  <span>For the fastest reply, call or email directly.</span>
                 </div>
               </div>
             </div>
@@ -325,12 +328,9 @@ export const ContactPage: React.FC = () => {
                         onChange={handleChange}
                         className="w-full bg-[#050505] border border-white/10 focus:border-[#E11D48] px-3.5 py-3 text-sm text-white outline-none transition-colors"
                       >
-                        <option value="Event Photography">Event Photography</option>
-                        <option value="Portrait Photography">Portrait Photography</option>
-                        <option value="Journalism & Editorial">Journalism & Editorial</option>
-                        <option value="Commercial & Promotional">Commercial & Promotional</option>
-                        <option value="Custom Photography Assignment">Custom Assignment</option>
-                        <option value="Other / Multiple Needs">Other / Multiple Needs</option>
+                        {inquiryOptions.map((option) => (
+                          <option key={option} value={option}>{option}</option>
+                        ))}
                       </select>
                     </div>
                   </div>

@@ -7,6 +7,8 @@ interface PhotoCardProps {
   onSelect: (photo: PhotoItem) => void;
   aspectClass?: string;
   showCaption?: boolean;
+  /** `sizes` hint for responsive loading; defaults to the 3-column portfolio grid */
+  sizes?: string;
 }
 
 export const PhotoCard: React.FC<PhotoCardProps> = ({
@@ -14,32 +16,12 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
   onSelect,
   aspectClass = '',
   showCaption = true,
+  sizes = '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw',
 }) => {
   const [loaded, setLoaded] = useState(false);
 
-  // Determine aspect ratio class if not provided
-  let computedAspect = aspectClass;
-  if (!computedAspect) {
-    switch (photo.aspectRatio) {
-      case 'portrait':
-        computedAspect = 'aspect-[3/4] sm:aspect-[4/5]';
-        break;
-      case 'tall':
-        computedAspect = 'aspect-[2/3]';
-        break;
-      case 'landscape':
-        computedAspect = 'aspect-[16/10] sm:aspect-[3/2]';
-        break;
-      case 'wide':
-        computedAspect = 'aspect-[16/9] sm:aspect-[21/9]';
-        break;
-      case 'square':
-        computedAspect = 'aspect-square';
-        break;
-      default:
-        computedAspect = 'aspect-[4/3]';
-    }
-  }
+  // Default crop follows the photo's own orientation so little of the frame is lost
+  const computedAspect = aspectClass || (photo.aspectRatio === 'portrait' ? 'aspect-[4/5]' : 'aspect-[3/2]');
 
   return (
     <article
@@ -51,19 +33,22 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
       <div className={`relative w-full ${computedAspect} overflow-hidden bg-[#111111]`}>
         {!loaded && (
           <div className="absolute inset-0 bg-[#111] animate-pulse flex items-center justify-center">
-            <span className="text-[10px] text-white/30 font-mono tracking-widest uppercase">LOADING FRAME...</span>
+            <span className="text-[10px] text-white/30 font-mono tracking-widest uppercase">LOADING...</span>
           </div>
         )}
         
         <img
           src={photo.imageSrc}
+          srcSet={photo.srcSet}
+          sizes={sizes}
           alt={photo.altText}
           loading="lazy"
+          decoding="async"
           onLoad={() => setLoaded(true)}
-          className={`w-full h-full object-cover transition-all duration-700 will-change-transform group-hover:scale-105 ${
+          style={{ objectPosition: photo.focus }}
+          className={`w-full h-full object-cover transition-all duration-700 will-change-transform group-hover:scale-[1.03] ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
-          referrerPolicy="no-referrer"
         />
 
         {/* Viewfinder corner accents on hover */}
@@ -75,7 +60,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
         </div>
 
         {/* Editorial overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5">
           <div className="flex justify-between items-start">
             <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest bg-[#E11D48] text-white">
               <Tag className="w-2.5 h-2.5" />
@@ -93,8 +78,8 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
             <h4 className="font-display text-lg font-semibold uppercase text-white leading-tight tracking-[0.02em]">
               {photo.title}
             </h4>
-            <p className="text-xs text-white/60 line-clamp-1 mt-0.5 font-light">
-              {photo.assignmentType}
+            <p className="text-xs text-white/70 line-clamp-2 mt-0.5 font-light">
+              {photo.description}
             </p>
           </div>
         </div>
@@ -111,9 +96,6 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
               {photo.categoryLabel}
             </p>
           </div>
-          <span className="shrink-0 text-[9px] font-mono text-white/40 uppercase tracking-widest">
-            {photo.location ? photo.location.split(' ')[0] : 'ARCHIVE'}
-          </span>
         </div>
       )}
     </article>

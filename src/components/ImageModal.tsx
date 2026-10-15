@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { PhotoItem } from '../types';
-import { X, ChevronLeft, ChevronRight, MapPin, Tag, ArrowRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Tag, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { servicesData } from '../data/services';
 
 interface ImageModalProps {
   photo: PhotoItem | null;
@@ -45,6 +46,8 @@ export const ImageModal: React.FC<ImageModalProps> = ({
   }, [photo]);
 
   if (!photo) return null;
+
+  const service = servicesData.find((s) => s.categoryKey === photo.category);
 
   return (
     <div
@@ -98,22 +101,19 @@ export const ImageModal: React.FC<ImageModalProps> = ({
 
       {/* Modal Content Container */}
       <div
-        className="relative max-w-6xl w-full max-h-[90vh] grid grid-cols-1 lg:grid-cols-12 bg-[#0A0A0A] border border-white/15 overflow-hidden shadow-2xl"
+        className="relative max-w-6xl w-full max-h-[90vh] grid grid-cols-1 lg:grid-cols-12 bg-[#0A0A0A] border border-white/15 overflow-y-auto lg:overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Main Image Area (8 cols on lg) */}
         <div className="lg:col-span-8 bg-black flex items-center justify-center p-2 sm:p-4 min-h-[300px] max-h-[65vh] lg:max-h-[85vh] relative overflow-hidden">
           <img
+            key={photo.id}
             src={photo.imageSrc}
+            srcSet={photo.srcSet}
+            sizes="(min-width: 1024px) 66vw, 100vw"
             alt={photo.altText}
-            className="max-h-full max-w-full object-contain select-none"
-            referrerPolicy="no-referrer"
+            className="max-h-[60vh] lg:max-h-[80vh] max-w-full object-contain select-none"
           />
-          {photo.isPlaceholder && (
-            <div className="absolute bottom-3 left-3 bg-[#111] border border-white/10 px-2 py-1 text-[9px] font-mono text-white/50 uppercase tracking-widest">
-              ARCHIVE // #{photo.id.replace('photo-', '')}
-            </div>
-          )}
         </div>
 
         {/* Narrative & Details Area (4 cols on lg) */}
@@ -128,54 +128,32 @@ export const ImageModal: React.FC<ImageModalProps> = ({
               </span>
             </div>
 
-            {/* Title & Assignment */}
             <div>
               <h3 className="font-display text-2xl sm:text-3xl font-semibold uppercase text-white tracking-[0.02em]">
                 {photo.title}
               </h3>
-              <p className="text-xs uppercase tracking-widest text-[#E11D48] font-bold mt-1">
-                {photo.assignmentType}
+              <p className="text-sm text-white/70 font-light leading-relaxed mt-3">
+                {photo.description}
               </p>
             </div>
-
-            {/* Story / Narrative */}
-            <div className="space-y-2 border-t border-white/10 pt-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-                Visual Narrative
-              </span>
-              <p className="text-sm text-white/70 font-light leading-relaxed">
-                {photo.story}
-              </p>
-            </div>
-
-            {/* Metadata & Location */}
-            {photo.location && (
-              <div className="flex items-center gap-2 text-xs text-white/50 pt-1 font-mono">
-                <MapPin className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span>Assignment Setting: <strong className="text-white font-sans">{photo.location}</strong></span>
-              </div>
-            )}
-
-            {photo.editorialNote && (
-              <div className="p-3 bg-[#111111] border border-white/10 text-xs text-white/70 italic font-serif-editorial">
-                "{photo.editorialNote}"
-              </div>
-            )}
           </div>
 
           {/* Bottom Action */}
           <div className="pt-8 mt-6 border-t border-white/10 space-y-3">
             <Link
-              to={`/contact?subject=${encodeURIComponent(`Inquiry regarding ${photo.categoryLabel} - ${photo.title}`)}`}
+              to={`/contact?${new URLSearchParams({
+                ...(service ? { service: service.inquiryValue } : {}),
+                subject: `${photo.categoryLabel} photography (like "${photo.title}")`,
+              })}`}
               onClick={onClose}
               className="w-full inline-flex items-center justify-center gap-2 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest py-3.5 px-4 rounded-none transition-all"
             >
-              <span>INQUIRE ABOUT THIS STYLE</span>
+              <span>INQUIRE ABOUT {photo.categoryLabel.toUpperCase()}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             
             <p className="text-[10px] text-center text-white/40 uppercase tracking-widest font-bold">
-              Available for assignments, events, and editorial commissions.
+              Photograph by Alan Luby
             </p>
           </div>
 
