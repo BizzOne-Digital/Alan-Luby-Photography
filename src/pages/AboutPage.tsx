@@ -82,33 +82,28 @@ export const AboutPage: React.FC = () => {
                 What Alan Offers Today
               </h2>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Alan Luby is a freelance photographer based in
-                <strong className="text-white font-semibold"> Boynton Beach, Florida</strong>, with
-                <strong className="text-white font-semibold"> over 30 years of photography experience</strong>. He photographs
-                events and portraits for individuals, families and organizations, along with sports, entertainment and
-                business photography.
+                I'm a freelance photographer who currently resides in
+                <strong className="text-white font-semibold"> Boynton Beach</strong> and a member of the Black Chamber of
+                Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers, I have
+                been hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida
+                Sun-Sentinel, the Associated Press and numerous other publications. I have
+                <strong className="text-white font-semibold"> over 30 years of photography experience</strong> and was the
+                team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
+                Continental Basketball Association.
               </p>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                He is a portrait and wedding photographer who has provided event photography with on-site printing for
-                Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters of
-                Palm Beach County, BB King's, and numerous other profit and not-for-profit organizations. He is a member of
-                the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, the American Society of
-                Media Photographers.
+                I'm also a portrait and wedding photographer that has done event photography with on-site printing for
+                Motorola, American Society of Kidney Patients, Palm Beach State College, Big Brothers, Big Sisters of Palm
+                Beach County, BB King's and numerous other profit and not-for-profit organizations.
               </p>
 
               <h3 className="font-display text-xl font-semibold uppercase tracking-[0.02em] text-white pt-4">
                 Career Background
               </h3>
               <p className="text-base text-white/70 font-light leading-relaxed">
-                Earlier in his career, Alan was hired to cover events by the Miami Herald, Palm Beach Post, South Florida
-                Times, South Florida Sun-Sentinel, the Associated Press and numerous other publications. He served as team
-                photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
-                Continental Basketball Association.
-              </p>
-              <p className="text-base text-white/70 font-light leading-relaxed">
-                As a freelancer he covered the Miami Dolphins, Miami Heat, Miami Marlins, the University of Miami,
-                President Barack Obama, the victory party for Florida Gov. Rick Scott, and numerous other news, sports and
-                feature assignments. That background in fast-moving, high-pressure coverage shapes how he works today.
+                As a freelance photographer I have had the opportunity to cover the Miami Dolphins, Miami Heat, Miami
+                Marlins, University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott and
+                numerous other news, sports and feature assignments for various publications.
               </p>
               <figure className="pt-2 space-y-2">
                 <div className="relative aspect-[3/2] bg-[#111] border border-white/10 overflow-hidden">

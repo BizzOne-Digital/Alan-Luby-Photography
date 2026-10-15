@@ -42,6 +42,8 @@ export interface TestimonialItem {
   location?: string;
   /** Editorial summary written by us, not part of the quote */
   highlight?: string;
+  /** Article URL supplied with the testimonial */
+  link?: string;
   featured?: boolean;
 }
 

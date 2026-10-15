@@ -78,6 +78,16 @@ export const TestimonialsPage: React.FC = () => {
                 <blockquote className="font-serif-editorial text-lg text-white/90 italic leading-relaxed">
                   “{item.quote}”
                 </blockquote>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xs text-[#E11D48] hover:text-white underline break-all transition-colors"
+                  >
+                    {item.link}
+                  </a>
+                )}
               </div>
 
               <div className="pt-6 border-t border-white/10 flex items-center justify-between">
