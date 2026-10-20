@@ -1,176 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Logo } from './Logo';
-import { Mail, Phone, ArrowUpRight, Camera, ShieldCheck } from 'lucide-react';
+import { Wordmark } from './Header';
+import { servicesData } from '../data/services';
 
-export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+export const EMAIL = 'aluby1441@aol.com';
+export const PHONE = '(561) 340-9310';
+export const PHONE_HREF = 'tel:+15613409310';
 
-  return (
-    <footer id="main-footer" className="bg-[#050505] border-t border-white/10 text-white/50 relative overflow-hidden">
-      {/* Decorative top accent line with red anchor */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#E11D48] to-transparent opacity-80" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-14 border-b border-white/10">
-          
-          {/* Brand Column (5 cols on lg) */}
-          <div className="lg:col-span-5 space-y-6">
-            <Logo />
-            <p className="text-sm text-white/60 font-light leading-relaxed max-w-sm">
-              <strong className="text-[#F5F5F4] font-bold uppercase tracking-tight block text-base mb-1">
-                Real Moments. Real People.
-              </strong>
-              Event and portrait photography, plus sports, entertainment and business coverage, from Boynton Beach, Florida.
-            </p>
-            
-            <div className="pt-1 flex flex-wrap items-center gap-3 text-[10px] uppercase font-bold tracking-widest">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#111111] border border-white/10 text-white/70">
-                <Camera className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span>Events • Portraits • Sports</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#111111] border border-white/10 text-white/70">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span>Boynton Beach, FL</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Quick Navigation (2 cols on lg) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E11D48]">
-              01 // Navigation
-            </h4>
-            <ul className="space-y-2.5 text-xs uppercase tracking-widest font-semibold">
-              <li>
-                <Link to="/" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  About Alan
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link to="/work" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  Portfolio / Work
-                </Link>
-              </li>
-              <li>
-                <Link to="/testimonials" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white/70 hover:text-[#E11D48] transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Photography Disciplines (2 cols on lg) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E11D48]">
-              02 // Disciplines
-            </h4>
-            <ul className="space-y-2.5 text-xs uppercase tracking-widest font-semibold text-white/60">
-              <li>
-                <Link to="/work?category=events" className="hover:text-white transition-colors">
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link to="/work?category=portraits" className="hover:text-white transition-colors">
-                  Portraits
-                </Link>
-              </li>
-              <li>
-                <Link to="/work?category=sports" className="hover:text-white transition-colors">
-                  Sports
-                </Link>
-              </li>
-              <li>
-                <Link to="/work?category=entertainment" className="hover:text-white transition-colors">
-                  Entertainment
-                </Link>
-              </li>
-              <li>
-                <Link to="/work?category=commercial" className="hover:text-white transition-colors">
-                  Commercial
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Direct Contact & Social Media (3 cols on lg) */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#E11D48]">
-              03 // Direct Inquiries
-            </h4>
-            
-            <div className="space-y-2.5 font-mono text-xs">
-              <a
-                href="mailto:aluby1441@aol.com"
-                className="group flex items-start gap-3 p-3 bg-[#0E0E0E] border border-white/10 hover:border-[#E11D48] transition-all text-white/80 hover:text-white"
-              >
-                <Mail className="w-4 h-4 text-[#E11D48] mt-0.5 shrink-0" />
-                <div className="flex flex-col">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40 font-sans font-bold">Direct Email</span>
-                  <span className="font-semibold text-white">aluby1441@aol.com</span>
-                </div>
-              </a>
-
-              <a
-                href="tel:5613409310"
-                className="group flex items-start gap-3 p-3 bg-[#0E0E0E] border border-white/10 hover:border-[#E11D48] transition-all text-white/80 hover:text-white"
-              >
-                <Phone className="w-4 h-4 text-[#E11D48] mt-0.5 shrink-0" />
-                <div className="flex flex-col">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40 font-sans font-bold">Studio Phone</span>
-                  <span className="font-semibold text-white">(561) 340-9310</span>
-                </div>
-              </a>
-            </div>
-
-            {/* Social channels */}
-            <div className="pt-2">
-              <div className="flex flex-wrap gap-2">
-                <a
-                  href="https://www.facebook.com/share/1Jq7nQ8Rci/?mibextid=wwXIfr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#111] border border-white/10 text-[10px] uppercase tracking-widest font-bold text-white/70 hover:text-white hover:border-[#E11D48] transition-colors"
-                >
-                  <span>Facebook</span>
-                  <ArrowUpRight className="w-3 h-3 text-[#E11D48]" />
-                </a>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#111] border border-white/10 text-[10px] uppercase tracking-widest font-bold text-white/70">
-                  <span>Instagram: <strong className="text-white ml-0.5">Alan Luby</strong></span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[10px] text-white/40 tracking-widest uppercase font-bold gap-4">
-          <div className="flex flex-wrap items-center gap-6">
-            <span>Based in Boynton Beach, FL</span>
-            <span className="text-[#E11D48]">Now Booking Events &amp; Portraits</span>
-          </div>
-          <div>
-            © {currentYear} Alan Luby Photography. All Rights Reserved.
-          </div>
-        </div>
+export const Footer: React.FC = () => (
+  <footer className="border-t border-line bg-sand/60">
+    <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="space-y-3">
+        <Wordmark />
+        <p className="max-w-xs text-[0.95rem] text-muted">
+          Event, portrait, sports and live performance photography. Based in Boynton Beach, Florida, serving South Florida.
+        </p>
       </div>
-    </footer>
-  );
-};
+
+      <div>
+        <h2 className="mb-3 font-sans text-sm font-semibold text-ink">Contact</h2>
+        <ul className="space-y-2 text-[0.95rem]">
+          <li><a href={`mailto:${EMAIL}`} className="text-muted hover:text-ink">{EMAIL}</a></li>
+          <li><a href={PHONE_HREF} className="text-muted hover:text-ink">{PHONE}</a></li>
+          <li>
+            <a href="https://www.facebook.com/share/1Jq7nQ8Rci/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ink">
+              Facebook<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="mb-3 font-sans text-sm font-semibold text-ink">Services</h2>
+        <ul className="space-y-2 text-[0.95rem]">
+          {servicesData.map((s) => (
+            <li key={s.id}>
+              <Link to={`/services#${s.id}`} className="text-muted hover:text-ink">{s.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="mb-3 font-sans text-sm font-semibold text-ink">Explore</h2>
+        <ul className="space-y-2 text-[0.95rem]">
+          {[['/work', 'Work'], ['/about', 'About'], ['/testimonials', 'Testimonials'], ['/contact', 'Inquire']].map(([to, label]) => (
+            <li key={to}><Link to={to} className="text-muted hover:text-ink">{label}</Link></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div className="wrap border-t border-line py-6 text-sm text-muted">
+      © {new Date().getFullYear()} Alan Luby Photography. All photographs by Alan Luby.
+    </div>
+  </footer>
+);

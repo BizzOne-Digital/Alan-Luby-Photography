@@ -1,177 +1,109 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { servicesData } from '../data/services';
-import { ContactCTASection } from '../components/ContactCTASection';
-import { PageHeroImage } from '../components/PageHeroImage';
-import { heroImages } from '../data/photography';
-import { 
-  Check, 
-  ArrowRight, 
-  ArrowUpRight 
-} from 'lucide-react';
+import { inquiryHref, servicesData } from '../data/services';
+import { attributionOf, testimonialById } from '../data/testimonials';
+import { Photo } from '../components/Photo';
+import { InquiryBand } from '../components/InquiryBand';
+import { PageMeta } from '../components/PageMeta';
+import { ImageReveal, Reveal, TextReveal } from '../components/Motion';
 
-export const ServicesPage: React.FC = () => {
-  return (
-    <div id="services-page" className="min-h-screen bg-[#050505] text-[#F5F5F4] pt-28 pb-20">
-      
-      {/* Page Header */}
-      <div className="relative isolate">
-        <PageHeroImage photo={heroImages.services} />
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="border-b border-white/10 pb-10 space-y-4 max-w-4xl">
-          <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-            <span>What Alan Offers</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
-            Photography Services
-          </h1>
-          <p className="text-base sm:text-xl text-white/70 font-light leading-relaxed">
-            Event and portrait photography first, with sports, entertainment and business coverage for organizations across South Florida.
-          </p>
-        </div>
-      </section>
-      </div>
+const PROCESS = [
+  { title: 'Get in touch', text: 'Send a short inquiry or call. Mention the occasion, the date and the location if you know them.' },
+  { title: 'Plan together', text: 'Alan talks through the schedule, the people who matter most and the moments you want covered.' },
+  { title: 'The day itself', text: 'Alan arrives prepared and works quietly around your program, session, game or show.' },
+  { title: 'Your photographs', text: 'You receive edited, color-corrected digital images, ready to share and print.' },
+];
 
-      {/* Services List Breakdown */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 mb-24">
-        {servicesData.map((service, idx) => (
-          <div
-            key={service.id}
-            id={service.id}
-            className="p-8 sm:p-12 bg-[#0A0A0A] border border-white/10 hover:border-[#E11D48] transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
-          >
-            {/* Image Col (5 cols on lg) */}
-            <div className={`lg:col-span-5 ${idx % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
-              <div className="relative aspect-[4/3] bg-[#111] border border-white/10 overflow-hidden shadow-xl">
-                <img
-                  src={service.image.imageSrc}
-                  srcSet={service.image.srcSet}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  alt={service.image.altText}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  style={{ objectPosition: service.image.focus }}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 left-3 bg-[#050505] border border-white/15 px-3 py-1 text-[9px] font-mono text-[#E11D48] font-bold uppercase tracking-widest">
-                  SERVICE // 0{idx + 1}
-                </div>
-              </div>
-            </div>
+export const ServicesPage: React.FC = () => (
+  <>
+    <PageMeta
+      title="Services"
+      description="Event and celebration photography, portraits and business headshots, sports and live performance photography by Alan Luby in South Florida."
+    />
 
-            {/* Content Col (7 cols on lg) */}
-            <div className={`lg:col-span-7 space-y-6 ${idx % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-              <div className="space-y-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
-                  {service.tagline}
-                </span>
-                <h2 className="font-display text-2xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white">
-                  {service.title}
-                </h2>
-              </div>
-
-              <p className="text-sm sm:text-base text-white/70 font-light leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* What is Included / Deliverables */}
-              <div className="space-y-3 pt-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 block">
-                  Service Deliverables
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-white/80 font-medium">
-                  {service.deliverables.map((item, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-[#E11D48] mt-0.5 shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Ideal For Badges */}
-              <div className="pt-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 block mb-2">
-                  Ideal For
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {service.idealFor.map((target, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2.5 py-1 text-[10px] uppercase font-bold tracking-wider bg-[#111] border border-white/10 text-white/70"
-                    >
-                      {target}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Link
-                  to={`/contact?service=${encodeURIComponent(service.inquiryValue)}`}
-                  id={`service-cta-${service.id}`}
-                  className="inline-flex items-center gap-2 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-6 py-3.5 transition-all"
-                >
-                  <span>REQUEST A QUOTE</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to={`/work?category=${service.categoryKey}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
-                >
-                  <span>View {service.categoryKey} work</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#E11D48]" />
-                </Link>
-              </div>
-
-            </div>
-          </div>
+    <section className="wrap pb-12 pt-12 sm:pt-16">
+      <TextReveal as="h1" text="Services" className="text-4xl sm:text-5xl" />
+      <p className="mt-4 max-w-2xl text-lg text-muted">
+        Alan photographs people at their occasions, in portraits, in competition and on stage. Here is what each kind of
+        coverage includes and how to start a conversation about yours.
+      </p>
+      <nav aria-label="Services on this page" className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+        {servicesData.map((s) => (
+          <a key={s.id} href={`#${s.id}`} className="text-link">{s.title}</a>
         ))}
-      </section>
+      </nav>
+    </section>
 
-      {/* "NEED SOMETHING DIFFERENT? LET'S DISCUSS YOUR PROJECT" SECTION */}
-      <section className="py-20 bg-[#0A0A0A] border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-8 sm:p-14 bg-[#050505] border border-white/10 text-center max-w-4xl mx-auto space-y-6">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] block">
-              SOMETHING ELSE IN MIND?
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
-              Need something different? <br />
-              <span className="text-[#E11D48]">Let's discuss your project.</span>
-            </h2>
-            <p className="text-sm sm:text-base text-white/70 font-light max-w-2xl mx-auto leading-relaxed">
-              Multi-day events, combined event and portrait coverage, or a project that doesn't fit one category — tell Alan what you need and he'll recommend an approach.
-            </p>
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/contact"
-                id="services-custom-cta"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#E11D48] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-8 py-4 transition-all"
-              >
-                <span>START A PROJECT</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:5613409310"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/20 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest px-7 py-4 transition-all"
-              >
-                <span>CALL: (561) 340-9310</span>
-              </a>
+    {servicesData.map((s, i) => {
+      const quote = s.testimonialId ? testimonialById(s.testimonialId) : null;
+      const flip = i % 2 === 1;
+      return (
+        <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="border-t border-line py-16 lg:py-24">
+          <div className="wrap grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className={`space-y-3 ${flip ? 'lg:order-2' : ''}`}>
+              <ImageReveal>
+                <Photo photo={s.image} sizes="(min-width: 1024px) 45vw, 100vw" />
+              </ImageReveal>
+              <div className="grid grid-cols-2 gap-3">
+                {s.supporting.map((p, j) => (
+                  <ImageReveal key={p.id} delay={0.15 + j * 0.12} className="aspect-[3/2]">
+                    <Photo photo={p} cover sizes="(min-width: 1024px) 22vw, 50vw" />
+                  </ImageReveal>
+                ))}
+              </div>
+            </div>
+
+            <div className={`space-y-6 lg:pt-4 ${flip ? 'lg:order-1' : ''}`}>
+              <TextReveal id={`${s.id}-title`} text={s.title} className="text-3xl sm:text-4xl" />
+              <Reveal><p className="text-lg">{s.summary}</p></Reveal>
+              <div>
+                <h3 className="mb-1 text-base">Who it’s for</h3>
+                <p className="text-muted">{s.whoFor}</p>
+              </div>
+              <div>
+                <h3 className="mb-2 text-base">What Alan photographs</h3>
+                <ul className="space-y-1.5 text-muted">
+                  {s.photographs.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span aria-hidden className="mt-[0.7em] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {quote && (
+                <figure className="border-l-2 border-accent/40 pl-5">
+                  <blockquote className="font-display text-lg leading-snug">“{quote.excerpt}”</blockquote>
+                  <figcaption className="mt-2 text-sm text-muted">{attributionOf(quote)}</figcaption>
+                </figure>
+              )}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
+                <Link to={inquiryHref(s.inquiryValue)} className="btn-primary">Inquire about {s.shortTitle.toLowerCase()}</Link>
+                <Link to={`/work?category=${s.id}`} className="text-link">See {s.shortTitle.toLowerCase()} work</Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      );
+    })}
 
-      {/* Conversion Banner */}
-      <div className="mt-20">
-        <ContactCTASection
-          headline="READY TO BOOK YOUR DATE?"
-          subhead="Share your date, location and what you need photographed to get started."
-        />
+    <section aria-labelledby="process" className="border-t border-line bg-sand/50 py-16 lg:py-24">
+      <div className="wrap">
+        <TextReveal id="process" text="How it works" className="text-3xl sm:text-4xl" />
+        <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {PROCESS.map((step, i) => (
+            <li key={step.title}>
+              <Reveal delay={i * 0.12} className="space-y-2">
+              <span className="font-display text-2xl text-accent">{i + 1}</span>
+              <h3 className="text-lg">{step.title}</h3>
+              <p className="text-[0.95rem] text-muted">{step.text}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </div>
+    </section>
 
-    </div>
-  );
-};
+    <InquiryBand />
+  </>
+);

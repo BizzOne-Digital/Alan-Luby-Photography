@@ -1,52 +1,50 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { PageMeta } from './components/PageMeta';
+import { Splash } from './components/Splash';
+import { ScrollProgress } from './components/Motion';
+import { MotionConfig } from 'motion/react';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { WorkPage } from './pages/WorkPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 import { ContactPage } from './pages/ContactPage';
-import { ArrowLeft } from 'lucide-react';
 
-const NotFoundPage: React.FC = () => {
-  return (
-    <div className="min-h-[70vh] flex items-center justify-center pt-24 pb-16 px-4 bg-[#08080a] text-center">
-      <div className="max-w-md space-y-6">
-        <div className="text-red-500 font-mono text-5xl font-black">404</div>
-        <h1 className="font-display text-3xl font-bold uppercase text-white">
-          Frame Not Found
-        </h1>
-        <p className="text-sm text-zinc-400">
-          The requested page does not exist on the Alan Luby Photography website.
-        </p>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-xs transition-all"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Return to Homepage</span>
-        </Link>
-      </div>
+const NotFoundPage: React.FC = () => (
+  <section className="wrap py-24 sm:py-32">
+    <PageMeta title="Page not found" description="This page could not be found on the Alan Luby Photography website." />
+    <h1 className="text-4xl sm:text-5xl">This page could not be found.</h1>
+    <p className="mt-4 max-w-md text-lg text-muted">The link may be out of date. These pages are a good place to continue.</p>
+    <div className="mt-8 flex flex-wrap gap-3">
+      <Link to="/" className="btn-primary">Go to the homepage</Link>
+      <Link to="/work" className="btn-secondary">View work</Link>
     </div>
-  );
-};
+  </section>
+);
+
+/** Old /portfolio links (including ?category=) land on /work. */
+const PortfolioRedirect = () => <Navigate to={{ pathname: '/work', search: useLocation().search }} replace />;
 
 export default function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-[#08080a] text-zinc-100 selection:bg-red-600 selection:text-white">
+      <Splash />
+      <ScrollProgress />
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="flex-grow">
+        <main id="main" className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/work" element={<WorkPage />} />
-            <Route path="/portfolio" element={<Navigate to="/work" replace />} />
+            <Route path="/portfolio" element={<PortfolioRedirect />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -55,5 +53,6 @@ export default function App() {
         <Footer />
       </div>
     </BrowserRouter>
+    </MotionConfig>
   );
 }

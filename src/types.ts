@@ -1,59 +1,43 @@
-export type PhotoCategory = 'all' | 'events' | 'portraits' | 'sports' | 'entertainment' | 'commercial';
+export type PhotoCategory = 'events' | 'portraits' | 'sports' | 'performance';
 
 export interface PhotoItem {
   id: string;
   title: string;
-  category: Exclude<PhotoCategory, 'all'>;
-  categoryLabel: string;
-  aspectRatio: 'landscape' | 'portrait';
-  /** Web derivative (1600px) used for display */
-  imageSrc: string;
-  /** 800w + 1600w derivatives */
+  category: PhotoCategory;
+  /** Intrinsic size of the original, used for aspect ratio and reserved space */
+  width: number;
+  height: number;
+  /** Largest web derivative */
+  src: string;
+  /** Width-described derivatives (actual pixel widths) */
   srcSet: string;
   /** Untouched original in /public/JPEG */
   originalSrc: string;
-  /** CSS object-position used when the card crops the frame */
+  /** CSS object-position, used only where a layout crops the frame */
   focus: string;
-  altText: string;
-  description: string;
-  featuredOnHome?: boolean;
+  alt: string;
 }
 
 export interface ServiceItem {
-  id: string;
+  id: PhotoCategory;
   title: string;
-  categoryKey: PhotoCategory;
-  /** Must match a contact-form option value */
+  shortTitle: string;
+  /** Must match a contact-form option */
   inquiryValue: string;
-  tagline: string;
-  description: string;
-  deliverables: string[];
-  idealFor: string[];
+  summary: string;
+  whoFor: string;
+  photographs: string[];
   image: PhotoItem;
+  supporting: PhotoItem[];
+  testimonialId?: string;
 }
 
 export interface TestimonialItem {
   id: string;
   quote: string;
+  /** Verbatim shortening of `quote` for compact placements */
+  excerpt?: string;
   clientRole: string;
-  /** Organization or event name, when known */
   organization?: string;
-  /** City/state, when that is all the source gives */
   location?: string;
-  /** Editorial summary written by us, not part of the quote */
-  highlight?: string;
-  /** Article URL supplied with the testimonial */
-  link?: string;
-  featured?: boolean;
-}
-
-export interface ContactFormValues {
-  name: string;
-  email: string;
-  phone: string;
-  photographyType: string;
-  eventDate: string;
-  location: string;
-  estimatedBudget: string;
-  message: string;
 }

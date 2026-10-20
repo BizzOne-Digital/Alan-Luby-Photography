@@ -1,263 +1,87 @@
 import React from 'react';
-import { ContactCTASection } from '../components/ContactCTASection';
-import { PageHeroImage } from '../components/PageHeroImage';
-import { heroImages, careerImage, photographyCollection } from '../data/photography';
+import { Link } from 'react-router-dom';
+import { photoById } from '../data/photography';
+import { Photo } from '../components/Photo';
+import { InquiryBand } from '../components/InquiryBand';
+import { PageMeta } from '../components/PageMeta';
+import { ImageReveal, Reveal, TextReveal } from '../components/Motion';
 
-const bioPhoto = photographyCollection.find((p) => p.id === 'dsc-46779')!;
-import { 
-  Camera, 
-  Check, 
-  Sliders, 
-  HeartHandshake, 
-  FileText 
-} from 'lucide-react';
+const examples = ['dsc-5575', 'dsc-46779', 'dsc-68467'].map(photoById);
 
-export const AboutPage: React.FC = () => {
-  return (
-    <div id="about-page" className="min-h-screen bg-[#050505] text-[#F5F5F4] pt-28 pb-20">
-      
-      {/* Page Header */}
-      <div className="relative isolate">
-        <PageHeroImage photo={heroImages.about} />
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="border-b border-white/10 pb-10 space-y-4 max-w-4xl">
-          <div className="inline-block bg-[#E11D48] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-            <span>The Photographer</span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold uppercase tracking-[0.02em] text-white leading-none">
-            About Alan Luby
-          </h1>
-          <p className="text-base sm:text-xl text-white/75 font-light leading-relaxed">
-            Event and portrait photographer based in Boynton Beach, Florida, also covering sports, entertainment and business photography.
-          </p>
-        </div>
-      </section>
+export const AboutPage: React.FC = () => (
+  <>
+    <PageMeta
+      title="About Alan Luby"
+      description="Alan Luby is a Boynton Beach photographer with over 30 years of experience photographing events, portraits, sports and live performances."
+    />
+
+    <section className="wrap grid gap-10 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:pb-24">
+      <div>
+        <p className="eyebrow">About</p>
+        <TextReveal as="h1" text="Alan Luby photographs people at their best moments." className="mt-3 text-4xl sm:text-5xl" />
       </div>
 
-      {/* Main Bio & Portrait Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Portrait & Details (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Portfolio image. No confirmed portrait of Alan was supplied, so none is shown. */}
-            <figure className="space-y-2">
-              <div className="relative aspect-[4/3] bg-[#111] border border-white/10 overflow-hidden shadow-2xl">
-                <img
-                  src={bioPhoto.imageSrc}
-                  srcSet={bioPhoto.srcSet}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  alt={bioPhoto.altText}
-                  loading="lazy"
-                  decoding="async"
-                  style={{ objectPosition: bioPhoto.focus }}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <figcaption className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
-                Portrait session · Photograph by Alan Luby
-              </figcaption>
-            </figure>
+      <Reveal delay={0.3} className="max-w-2xl space-y-5 text-lg lg:pt-10">
+        <p>
+          Alan is a freelance photographer based in Boynton Beach, Florida, with over 30 years of experience. Today his
+          work centers on events, celebrations and portraits, alongside sports and live performance.
+        </p>
+        <p className="text-muted">
+          He has photographed weddings, family milestones and portrait sessions, and covered events for organizations
+          including Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters
+          of Palm Beach County and BB King’s. His sports experience includes serving as team photographer for the Florida
+          Bobcats of the Arena Football League and the Florida Beachdogs of the Continental Basketball Association.
+        </p>
+        <p className="text-muted">
+          Earlier in his career he also photographed news and feature assignments for South Florida publications.
+        </p>
+        <p className="text-muted">
+          Alan is a member of the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, the American
+          Society of Media Photographers.
+        </p>
+      </Reveal>
+    </section>
 
-            {/* Quick Contact Box */}
-            <div className="p-6 bg-[#0A0A0A] border border-white/10 space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
-                Direct Inquiries
-              </span>
-              <p className="text-xs text-white/60 font-light">
-                Booking events, portrait sessions, games and performances.
-              </p>
-              <div className="pt-2 flex flex-col space-y-1.5 text-xs text-white/80 font-mono">
-                <span>Email: <strong className="text-white font-sans font-bold">aluby1441@aol.com</strong></span>
-                <span>Phone: <strong className="text-white font-sans font-bold">(561) 340-9310</strong></span>
-              </div>
+    <section aria-labelledby="approach" className="border-t border-line py-16 lg:py-24">
+      <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+        <TextReveal id="approach" text="How Alan works" className="text-3xl sm:text-4xl" />
+        <dl className="grid max-w-2xl gap-8 sm:grid-cols-2">
+          {[
+            ['Prepared and on time', 'He plans around your schedule and arrives ready, so the day runs smoothly.'],
+            ['People at ease', 'Relaxed direction helps portrait subjects and guests stop worrying about the camera.'],
+            ['Watching for moments', 'The laugh, the embrace and the reaction often happen between the planned moments.'],
+            ['Natural results', 'Careful editing keeps skin tones and colors true to the day.'],
+          ].map(([term, text]) => (
+            <div key={term}>
+              <dt className="font-semibold">{term}</dt>
+              <dd className="mt-1.5 text-muted">{text}</dd>
             </div>
-          </div>
+          ))}
+        </dl>
+      </div>
+    </section>
 
-          {/* Right Column: Bio Narrative & Story (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            
-            <div className="space-y-4">
-              <h2 className="font-display text-2xl sm:text-4xl font-semibold uppercase tracking-[0.02em] text-white">
-                What Alan Offers Today
-              </h2>
-              <p className="text-base text-white/70 font-light leading-relaxed">
-                I'm a freelance photographer who currently resides in
-                <strong className="text-white font-semibold"> Boynton Beach</strong> and a member of the Black Chamber of
-                Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers, I have
-                been hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida
-                Sun-Sentinel, the Associated Press and numerous other publications. I have
-                <strong className="text-white font-semibold"> over 30 years of photography experience</strong> and was the
-                team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
-                Continental Basketball Association.
-              </p>
-              <p className="text-base text-white/70 font-light leading-relaxed">
-                I'm also a portrait and wedding photographer that has done event photography with on-site printing for
-                Motorola, American Society of Kidney Patients, Palm Beach State College, Big Brothers, Big Sisters of Palm
-                Beach County, BB King's and numerous other profit and not-for-profit organizations.
-              </p>
-
-              <h3 className="font-display text-xl font-semibold uppercase tracking-[0.02em] text-white pt-4">
-                Career Background
-              </h3>
-              <p className="text-base text-white/70 font-light leading-relaxed">
-                As a freelance photographer I have had the opportunity to cover the Miami Dolphins, Miami Heat, Miami
-                Marlins, University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott and
-                numerous other news, sports and feature assignments for various publications.
-              </p>
-              <figure className="pt-2 space-y-2">
-                <div className="relative aspect-[3/2] bg-[#111] border border-white/10 overflow-hidden">
-                  <img
-                    src={careerImage.imageSrc}
-                    srcSet={careerImage.srcSet}
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                    alt={careerImage.altText}
-                    loading="lazy"
-                    decoding="async"
-                    style={{ objectPosition: careerImage.focus }}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <figcaption className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
-                  {careerImage.title} · {careerImage.description}
-                </figcaption>
+    <section aria-labelledby="examples" className="border-t border-line py-16 lg:py-24">
+      <div className="wrap">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <TextReveal id="examples" text="Examples of Alan’s work" className="text-3xl sm:text-4xl" />
+          <Link to="/work" className="text-link">View the portfolio</Link>
+        </div>
+        <ul className="grid gap-4 sm:grid-cols-3">
+          {examples.map((p, i) => (
+            <li key={p.id}>
+              <figure>
+                <ImageReveal delay={i * 0.12} className="aspect-[3/2]">
+                  <Photo photo={p} cover sizes="(min-width: 640px) 33vw, 100vw" />
+                </ImageReveal>
+                <figcaption className="mt-2 text-sm text-muted">{p.title}. Photograph by Alan Luby.</figcaption>
               </figure>
-            </div>
-
-            {/* A DIFFERENT KIND OF PHOTOGRAPHER */}
-            <div className="p-8 bg-[#0A0A0A] border border-white/10 border-l-4 border-l-[#E11D48] space-y-4 shadow-xl">
-              <h3 className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-[0.02em] text-white">
-                How Alan Works
-              </h3>
-              <p className="text-sm sm:text-base text-white/60 font-light leading-relaxed">
-                Every event and every person is different. Alan adapts to the room, the light and the personalities
-                involved, so the photographs feel natural rather than staged.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-white/80 font-medium">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
-                  <span>Unobtrusive event observation</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
-                  <span>Candid, unforced portrait guidance</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
-                  <span>Timing for action and performance</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#E11D48] shrink-0" />
-                  <span>Polished, true-to-life post-production</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Photography Philosophy */}
-            <div className="space-y-4 pt-2">
-              <h3 className="font-display text-xl font-semibold uppercase tracking-[0.02em] text-white">
-                Photography Philosophy
-              </h3>
-              <div className="space-y-4 text-sm text-white/70 font-light leading-relaxed">
-                <p>
-                  <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">01 // Respect for the Subject:</strong> Whether photographing a keynote speaker, a family or an individual portrait client, Alan creates an atmosphere of ease and mutual respect where authenticity thrives naturally.
-                </p>
-                <p>
-                  <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">02 // Visual Storytelling:</strong> Every photograph should communicate context, atmosphere, and emotion. A collection of images should tell a coherent story from beginning to end.
-                </p>
-                <p>
-                  <strong className="text-white font-bold block mb-0.5 uppercase tracking-wide text-xs">03 // Dependability & Adaptability:</strong> Photography assignments can be unpredictable. Alan brings the calm experience needed to pivot when schedules shift or lighting changes unexpectedly.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Step Professional Approach */}
-      <section className="py-20 bg-[#0A0A0A] border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="max-w-3xl mb-14 space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#E11D48] block">
-              The Workflow
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-semibold uppercase tracking-[0.02em] text-white">
-              Professional Approach
-            </h2>
-            <p className="text-sm sm:text-base text-white/60 font-light">
-              A clear, dependable process from the first conversation to your final gallery.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="p-6 bg-[#050505] border border-white/10 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 01</span>
-                <HeartHandshake className="w-5 h-5 text-white/40" />
-              </div>
-              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Pre-Shoot Discovery
-              </h3>
-              <p className="text-xs text-white/60 font-light leading-relaxed">
-                Understanding your schedule, must-have shots and the people involved before the day arrives.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050505] border border-white/10 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 02</span>
-                <Camera className="w-5 h-5 text-white/40" />
-              </div>
-              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Live Execution
-              </h3>
-              <p className="text-xs text-white/60 font-light leading-relaxed">
-                Punctual, attentive coverage of both the planned moments and the candid ones.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050505] border border-white/10 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 03</span>
-                <Sliders className="w-5 h-5 text-white/40" />
-              </div>
-              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Selection & Editing
-              </h3>
-              <p className="text-xs text-white/60 font-light leading-relaxed">
-                Careful selection and color correction that keeps skin tones and colors natural.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050505] border border-white/10 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-[#E11D48]">PHASE 04</span>
-                <FileText className="w-5 h-5 text-white/40" />
-              </div>
-              <h3 className="font-display text-lg font-semibold uppercase text-white tracking-[0.02em]">
-                Gallery Delivery
-              </h3>
-              <p className="text-xs text-white/60 font-light leading-relaxed">
-                High-resolution digital files, ready to share, print or use on your website.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* Conversion Banner */}
-      <div className="mt-20">
-        <ContactCTASection
-          headline="READY TO WORK WITH ALAN?"
-          subhead="Tell Alan about your event, portrait session or project."
-        />
+            </li>
+          ))}
+        </ul>
       </div>
+    </section>
 
-    </div>
-  );
-};
+    <InquiryBand title="Have an occasion in mind?" />
+  </>
+);
