@@ -105,3 +105,20 @@
     flex-grow: 999;
   }
 }
+
+/* Endless photo strip. Two copies of the list; shifting by -50% loops seamlessly. */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee var(--marquee-duration, 60s) linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+.marquee-track:hover .marquee {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { EMAIL, PHONE, PHONE_HREF } from './Footer';
-import { TextReveal } from './Motion';
+import { Magnetic, TextReveal } from './Motion';
 
 interface InquiryBandProps {
   title?: string;
@@ -20,9 +20,11 @@ export const InquiryBand: React.FC<InquiryBandProps> = ({
         <p className="max-w-xl text-paper/85">{text}</p>
       </div>
       <div className="flex flex-col gap-4 lg:items-end">
-        <Link to="/contact" className="btn-primary self-start bg-paper text-accent hover:bg-white lg:self-end">
+        <Magnetic>
+          <Link to="/contact" className="btn-primary self-start bg-paper text-accent hover:bg-white lg:self-end">
           Start an inquiry
         </Link>
+        </Magnetic>
         <p className="text-[0.95rem] text-paper/85">
           Or <a href={`mailto:${EMAIL}`} className="underline underline-offset-4 hover:text-white">{EMAIL}</a>
           {' · '}

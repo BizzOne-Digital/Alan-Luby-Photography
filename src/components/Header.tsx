@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion, useMotionValueEvent, useScroll } from 'motion/react';
 
 const NAV = [
   { to: '/work', label: 'Work' },
@@ -20,6 +21,14 @@ const navClass = ({ isActive }: { isActive: boolean }) =>
 export const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Slide away while scrolling down, return on any scroll up.
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setHidden(y > prev && y > 240);
+  });
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -31,7 +40,12 @@ export const Header: React.FC = () => {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/95 backdrop-blur-sm">
+    <motion.header
+      className="sticky top-0 z-40 border-b border-line/70 bg-paper/95 backdrop-blur-sm"
+      animate={{ y: hidden && !open ? '-100%' : '0%' }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      onFocusCapture={() => setHidden(false)}
+    >
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
         Skip to content
       </a>
@@ -75,6 +89,6 @@ export const Header: React.FC = () => {
           </div>
         </nav>
       )}
-    </header>
+    </motion.header>
   );
 };

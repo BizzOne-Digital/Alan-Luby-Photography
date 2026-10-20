@@ -147,6 +147,106 @@ export const photographyCollection: PhotoItem[] = [
     title: 'Workplace instruction',
     alt: 'An instructor in an apron pointing across a classroom of students',
   }),
+  photo({
+    file: 'DSC_61146.jpg', category: 'events', width: 2300, height: 1528, focus: '50% 25%',
+    title: 'Hands up on the dance floor',
+    alt: 'A man in a plaid jacket throwing both arms in the air while guests cheer around him',
+  }),
+  photo({
+    file: '01600016.jpg', category: 'portraits', width: 1840, height: 2300, focus: '50% 25%',
+    title: 'Outdoor portrait in natural light',
+    alt: 'A woman with long hair laughing upward in a white dress against green foliage',
+  }),
+  photo({
+    file: 'DSC_25324.jpg', category: 'sports', width: 2300, height: 1530, focus: '60% 35%',
+    title: 'Boxing victory',
+    alt: 'A boxer in red raising a gloved fist in the ring',
+  }),
+  photo({
+    file: 'DSC_7122.jpg', category: 'performance', width: 2300, height: 1518, focus: '50% 25%',
+    title: 'Leap over the orchestra',
+    alt: 'A dancer in a split leap above an outdoor orchestra while the audience watches',
+  }),
+  photo({
+    file: 'DSC_0833B.jpg', category: 'portraits', width: 2300, height: 1518, focus: '50% 35%',
+    title: 'Family studio portrait',
+    alt: 'A smiling family of five posed together against a gray backdrop',
+  }),
+  photo({
+    file: 'DSC_2023.jpg', category: 'sports', width: 2300, height: 1530, focus: '50% 35%',
+    title: 'Bench erupts',
+    alt: 'A basketball player spreading her arms wide in celebration as teammates cheer behind her',
+  }),
+  photo({
+    file: 'DSC_303571.jpg', category: 'events', width: 2300, height: 1764, focus: '45% 35%',
+    title: 'Laughter at an evening event',
+    alt: 'A woman in a red dress laughing with her head thrown back beside a smiling man in a gray suit',
+  }),
+  photo({
+    file: 'DSC_68234.jpg', category: 'sports', width: 1518, height: 2300, focus: '50% 30%',
+    title: 'Youth baseball joy',
+    alt: 'A young baseball player in a helmet grinning as he runs',
+  }),
+  photo({
+    file: 'DSC_7332.jpg', category: 'performance', width: 2300, height: 1530, focus: '50% 40%',
+    title: 'Fashion show runway',
+    alt: 'A model walking a runway lined with a seated audience at a fashion show',
+  }),
+  photo({
+    file: 'DSC_4970.jpg', category: 'portraits', width: 1530, height: 2300, focus: '50% 35%',
+    title: 'Couple portrait in the garden',
+    alt: 'A smiling couple embracing among green trees',
+  }),
+  photo({
+    file: 'DSC_95856.jpg', category: 'sports', width: 2300, height: 1530, focus: '40% 45%',
+    title: 'Youth tennis',
+    alt: 'A boy in a blue shirt running across a tennis court with his racket, grinning',
+  }),
+  photo({
+    file: 'DSC_5526.jpg', category: 'events', width: 2300, height: 1518, focus: '55% 35%',
+    title: 'Celebration couple',
+    alt: 'A woman in a black dress and a man in a plaid jacket laughing together at a party',
+  }),
+  photo({
+    file: 'DSC_40902.jpg', category: 'portraits', width: 2300, height: 1529, focus: '50% 40%',
+    title: 'Family jump on the beach',
+    alt: 'A family in yellow and denim jumping together on the beach',
+  }),
+  photo({
+    file: 'JWS_37126.jpg', category: 'performance', width: 2300, height: 1530, focus: '40% 30%',
+    title: 'Cheer stunt',
+    alt: 'A cheerleader lifted high by a teammate, shouting with pom-poms in the air',
+  }),
+  photo({
+    file: 'DSC_3973.jpg', category: 'portraits', width: 2300, height: 1530, focus: '35% 35%',
+    title: 'Personality portrait',
+    alt: 'A smiling man in a suit touching his brow against a light background',
+  }),
+  photo({
+    file: 'DSC_55581.jpg', category: 'sports', width: 2111, height: 2300, focus: '50% 35%',
+    title: 'Teammates celebrate',
+    alt: 'Two young players hugging and cheering on the field',
+  }),
+  photo({
+    file: 'DSC_79685.jpg', category: 'events', width: 2300, height: 1530, focus: '50% 35%',
+    title: 'Party fun',
+    alt: 'Two children laughing and playing in a colorful bounce house',
+  }),
+  photo({
+    file: 'DSC_39269.jpg', category: 'portraits', width: 2300, height: 1530, focus: '50% 35%',
+    title: 'Family portrait by the water',
+    alt: 'A smiling family of four posed close together by the waterfront',
+  }),
+  photo({
+    file: 'JWS_02313.jpg', category: 'events', width: 2300, height: 1530, focus: '50% 30%',
+    title: 'Open-arms greeting',
+    alt: 'A woman in a pink hat and a man in a blue blazer greeting each other with outstretched arms at a podium',
+  }),
+  photo({
+    file: 'JWS_85879 8x10.jpg', category: 'portraits', width: 1840, height: 2300, focus: '50% 30%',
+    title: 'Prom portrait',
+    alt: 'A young couple dressed for prom posing outdoors, she in a purple gown with a corsage',
+  }),
 ];
 
 export const photoById = (id: string) => {
@@ -173,3 +273,10 @@ export const parseCategory = (value: string | null): PhotoCategory | null => {
   const key = legacy[value] ?? value;
   return key in categoryLabels ? (key as PhotoCategory) : null;
 };
+
+/** From Alan's earlier news work. Shown only on About as a career highlight, never in Work or services. */
+export const careerPhoto: PhotoItem = photo({
+  file: 'DJP_15474.jpg', category: 'events', width: 2300, height: 1530, focus: '60% 45%',
+  title: 'President Barack Obama with supporters',
+  alt: 'President Barack Obama waving to a cheering crowd gathered behind him, a presidential podium at right',
+});

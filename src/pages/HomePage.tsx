@@ -2,14 +2,20 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { heroPhoto, selectedWork } from '../data/photography';
+import { careerPhoto, heroPhoto, photoById, selectedWork } from '../data/photography';
+import { PhotoMarquee } from '../components/PhotoMarquee';
 import { servicesData } from '../data/services';
 import { attributionOf, homeTestimonials } from '../data/testimonials';
 import { Photo } from '../components/Photo';
 import { Gallery } from '../components/Gallery';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
-import { ImageReveal, Reveal, TextReveal } from '../components/Motion';
+import { CountUp, ImageReveal, Magnetic, Reveal, TextReveal, Tilt, VelocityText } from '../components/Motion';
+
+const MARQUEE: [ReturnType<typeof photoById>[], ReturnType<typeof photoById>[]] = [
+  ['dsc-61146', '01600016', 'dsc-25324', 'dsc-7122', 'dsc-0833b', 'dsc-2023', 'dsc-303571', 'dsc-68234', 'dsc-7332', 'dsc-4970'].map(photoById),
+  ['dsc-95856', 'dsc-5526', 'dsc-40902', 'jws-37126', 'dsc-3973', 'dsc-55581', 'dsc-79685', 'dsc-39269', 'jws-02313', 'jws-85879-8x10'].map(photoById),
+];
 import { introDelay } from '../components/Splash';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -35,8 +41,8 @@ const Hero: React.FC = () => {
           Celebrations, gatherings and portraits that feel like the people in them, plus sports and live performances, photographed by Alan Luby across South Florida.
         </motion.p>
         <motion.div className="flex flex-wrap gap-3 pt-2" {...fadeUp(0.7)}>
-          <Link to="/work" className="btn-primary">View selected work</Link>
-          <Link to="/contact" className="btn-secondary">Inquire</Link>
+          <Magnetic><Link to="/work" className="btn-primary">View selected work</Link></Magnetic>
+          <Magnetic><Link to="/contact" className="btn-secondary">Inquire</Link></Magnetic>
         </motion.div>
       </motion.div>
       <figure className="lg:order-2">
@@ -55,6 +61,12 @@ export const HomePage: React.FC = () => (
     <PageMeta description="Alan Luby photographs events, celebrations and portraits across South Florida, along with sports and live performances. Based in Boynton Beach, Florida." />
 
     <Hero />
+
+    <VelocityText
+      text="Events · Portraits · Sports · Live performance ·"
+      className="border-y border-line py-5 font-display text-4xl text-ink/85 sm:text-6xl lg:text-7xl"
+    />
+    <div className="h-16 lg:h-24" />
 
     {/* Selected work */}
     <section aria-labelledby="selected-work" className="wrap pb-20 lg:pb-28">
@@ -77,11 +89,13 @@ export const HomePage: React.FC = () => (
         <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {servicesData.map((s, i) => (
             <li key={s.id} className="flex flex-col">
+              <Tilt>
               <Link to={`/services#${s.id}`} className="group block overflow-hidden" tabIndex={-1} aria-hidden>
                 <ImageReveal delay={i * 0.12} className="aspect-[4/5]">
                   <Photo photo={s.image} cover sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.03]" />
                 </ImageReveal>
               </Link>
+              </Tilt>
               <h3 className="mt-5 text-xl">{s.title}</h3>
               <p className="mt-2 flex-1 text-[0.95rem] text-muted">{s.summary}</p>
               <div className="mt-4 flex flex-col gap-1.5 text-[0.95rem]">
@@ -98,7 +112,10 @@ export const HomePage: React.FC = () => (
 
     {/* About Alan */}
     <section aria-labelledby="meet-alan" className="wrap grid gap-8 py-20 lg:grid-cols-[1fr_2fr] lg:gap-16 lg:py-28">
-      <TextReveal id="meet-alan" text="Over 30 years of photographing people" className="text-3xl sm:text-4xl" />
+      <div>
+        <p className="font-display text-[5.5rem] leading-none text-accent sm:text-[8rem]"><CountUp to={30} suffix="+" /></p>
+        <TextReveal id="meet-alan" text="Over 30 years of photographing people" className="mt-4 text-3xl sm:text-4xl" />
+      </div>
       <Reveal className="max-w-2xl space-y-5 text-lg">
         <p>
           Alan Luby has photographed banquets and conventions, weddings and birthdays, games and stage performances,
@@ -112,6 +129,41 @@ export const HomePage: React.FC = () => (
         <Link to="/about" className="text-link inline-flex items-center gap-1.5 text-base">
           More about Alan <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
+      </Reveal>
+    </section>
+
+    {/* Career highlight */}
+    <section aria-labelledby="career" className="border-t border-line py-16 lg:py-24">
+      <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-20">
+        <div className="space-y-4">
+          <p className="eyebrow">Career highlight</p>
+          <TextReveal id="career" text="Ready for the moment that matters" className="text-3xl sm:text-4xl" />
+          <Reveal>
+            <p className="text-muted">
+              Alan’s years covering news for South Florida publications included photographing President Barack Obama.
+              That experience of working fast, in crowds and under pressure, is the same calm he brings to events today.
+            </p>
+          </Reveal>
+        </div>
+        <figure>
+          <ImageReveal>
+            <Photo photo={careerPhoto} sizes="(min-width: 1024px) 55vw, 100vw" />
+          </ImageReveal>
+          <figcaption className="mt-2 text-sm text-muted">{careerPhoto.title}. Photograph by Alan Luby.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    {/* Moments marquee: more of the portfolio in motion */}
+    <section aria-labelledby="moments" className="border-t border-line py-20 lg:py-28">
+      <div className="wrap mb-10 flex flex-wrap items-end justify-between gap-4">
+        <TextReveal id="moments" text="More moments" className="text-3xl sm:text-4xl" />
+        <Link to="/work" className="text-link inline-flex items-center gap-1.5">
+          Browse every category <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      </div>
+      <Reveal>
+        <PhotoMarquee rows={MARQUEE} />
       </Reveal>
     </section>
 

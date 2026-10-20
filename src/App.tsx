@@ -6,7 +6,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { PageMeta } from './components/PageMeta';
 import { Splash } from './components/Splash';
 import { ScrollProgress } from './components/Motion';
-import { MotionConfig } from 'motion/react';
+import { MotionConfig, motion } from 'motion/react';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -29,6 +29,16 @@ const NotFoundPage: React.FC = () => (
 /** Old /portfolio links (including ?category=) land on /work. */
 const PortfolioRedirect = () => <Navigate to={{ pathname: '/work', search: useLocation().search }} replace />;
 
+/** Each route fades and rises in; keyed by path so it replays on navigation. */
+const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { pathname } = useLocation();
+  return (
+    <motion.div key={pathname} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+      {children}
+    </motion.div>
+  );
+};
+
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
@@ -39,16 +49,18 @@ export default function App() {
       <div className="flex min-h-screen flex-col">
         <Header />
         <main id="main" className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/work" element={<WorkPage />} />
-            <Route path="/portfolio" element={<PortfolioRedirect />} />
-            <Route path="/testimonials" element={<TestimonialsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <PageTransition>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/work" element={<WorkPage />} />
+              <Route path="/portfolio" element={<PortfolioRedirect />} />
+              <Route path="/testimonials" element={<TestimonialsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+            </PageTransition>
         </main>
         <Footer />
       </div>
