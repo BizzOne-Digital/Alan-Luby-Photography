@@ -10,7 +10,7 @@ const NAV = [
 ];
 
 export const Wordmark: React.FC = () => (
-  <Link to="/" className="font-display text-[1.35rem] leading-none tracking-tight text-ink">
+  <Link to="/" className="font-display text-[1.15rem] leading-none tracking-tight text-ink sm:text-[1.35rem]">
     Alan Luby <span className="text-muted">Photography</span>
   </Link>
 );
@@ -27,7 +27,8 @@ export const Header: React.FC = () => {
   // Slide away while scrolling down, return on any scroll up.
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
-    setHidden(y > prev && y > 240);
+    // Desktop only: on phones the header carries the Inquire button, so it stays put.
+    setHidden(window.innerWidth >= 1024 && y > prev && y > 240);
   });
 
   useEffect(() => setOpen(false), [pathname]);
@@ -63,6 +64,12 @@ export const Header: React.FC = () => {
           </Link>
         </nav>
 
+        <div className="flex items-center gap-1 lg:hidden">
+        {pathname !== '/contact' && (
+          <Link to="/contact" className="btn-primary min-h-10 px-4 text-sm">
+            Inquire
+          </Link>
+        )}
         <button
           type="button"
           className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-ink/5 lg:hidden"
@@ -73,6 +80,7 @@ export const Header: React.FC = () => {
         >
           {open ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
         </button>
+        </div>
       </div>
 
       {open && (

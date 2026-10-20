@@ -274,6 +274,27 @@ export const parseCategory = (value: string | null): PhotoCategory | null => {
   return key in categoryLabels ? (key as PhotoCategory) : null;
 };
 
+/**
+ * Couple story on the homepage. "Gina & Darrell Saved The Date Photoshoot.jpg" is a composite whose top half is
+ * the same wedding entrance as DSC_88579 and whose bottom half is the engagement session; the web derivative
+ * save-the-date-*.webp is that bottom half. Names are not published.
+ */
+export const coupleStory = {
+  engagement: {
+    id: 'save-the-date',
+    title: 'Save-the-date session',
+    category: 'events',
+    width: 1717,
+    height: 1135,
+    src: '/images/work/save-the-date-1600.webp',
+    srcSet: [640, 1024, 1600].map((w) => `/images/work/save-the-date-${w}.webp ${w}w`).join(', '),
+    originalSrc: `/JPEG/${encodeURIComponent('Gina & Darrell Saved The Date Photoshoot.jpg')}`,
+    focus: '50% 40%',
+    alt: 'A smiling couple outdoors, the woman showing her engagement ring and wearing a “She said yes” T-shirt',
+  } satisfies PhotoItem,
+  wedding: photoById('dsc-88579'),
+};
+
 /** From Alan's earlier news work. Shown only on About as a career highlight, never in Work or services. */
 export const careerPhoto: PhotoItem = photo({
   file: 'DJP_15474.jpg', category: 'events', width: 2300, height: 1530, focus: '60% 45%',

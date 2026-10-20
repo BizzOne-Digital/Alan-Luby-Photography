@@ -116,9 +116,6 @@
 .marquee-reverse {
   animation-direction: reverse;
 }
-.marquee-track:hover .marquee {
-  animation-play-state: paused;
-}
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; }
 }

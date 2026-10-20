@@ -2,14 +2,12 @@ import React from 'react';
 import {
   animate,
   motion,
-  useAnimationFrame,
   useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
-  useVelocity,
 } from 'motion/react';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -90,35 +88,16 @@ export const ScrollProgress: React.FC = () => {
   return <motion.div aria-hidden style={{ scaleX }} className="fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-accent" />;
 };
 
-/** Infinite text band whose speed and direction follow the visitor's scroll. */
-export const VelocityText: React.FC<{ text: string; baseVelocity?: number; className?: string }> = ({ text, baseVelocity = 3, className = '' }) => {
-  const x = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const factor = useTransform(velocity, [0, 1000], [0, 5], { clamp: false });
-  const direction = React.useRef(1);
-  const reduce = useReducedMotion();
-
-  useAnimationFrame((_, delta) => {
-    if (reduce) return;
-    let move = direction.current * baseVelocity * (delta / 1000);
-    if (factor.get() < 0) direction.current = -1;
-    else if (factor.get() > 0) direction.current = 1;
-    move += direction.current * move * factor.get();
-    // Four copies; wrap after one copy (25%) so the loop is seamless.
-    x.set((((x.get() + move) % 25) - 25) % 25);
-  });
-
-  return (
-    <div className={`overflow-hidden whitespace-nowrap ${className}`} aria-hidden>
-      <motion.div className="inline-flex" style={{ x: useTransform(x, (v) => `${v}%`) }}>
-        {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="pr-12">{text}</span>
-        ))}
-      </motion.div>
+/** Endless text band at a constant speed (same CSS loop as the photo strip). */
+export const TextMarquee: React.FC<{ text: string; className?: string }> = ({ text, className = '' }) => (
+  <div className={`overflow-hidden whitespace-nowrap ${className}`} aria-hidden>
+    <div className="marquee flex w-max" style={{ '--marquee-duration': '40s' } as React.CSSProperties}>
+      {[0, 1, 2, 3].map((i) => (
+        <span key={i} className="pr-12">{text}</span>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 /** Number that counts up the first time it scrolls into view. */
 export const CountUp: React.FC<{ to: number; suffix?: string }> = ({ to, suffix = '' }) => {

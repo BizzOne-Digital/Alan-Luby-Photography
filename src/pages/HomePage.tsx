@@ -2,15 +2,18 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { careerPhoto, heroPhoto, photoById, selectedWork } from '../data/photography';
+import { coupleStory, heroPhoto, photoById, selectedWork } from '../data/photography';
+import { inquiryHref } from '../data/services';
 import { PhotoMarquee } from '../components/PhotoMarquee';
 import { servicesData } from '../data/services';
-import { attributionOf, homeTestimonials } from '../data/testimonials';
+import { attributionOf, homeTestimonials, testimonialById } from '../data/testimonials';
 import { Photo } from '../components/Photo';
 import { Gallery } from '../components/Gallery';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
-import { CountUp, ImageReveal, Magnetic, Reveal, TextReveal, Tilt, VelocityText } from '../components/Motion';
+import { CountUp, ImageReveal, Magnetic, Reveal, TextReveal, Tilt, TextMarquee } from '../components/Motion';
+
+const storyQuote = testimonialById('testimonial-4');
 
 const MARQUEE: [ReturnType<typeof photoById>[], ReturnType<typeof photoById>[]] = [
   ['dsc-61146', '01600016', 'dsc-25324', 'dsc-7122', 'dsc-0833b', 'dsc-2023', 'dsc-303571', 'dsc-68234', 'dsc-7332', 'dsc-4970'].map(photoById),
@@ -62,7 +65,7 @@ export const HomePage: React.FC = () => (
 
     <Hero />
 
-    <VelocityText
+    <TextMarquee
       text="Events · Portraits · Sports · Live performance ·"
       className="border-y border-line py-5 font-display text-4xl text-ink/85 sm:text-6xl lg:text-7xl"
     />
@@ -132,25 +135,45 @@ export const HomePage: React.FC = () => (
       </Reveal>
     </section>
 
-    {/* Career highlight */}
-    <section aria-labelledby="career" className="border-t border-line py-16 lg:py-24">
-      <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-20">
-        <div className="space-y-4">
-          <p className="eyebrow">Career highlight</p>
-          <TextReveal id="career" text="Ready for the moment that matters" className="text-3xl sm:text-4xl" />
-          <Reveal>
-            <p className="text-muted">
-              Alan’s years covering news for South Florida publications included photographing President Barack Obama.
-              That experience of working fast, in crowds and under pressure, is the same calm he brings to events today.
+    {/* Client story: one couple, two sessions */}
+    <section aria-labelledby="story" className="border-t border-line py-20 lg:py-28">
+      <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-20">
+        <div className="space-y-6">
+          <p className="eyebrow">A couple’s story</p>
+          <TextReveal id="story" text="From “she said yes” to the walk down the aisle" className="text-3xl sm:text-4xl" />
+          <Reveal className="space-y-4 text-muted">
+            <p>
+              Alan photographed this couple’s save-the-date session and then their wedding day. The first was relaxed
+              and playful, with plenty of room to laugh at the camera. The second meant reading the room: the ceremony
+              schedule, the light, and the glance between them as they made their entrance.
             </p>
           </Reveal>
+          <Reveal delay={0.15}>
+            <figure className="border-l-2 border-accent/40 pl-5">
+              <blockquote className="font-display text-lg leading-snug">“{storyQuote.quote}”</blockquote>
+              <figcaption className="mt-2 text-sm text-muted">From another client · {attributionOf(storyQuote)}</figcaption>
+            </figure>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <Link to={inquiryHref('Events & celebrations')} className="text-link inline-flex items-center gap-1.5">
+              Inquire about wedding and celebration coverage <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </Reveal>
         </div>
-        <figure>
-          <ImageReveal>
-            <Photo photo={careerPhoto} sizes="(min-width: 1024px) 55vw, 100vw" />
-          </ImageReveal>
-          <figcaption className="mt-2 text-sm text-muted">{careerPhoto.title}. Photograph by Alan Luby.</figcaption>
-        </figure>
+        <div className="grid grid-cols-2 items-start gap-3 sm:gap-4">
+          <figure className="mt-10 sm:mt-16">
+            <ImageReveal>
+              <Photo photo={coupleStory.engagement} sizes="(min-width: 1024px) 28vw, 50vw" />
+            </ImageReveal>
+            <figcaption className="mt-2 text-sm text-muted">The save-the-date session</figcaption>
+          </figure>
+          <figure>
+            <ImageReveal delay={0.15}>
+              <Photo photo={coupleStory.wedding} sizes="(min-width: 1024px) 28vw, 50vw" />
+            </ImageReveal>
+            <figcaption className="mt-2 text-sm text-muted">The wedding day</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 

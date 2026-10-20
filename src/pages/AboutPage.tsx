@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { photoById } from '../data/photography';
+import { careerPhoto, photoById } from '../data/photography';
 import { Photo } from '../components/Photo';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
@@ -40,6 +40,27 @@ export const AboutPage: React.FC = () => (
           Society of Media Photographers.
         </p>
       </Reveal>
+    </section>
+
+    <section aria-labelledby="career" className="border-t border-line py-16 lg:py-24">
+      <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-20">
+        <div className="space-y-4">
+          <p className="eyebrow">Career highlight</p>
+          <TextReveal id="career" text="Ready for the moment that matters" className="text-3xl sm:text-4xl" />
+          <Reveal>
+            <p className="text-muted">
+              Alan’s years covering news for South Florida publications included photographing President Barack Obama.
+              That experience of working fast, in crowds and under pressure, is the same calm he brings to events today.
+            </p>
+          </Reveal>
+        </div>
+        <figure>
+          <ImageReveal>
+            <Photo photo={careerPhoto} sizes="(min-width: 1024px) 55vw, 100vw" />
+          </ImageReveal>
+          <figcaption className="mt-2 text-sm text-muted">{careerPhoto.title}. Photograph by Alan Luby.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section aria-labelledby="approach" className="border-t border-line py-16 lg:py-24">
