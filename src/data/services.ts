@@ -38,7 +38,6 @@ export const servicesData: ServiceItem[] = [
     ],
     image: photoById('dsc-7539'),
     supporting: [photoById('dsc-1563'), photoById('dsc-02093')],
-    testimonialId: 'testimonial-15',
   },
   {
     id: 'sports',

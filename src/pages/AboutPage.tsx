@@ -23,21 +23,22 @@ export const AboutPage: React.FC = () => (
 
       <Reveal delay={0.3} className="max-w-2xl space-y-5 text-lg lg:pt-10">
         <p>
-          Alan is a freelance photographer based in Boynton Beach, Florida, with over 30 years of experience. Today his
-          work centers on events, celebrations and portraits, alongside sports and live performance.
+          I'm a freelance photographer who currently resides in Boynton Beach and a member of the Black Chamber of
+          Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers, I have been
+          hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida Sun-Sentinel, the
+          Associated Press and numerous other publications. I have over 30 years of photography experience and was the
+          team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
+          Continental Basketball Association.
         </p>
         <p className="text-muted">
-          He has photographed weddings, family milestones and portrait sessions, and covered events for organizations
-          including Motorola, the American Society of Kidney Patients, Palm Beach State College, Big Brothers Big Sisters
-          of Palm Beach County and BB King’s. His sports experience includes serving as team photographer for the Florida
-          Bobcats of the Arena Football League and the Florida Beachdogs of the Continental Basketball Association.
+          As a freelance photographer I have had the opportunity to cover the Miami Dolphins, Miami Heat, Miami Marlins,
+          University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott and numerous other
+          news, sports and feature assignments for various publications.
         </p>
         <p className="text-muted">
-          Earlier in his career he also photographed news and feature assignments for South Florida publications.
-        </p>
-        <p className="text-muted">
-          Alan is a member of the Black Chamber of Commerce of Palm Beach County and a former member of ASMP, the American
-          Society of Media Photographers.
+          I’m also a portrait and wedding photographer that has done event photography with on-site printing for
+          Motorola, American Society of Kidney Patients, Palm Beach State College, Big Brothers, Big Sisters of Palm Beach
+          County, BB King's and numerous other profit and not-for-profit organizations.
         </p>
       </Reveal>
     </section>
