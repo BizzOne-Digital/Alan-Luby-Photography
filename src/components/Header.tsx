@@ -10,8 +10,12 @@ const NAV = [
 ];
 
 export const Wordmark: React.FC = () => (
-  <Link to="/" className="font-display text-[1.15rem] leading-none tracking-tight text-ink sm:text-[1.35rem]">
-    Alan Luby <span className="text-muted">Photography</span>
+  <Link to="/" aria-label="Alan Luby Photography, home" className="flex flex-col items-start leading-none text-ink">
+    <span className="font-display text-[1.6rem] font-extrabold uppercase tracking-[0.02em] sm:text-[2rem]">Alan Luby</span>
+    <span className="mt-1.5 flex w-full items-center gap-2 font-sans text-[0.6rem] font-extrabold uppercase tracking-[0.42em] text-ink sm:text-[0.68rem]">
+      Photography
+      <span className="h-px flex-1 bg-accent" />
+    </span>
   </Link>
 );
 
@@ -50,7 +54,7 @@ export const Header: React.FC = () => {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
         Skip to content
       </a>
-      <div className="wrap flex h-[4.5rem] items-center justify-between gap-6">
+      <div className="flex h-20 w-full items-center px-5 sm:px-8 lg:px-10 justify-between gap-6">
         <Wordmark />
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">

@@ -23,8 +23,8 @@ export const AboutPage: React.FC = () => (
 
       <Reveal delay={0.3} className="max-w-2xl space-y-5 text-lg lg:pt-10">
         <p>
-          I'm a freelance photographer who currently resides in Boynton Beach and a member of the Black Chamber of
-          Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers, I have been
+          I'm a freelance photographer who currently resides in Boynton Beach. I am a member of the Black Chamber of
+          Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers. I have been
           hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida Sun-Sentinel, the
           Associated Press and numerous other publications. I have over 30 years of photography experience and was the
           team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
