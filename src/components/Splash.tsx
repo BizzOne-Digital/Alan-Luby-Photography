@@ -5,7 +5,6 @@ import { photoById } from '../data/photography';
 const EASE = [0.76, 0, 0.24, 1] as const;
 const DURATION = 2.4;
 const FLASH = ['jws-24957', 'dsc-7539', 'dsc-16185', 'dsc-81284', 'dsc-11003'].map(photoById);
-const NAME = 'Alan Luby';
 
 const shouldShow = () => {
   try {
@@ -83,27 +82,28 @@ export const Splash: React.FC = () => {
               <motion.div key={`flash-${frame}`} className="absolute inset-0 bg-paper" initial={{ opacity: 0.55 }} animate={{ opacity: 0 }} transition={{ duration: 0.35 }} />
             </div>
 
-            <h2 className="mt-8 flex overflow-hidden font-display text-[clamp(2.75rem,10vw,6.5rem)] leading-none" aria-hidden>
-              {NAME.split('').map((ch, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block"
-                  initial={{ y: '110%', rotate: 8 }}
-                  animate={{ y: '0%', rotate: 0 }}
-                  transition={{ duration: 0.9, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {ch === ' ' ? ' ' : ch}
-                </motion.span>
-              ))}
-            </h2>
-            <motion.p
-              className="mt-3 text-sm tracking-[0.3em] text-paper/70"
-              initial={{ opacity: 0, letterSpacing: '0.8em' }}
-              animate={{ opacity: 1, letterSpacing: '0.3em' }}
-              transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            <motion.div
+              className="mt-6 sm:mt-8"
+              aria-hidden
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
-              PHOTOGRAPHY
-            </motion.p>
+              <img
+                src="/brand/premium-v1/vector/primary-white.svg"
+                alt=""
+                width={2160}
+                height={530}
+                className="hidden h-auto w-[min(82vw,40rem)] sm:block"
+              />
+              <img
+                src="/brand/premium-v1/vector/monogram-white.svg"
+                alt=""
+                width={640}
+                height={640}
+                className="h-40 w-40 sm:hidden"
+              />
+            </motion.div>
           </motion.div>
 
           <div className="absolute inset-x-5 bottom-6 flex items-end justify-between text-sm text-paper/60 sm:inset-x-10 sm:bottom-10">

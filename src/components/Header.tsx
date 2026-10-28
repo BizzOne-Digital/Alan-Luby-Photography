@@ -10,12 +10,21 @@ const NAV = [
 ];
 
 export const Wordmark: React.FC = () => (
-  <Link to="/" aria-label="Alan Luby Photography, home" className="flex flex-col items-start leading-none text-ink">
-    <span className="font-display text-[1.6rem] font-extrabold uppercase tracking-[0.02em] sm:text-[2rem]">Alan Luby</span>
-    <span className="mt-1.5 flex w-full items-center gap-2 font-sans text-[0.6rem] font-extrabold uppercase tracking-[0.42em] text-ink sm:text-[0.68rem]">
-      Photography
-      <span className="h-px flex-1 bg-accent" />
-    </span>
+  <Link to="/" aria-label="Alan Luby Photography, home" className="inline-flex max-w-full shrink-0 items-center rounded-sm leading-none">
+    <img
+      src="/brand/premium-v1/vector/primary.svg"
+      alt=""
+      width={2160}
+      height={530}
+      className="hidden h-auto w-[360px] max-w-full sm:block"
+    />
+    <img
+      src="/brand/premium-v1/vector/monogram.svg"
+      alt=""
+      width={640}
+      height={640}
+      className="block h-16 w-16 sm:hidden"
+    />
   </Link>
 );
 
@@ -54,7 +63,7 @@ export const Header: React.FC = () => {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
         Skip to content
       </a>
-      <div className="flex h-20 w-full items-center px-5 sm:px-8 lg:px-10 justify-between gap-6">
+      <div className="flex h-20 w-full items-center px-5 sm:h-24 sm:px-8 lg:px-10 justify-between gap-6">
         <Wordmark />
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">

@@ -1,0 +1,9 @@
+Generation mode: built-in image_gen
+Asset: alan-luby-photography-logo-simple.png
+Background: white
+
+Use case: logo-brand.
+Edit target: the supplied Alan Luby Photography logo. Create a much simpler and more beautiful typographic version.
+Replace the existing lockup with a typography-only wordmark on pure white. Exact main text: "Alan Luby", in title case, in an elegant medium-weight contemporary serif with natural readable letterforms, restrained stroke contrast and superb optical kerning. The name must be large and immediately readable, with a clear space between Alan and Luby. Exact second line: "PHOTOGRAPHY", in a smaller clean medium-weight sans-serif with gentle letter spacing, centered beneath the name, about 22 percent of its capital height and about 58 percent of its width. The name should feel like a premium photographer's personal signature through its typography, but use upright printed letters, not handwritten or cursive.
+Remove the aperture symbol entirely. Use only deep charcoal #20211F for both text lines. No icons, lines, frames, embellishments, ligatures that obscure letters, gradients, shadows, textures, mockups, or additional text.
+A carefully composed single finished logo, quiet and timeless, extremely simple, polished typography and balanced whitespace. Compact two-line lockup centered on a wide 2:1 white canvas, the name spanning approximately 72 percent of the canvas width. Sharp, flat, vector-like edges. Keep the complete business name accurately spelled.

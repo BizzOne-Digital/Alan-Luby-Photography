@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { inquiryOptions, parseInquiry } from '../data/services';
-import { EMAIL, PHONE, PHONE_HREF } from '../components/Footer';
+import { EMAIL, PHONE, PHONE_HREF, SOCIALS } from '../components/Footer';
 import { PageMeta } from '../components/PageMeta';
 import { TextReveal } from '../components/Motion';
 
@@ -245,6 +245,13 @@ export const ContactPage: React.FC = () => {
             <p>
               <a href={PHONE_HREF} className="text-link text-lg">{PHONE}</a>
             </p>
+            {SOCIALS.map(([label, href]) => (
+              <p key={href}>
+                <a href={href} target="_blank" rel="noopener noreferrer" className="text-link text-lg">
+                  {label}<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </p>
+            ))}
           </div>
           <div className="space-y-2">
             <h2 className="font-sans text-lg font-semibold">Where Alan works</h2>

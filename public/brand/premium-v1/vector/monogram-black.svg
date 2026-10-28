@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="logo-title logo-description">
+  <title id="logo-title">ALAN LUBY / PHOTOGRAPHY - AL monogram</title>
+  <desc id="logo-description">Alan Luby Photography. Interlocking serif AL initials with an open photographic framing corner. Transparent background; all lettering is outlined vector geometry.</desc>
+  <g transform="translate(60 120.35) scale(0.509803922)" aria-label="AL monogram">
+    <path fill="#000000" d="M416 0 H703 V23 C641 25 624 46 624 96 V473 L491 191 V94 C491 43 475 24 416 23 Z"/>
+    <path fill="#000000" d="M467 503 L604 721 C611 734 623 743 642 743 H788 C895 743 962 706 1003 589 H1020 V783 H387 V765 C449 761 467 742 467 680 Z"/>
+    <path fill="#000000" fill-rule="evenodd" d="M0 691 C49 681 62 653 91 606 L408 96 H424 L693 654 C709 687 719 698 742 709 V722 H618 L486 484 H210 L151 577 C125 616 125 638 142 660 C157 680 181 689 205 691 V713 H0 Z M230 448 H472 L369 229 Z"/>
+    <path fill="#000000" d="M717 102 H968 V386 H924 V146 H717 Z"/>
+  </g>
+</svg>

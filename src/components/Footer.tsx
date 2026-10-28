@@ -6,11 +6,15 @@ import { servicesData } from '../data/services';
 export const EMAIL = 'aluby1441@aol.com';
 export const PHONE = '(561) 340-9310';
 export const PHONE_HREF = 'tel:+15613409310';
+export const SOCIALS = [
+  ['Facebook', 'https://www.facebook.com/alan.luby'],
+  ['Instagram', 'https://www.instagram.com/alan_luby/'],
+];
 
 export const Footer: React.FC = () => (
   <footer className="border-t border-line bg-sand/60">
-    <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
-      <div className="space-y-3">
+    <div className="wrap grid gap-10 py-14 sm:grid-cols-2 xl:grid-cols-[minmax(360px,1.4fr)_1fr_1fr_1fr]">
+      <div className="space-y-3 sm:col-span-2 xl:col-span-1">
         <Wordmark />
         <p className="max-w-xs text-[0.95rem] text-muted">
           Event, portrait, sports and live performance photography. Based in Boynton Beach, Florida, serving South Florida.
@@ -22,11 +26,13 @@ export const Footer: React.FC = () => (
         <ul className="space-y-2 text-[0.95rem]">
           <li><a href={`mailto:${EMAIL}`} className="text-muted hover:text-ink">{EMAIL}</a></li>
           <li><a href={PHONE_HREF} className="text-muted hover:text-ink">{PHONE}</a></li>
-          <li>
-            <a href="https://www.facebook.com/share/1Jq7nQ8Rci/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ink">
-              Facebook<span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </li>
+          {SOCIALS.map(([label, href]) => (
+            <li key={href}>
+              <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ink">
+                {label}<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 

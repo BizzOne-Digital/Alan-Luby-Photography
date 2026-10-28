@@ -1,0 +1,10 @@
+Generation mode: built-in image_gen
+Asset: alan-luby-photography-logo.png
+Background: white
+
+Use case: logo-brand.
+Create one beautiful, finished typography-led logo for the established photography business "Alan Luby Photography". It must prioritize immediate readability and unmistakably communicate photography. The existing brand is an understated editorial photography studio specializing in events and portraits.
+Backdrop: pure flat white.
+Design: a large, refined, bold editorial serif wordmark "ALAN LUBY" on one line, meticulously balanced kerning, classic yet contemporary, inspired by sturdy Bodoni typography with sufficiently substantial thin strokes. Beneath it, prominently legible "PHOTOGRAPHY" in clean medium-weight uppercase geometric sans-serif with elegant but restrained letter spacing. The descriptor should be about one-quarter the main capitals' height, not tiny. Main name in deep charcoal #20211F; descriptor in deep forest green #354B40. Include a single discreet, carefully drawn six-blade camera aperture emblem above the name, in forest green, about half the height of the name's capitals; the typography dominates. Optically centered, harmonious vertical spacing, generous surrounding white space, balanced compact horizontal lockup that can be used in a website header or on a business card.
+Exact text only: "ALAN LUBY" and "PHOTOGRAPHY". Spell correctly: A L A N, L U B Y, P H O T O G R A P H Y.
+Crisp flat vector-style graphic edges, polished professional identity design. Produce a single logo on white, landscape canvas. No mockup, paper texture, photographs, watermark, shadows, gradients, metallic effects, script lettering, slogans, extra text, or multiple variants.

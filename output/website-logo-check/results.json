@@ -1,0 +1,80 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "overflow": false,
+      "logos": [
+        {
+          "src": "/brand/premium-v1/vector/primary.svg",
+          "width": 360,
+          "loaded": true
+        },
+        {
+          "src": "/brand/premium-v1/vector/primary.svg",
+          "width": 360,
+          "loaded": true
+        }
+      ],
+      "homeLabels": true
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "overflow": false,
+      "logos": [
+        {
+          "src": "/brand/premium-v1/vector/monogram.svg",
+          "width": 64,
+          "loaded": true
+        },
+        {
+          "src": "/brand/premium-v1/vector/monogram.svg",
+          "width": 64,
+          "loaded": true
+        }
+      ],
+      "homeLabels": true
+    },
+    {
+      "viewport": "narrow",
+      "width": 320,
+      "overflow": false,
+      "logos": [
+        {
+          "src": "/brand/premium-v1/vector/monogram.svg",
+          "width": 64,
+          "loaded": true
+        },
+        {
+          "src": "/brand/premium-v1/vector/monogram.svg",
+          "width": 64,
+          "loaded": true
+        }
+      ],
+      "homeLabels": true
+    },
+    {
+      "viewport": "tablet",
+      "width": 768,
+      "overflow": false,
+      "logos": [
+        {
+          "src": "/brand/premium-v1/vector/primary.svg",
+          "width": 360,
+          "loaded": true
+        },
+        {
+          "src": "/brand/premium-v1/vector/primary.svg",
+          "width": 360,
+          "loaded": true
+        }
+      ],
+      "homeLabels": true
+    }
+  ],
+  "mobileNavigation": "passed",
+  "splash": "passed",
+  "favicon": "passed",
+  "browserExceptions": []
+}

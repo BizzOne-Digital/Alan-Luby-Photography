@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alan Luby Photography — Identity</title>
+  <style>
+    :root { color-scheme: light; --ink:#242422; --ivory:#f4f0e8; --gold:#a38a58; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#e8e4dc; color:var(--ink); font-family:Arial,Helvetica,sans-serif; }
+    main { max-width:1320px; margin:0 auto; padding:50px 60px 35px; }
+    header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+    h1 { font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; margin:0; }
+    .palette { display:flex; align-items:center; gap:19px; }
+    .swatch { display:flex; align-items:center; gap:7px; font-size:10px; letter-spacing:.06em; }
+    .dot { width:12px; height:12px; border-radius:50%; border:1px solid #0002; }
+    .primary { position:relative; background:var(--ivory); min-height:340px; display:flex; align-items:center; justify-content:center; }
+    .primary img { width:84%; max-width:1050px; height:auto; }
+    .label { position:absolute; top:24px; left:26px; font-size:9px; letter-spacing:.16em; text-transform:uppercase; opacity:.65; }
+    .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:16px; }
+    .tile { position:relative; height:270px; display:flex; align-items:center; justify-content:center; background:var(--ivory); }
+    .tile img { width:170px; height:170px; object-fit:contain; }
+    .tile.white { background:#fff; }
+    .tile.black { background:#000; color:#fff; }
+    .tile.charcoal { background:var(--ink); color:var(--ivory); }
+    .watermark { width:235px !important; height:auto !important; }
+    .foot { display:flex; justify-content:space-between; align-items:flex-start; margin-top:26px; gap:30px; font-size:11px; line-height:1.6; }
+    .foot p { max-width:480px; margin:0; color:#5e5b55; }
+    nav { display:flex; flex-wrap:wrap; gap:6px 20px; justify-content:flex-end; }
+    a { color:var(--ink); text-underline-offset:4px; }
+    a:focus-visible { outline:2px solid var(--gold); outline-offset:5px; }
+    details { margin-top:24px; font-size:11px; color:#5e5b55; line-height:1.7; }
+    summary { cursor:pointer; }
+    .sizes { display:flex; align-items:center; flex-wrap:wrap; gap:35px; margin:20px 0; }
+    .sizes figure { margin:0; }
+    figcaption { font-size:10px; margin-top:10px; }
+    @media(max-width:750px) { main { padding:25px 20px; } header,.foot { flex-direction:column; align-items:flex-start; gap:18px; } .palette { gap:10px; } .primary { min-height:220px; } .row { grid-template-columns:1fr; } .tile { height:230px; } nav { justify-content:flex-start; } }
+    @media print { body { background:#fff; } main { padding:20px; } nav,details { display:none; } .primary,.tile { print-color-adjust:exact; -webkit-print-color-adjust:exact; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Alan Luby Photography · Visual identity</h1>
+      <div class="palette" aria-label="Brand palette">
+        <span class="swatch"><i class="dot" style="background:#242422"></i>#242422</span>
+        <span class="swatch"><i class="dot" style="background:#f4f0e8"></i>#F4F0E8</span>
+        <span class="swatch"><i class="dot" style="background:#a38a58"></i>#A38A58</span>
+      </div>
+    </header>
+    <section class="primary" aria-label="Primary horizontal logo on warm ivory">
+      <span class="label">01 / Primary signature</span>
+      <img src="vector/primary.svg" alt="AL monogram with Alan Luby Photography wordmark">
+    </section>
+    <div class="row">
+      <section class="tile" aria-label="Compact monogram on warm ivory">
+        <span class="label">02 / Compact monogram</span>
+        <img src="vector/monogram.svg" alt="Charcoal AL monogram with gold framing corner">
+      </section>
+      <section class="tile white" aria-label="Pure black monogram on white">
+        <span class="label">03 / Pure black</span>
+        <img src="vector/monogram-black.svg" alt="AL monogram in pure black">
+      </section>
+      <section class="tile black" aria-label="Pure white monogram on black">
+        <span class="label">04 / Pure white</span>
+        <img src="vector/monogram-white.svg" alt="AL monogram in pure white">
+      </section>
+    </div>
+    <div class="foot">
+      <p>An interlocking serif AL, finished with a quiet photographic framing corner. Transparent SVG masters contain outlined lettering; matching PNG exports are included.</p>
+      <nav aria-label="Download logo files">
+        <a href="vector/primary.svg" download>Primary SVG</a>
+        <a href="vector/monogram.svg" download>Monogram SVG</a>
+        <a href="primary.png" download>Primary PNG</a>
+        <a href="monogram.png" download>Monogram PNG</a>
+      </nav>
+    </div>
+    <details>
+      <summary>Usage and small-size checks</summary>
+      <p>Use the full signature at 360 px wide or larger so the photography descriptor stays readable. For compact navigation, profile images and small watermarks, use the monogram at 48 px or larger; 32 px is suitable for high-contrast monochrome use. Preserve clear space around every asset. Use the pure black or white masters for single-colour reproduction. Warm ivory is an application colour; all master logo backgrounds are transparent.</p>
+      <div class="sizes">
+        <figure><img src="vector/primary.svg" width="480" alt="Horizontal logo at 480 pixels"><figcaption>Horizontal · 480 px</figcaption></figure>
+        <figure><img src="vector/primary.svg" width="360" alt="Horizontal logo at 360 pixels"><figcaption>Horizontal · 360 px</figcaption></figure>
+        <figure><img src="vector/monogram.svg" width="48" alt="Monogram at 48 pixels"><figcaption>48 px</figcaption></figure>
+        <figure><img src="vector/monogram-black.svg" width="32" alt="Monogram at 32 pixels"><figcaption>32 px</figcaption></figure>
+      </div>
+      <p><a href="vector/primary-black.svg" download>Black horizontal</a> · <a href="vector/primary-white.svg" download>White horizontal</a> · <a href="vector/monogram-black.svg" download>Black monogram</a> · <a href="vector/monogram-white.svg" download>White monogram</a> · <a href="generation-prompts.json">Image generation prompts</a></p>
+      <p>The original concepts in the concepts folder were created using built-in image generation. The final SVG masters were separately constructed with clean paths and outlined type, then exported as matching transparent PNGs.</p>
+    </details>
+  </main>
+</body>
+</html>
