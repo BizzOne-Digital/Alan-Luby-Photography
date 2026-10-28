@@ -12,14 +12,32 @@ export const servicesData: ServiceItem[] = [
     whoFor:
       'Families marking milestones, couples, community groups, and organizations hosting banquets, galas, conventions and programs.',
     photographs: [
-      'Weddings, birthdays, sweet sixteens and anniversaries',
+      'Birthdays, sweet sixteens and anniversaries',
       'Galas, banquets, conventions and award programs',
       'Speakers, honorees and requested group photos',
       'Organizational coverage of workplaces and training sessions',
     ],
     image: photoById('jws-26102'),
-    supporting: [photoById('dsc-88579'), photoById('jws-05897')],
+    supporting: [photoById('jws-57653'), photoById('jws-05897')],
     testimonialId: 'testimonial-2',
+  },
+  {
+    id: 'weddings',
+    title: 'Weddings & engagements',
+    shortTitle: 'Weddings',
+    inquiryValue: 'Weddings & engagements',
+    summary:
+      'From the ring reveal to the last dance: engagement sessions and wedding days photographed with a calm, attentive eye for the moments between the couple.',
+    whoFor:
+      'Engaged couples, newlyweds, couples renewing their vows, and families planning a wedding celebration.',
+    photographs: [
+      'Engagement and save-the-date sessions',
+      'Portraits of the couple and the wedding party',
+      'Reception entrances, toasts, cake cutting and dancing',
+      'Candid moments with family and guests',
+    ],
+    image: photoById('jws-022245'),
+    supporting: [photoById('dsc-3502'), photoById('dsc-25825')],
   },
   {
     id: 'portraits',

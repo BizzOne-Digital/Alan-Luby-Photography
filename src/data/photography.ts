@@ -48,6 +48,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'Three football players leaping together for the ball, gloved hands reaching overhead',
   }),
   photo({
+    file: 'JWS_022245.jpg', category: 'weddings', width: 2300, height: 1530, focus: '45% 30%',
+    title: 'Bride and groom among the flowers',
+    alt: 'A bride in a beaded gown and tiara and a groom in a blue suit posing cheek to cheek beside pink and white flowers',
+  }),
+  photo({
     file: 'DSC_11768.jpg', category: 'performance', width: 2300, height: 1530, focus: '62% 25%',
     title: 'Singer reaching out to the audience',
     alt: 'A singer in a black jumpsuit holding a microphone and reaching toward the audience, two backing vocalists beside her',
@@ -61,6 +66,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'JWS_33598.jpg', category: 'events', width: 2300, height: 1530, focus: '62% 30%',
     title: 'Sweet sixteen dance',
     alt: 'A girl in a lavender gown and tiara dancing with a man in a cowboy hat beside a lit-up number 16',
+  }),
+  photo({
+    file: 'DSC_85458.jpg', category: 'weddings', width: 2300, height: 1518, focus: '55% 40%',
+    title: 'Bridesmaids on the lawn',
+    alt: 'A group of women in matching lavender T-shirts posed together on a lawn by the water',
   }),
   photo({
     file: 'DSC_01779.jpg', category: 'portraits', width: 1840, height: 2300, focus: '55% 30%',
@@ -78,6 +88,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A dancer in a burgundy and gold costume performing with an intense, joyful expression',
   }),
   photo({
+    file: 'DSC_58824.jpg', category: 'weddings', width: 2300, height: 1530, focus: '30% 35%',
+    title: 'Reception toast',
+    alt: 'A man and a laughing woman sharing a microphone while the bride claps and laughs at the head table',
+  }),
+  photo({
     file: 'JWS_26102.jpg', category: 'events', width: 2300, height: 1530, focus: '30% 35%',
     title: 'Warm welcome at a reception',
     alt: 'Guests at a formal reception embracing and laughing in front of lavender drapes',
@@ -93,12 +108,17 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A young baseball player in an orange jersey at the instant the ball meets the bat',
   }),
   photo({
+    file: 'DSC_25825.jpg', category: 'weddings', width: 2300, height: 1530, focus: '65% 35%',
+    title: 'Raising a glass',
+    alt: 'A bride in a veil and the groom smiling and raising champagne glasses at their reception',
+  }),
+  photo({
     file: 'JWS_47274.jpg', category: 'performance', width: 2300, height: 1530, focus: '55% 30%',
     title: 'Cultural dance performance',
     alt: 'A dancer in a yellow head wrap swirling a wide gold and black skirt across a hall floor',
   }),
   photo({
-    file: 'DSC_88579.jpg', category: 'events', width: 2300, height: 1530, focus: '60% 35%',
+    file: 'DSC_88579.jpg', category: 'weddings', width: 2300, height: 1530, focus: '60% 35%',
     title: 'Wedding entrance',
     alt: 'A bride holding a red and pink bouquet smiling at the groom as they walk in together',
   }),
@@ -106,6 +126,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'DSC_1563.jpg', category: 'portraits', width: 2300, height: 1530, focus: '50% 35%',
     title: 'Studio-style headshot',
     alt: 'A bearded man in glasses and a dark blazer smiling against a black background',
+  }),
+  photo({
+    file: 'DSC_40001.jpg', category: 'weddings', width: 1518, height: 2300, focus: '50% 35%',
+    title: 'Cutting the cake',
+    alt: 'A bride and groom cutting a black and white tiered cake surrounded by candles',
   }),
   photo({
     file: 'DSC_5064.jpg', category: 'sports', width: 2300, height: 1530, focus: '40% 50%',
@@ -123,6 +148,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A laughing baby girl in a pink tutu standing beside a tree on the grass',
   }),
   photo({
+    file: 'DSC_45375.jpg', category: 'weddings', width: 2300, height: 1530, focus: '55% 30%',
+    title: 'Grand entrance',
+    alt: 'A couple dancing into their reception under purple lights while the wedding party looks on',
+  }),
+  photo({
     file: 'DSC_5575.jpg', category: 'events', width: 2300, height: 1530, focus: '55% 40%',
     title: 'Guest reaction at a banquet',
     alt: 'An older woman in a wide-brimmed hat with a purple ribbon smiling broadly at a banquet table',
@@ -136,6 +166,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'JWS_57653.jpg', category: 'events', width: 2300, height: 1530, focus: '50% 35%',
     title: 'On the dance floor',
     alt: 'Women in bright dresses dancing and laughing together at a party',
+  }),
+  photo({
+    file: 'DSC_5817.jpg', category: 'weddings', width: 2300, height: 1528, focus: '60% 35%',
+    title: 'Laughter during the speeches',
+    alt: 'A guest with a microphone speaking to the groom, who laughs as guests watch from their tables',
   }),
   photo({
     file: 'DSC_3522.jpg', category: 'portraits', width: 2300, height: 1530, focus: '50% 40%',
@@ -153,6 +188,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A man in a plaid jacket throwing both arms in the air while guests cheer around him',
   }),
   photo({
+    file: 'DSC_6031.jpg', category: 'weddings', width: 2300, height: 1518, focus: '60% 40%',
+    title: 'Garter tradition',
+    alt: 'A groom grinning as he holds up the garter while the bride laughs beside him',
+  }),
+  photo({
     file: '01600016.jpg', category: 'portraits', width: 1840, height: 2300, focus: '50% 25%',
     title: 'Outdoor portrait in natural light',
     alt: 'A woman with long hair laughing upward in a white dress against green foliage',
@@ -166,6 +206,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'DSC_7122.jpg', category: 'performance', width: 2300, height: 1518, focus: '50% 25%',
     title: 'Leap over the orchestra',
     alt: 'A dancer in a split leap above an outdoor orchestra while the audience watches',
+  }),
+  photo({
+    file: 'DSC_6315.jpg', category: 'weddings', width: 2300, height: 1530, focus: '40% 35%',
+    title: 'Newlywed portrait',
+    alt: 'A bride in a tiara resting against the groom, who wears a yellow rose boutonniere',
   }),
   photo({
     file: 'DSC_0833B.jpg', category: 'portraits', width: 2300, height: 1518, focus: '50% 35%',
@@ -183,6 +228,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A woman in a red dress laughing with her head thrown back beside a smiling man in a gray suit',
   }),
   photo({
+    file: 'DSC_7368.jpg', category: 'weddings', width: 2300, height: 1518, focus: '70% 30%',
+    title: 'Laughter at the reception',
+    alt: 'A man in a red vest laughing into a microphone as a woman in a red dress laughs beside him',
+  }),
+  photo({
     file: 'DSC_68234.jpg', category: 'sports', width: 1518, height: 2300, focus: '50% 30%',
     title: 'Youth baseball joy',
     alt: 'A young baseball player in a helmet grinning as he runs',
@@ -196,6 +246,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'DSC_4970.jpg', category: 'portraits', width: 1530, height: 2300, focus: '50% 35%',
     title: 'Couple portrait in the garden',
     alt: 'A smiling couple embracing among green trees',
+  }),
+  photo({
+    file: 'DSC_16047.jpg', category: 'weddings', width: 2300, height: 1530, focus: '45% 30%',
+    title: 'Joy at the cake table',
+    alt: 'A bride and groom laughing with a guest beside a cake on a crystal stand',
   }),
   photo({
     file: 'DSC_95856.jpg', category: 'sports', width: 2300, height: 1530, focus: '40% 45%',
@@ -213,6 +268,11 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A family in yellow and denim jumping together on the beach',
   }),
   photo({
+    file: 'DSC_6967.jpg', category: 'weddings', width: 1808, height: 2300, focus: '50% 35%',
+    title: 'Holiday wedding portrait',
+    alt: 'A bride holding a red and white bouquet beside the groom in a red jacket, seated on a gold throne among holiday decorations',
+  }),
+  photo({
     file: 'JWS_37126.jpg', category: 'performance', width: 2300, height: 1530, focus: '40% 30%',
     title: 'Cheer stunt',
     alt: 'A cheerleader lifted high by a teammate, shouting with pom-poms in the air',
@@ -226,6 +286,11 @@ export const photographyCollection: PhotoItem[] = [
     file: 'DSC_55581.jpg', category: 'sports', width: 2111, height: 2300, focus: '50% 35%',
     title: 'Teammates celebrate',
     alt: 'Two young players hugging and cheering on the field',
+  }),
+  photo({
+    file: 'DSC_1413.jpg', category: 'weddings', width: 2300, height: 1528, focus: '50% 30%',
+    title: 'Walk on the terrace',
+    alt: 'A couple holding hands and laughing on a terrace overlooking palm trees and water',
   }),
   photo({
     file: 'DSC_79685.jpg', category: 'events', width: 2300, height: 1530, focus: '50% 35%',
@@ -243,9 +308,24 @@ export const photographyCollection: PhotoItem[] = [
     alt: 'A woman in a pink hat and a man in a blue blazer greeting each other with outstretched arms at a podium',
   }),
   photo({
+    file: 'DSC_1570.jpg', category: 'weddings', width: 2300, height: 1530, focus: '50% 30%',
+    title: 'Glance from the head table',
+    alt: 'A bride in a jeweled headpiece and the groom looking back over their shoulders at a candlelit reception table',
+  }),
+  photo({
     file: 'JWS_85879 8x10.jpg', category: 'portraits', width: 1840, height: 2300, focus: '50% 30%',
     title: 'Prom portrait',
     alt: 'A young couple dressed for prom posing outdoors, she in a purple gown with a corsage',
+  }),
+  photo({
+    file: 'DSC_2897.jpg', category: 'weddings', width: 2300, height: 1530, focus: '40% 30%',
+    title: 'Couple portrait in white',
+    alt: 'A smiling couple dressed in white posing outdoors, she in a hat, pearls and gloves',
+  }),
+  photo({
+    file: 'DSC_3502.jpg', category: 'weddings', width: 2300, height: 1530, focus: '70% 30%',
+    title: 'Engagement announcement',
+    alt: 'A woman showing her engagement ring beside her fiancé on the beach while two friends point to the ring',
   }),
 ];
 
@@ -257,10 +337,11 @@ export const photoById = (id: string) => {
 
 export const heroPhoto = photoById('jws-24957');
 
-export const selectedWork = ['dsc-46779', 'dsc-11003', 'dsc-16185', 'dsc-11768', 'jws-33598', 'dsc-01779'].map(photoById);
+export const selectedWork = ['dsc-46779', 'dsc-45375', 'dsc-11003', 'dsc-16185', 'dsc-11768', 'dsc-1570', 'jws-33598', 'dsc-01779'].map(photoById);
 
 export const categoryLabels: Record<PhotoCategory, string> = {
   events: 'Events',
+  weddings: 'Weddings & Engagements',
   portraits: 'Portraits',
   sports: 'Sports',
   performance: 'Live Performance',
@@ -283,7 +364,7 @@ export const coupleStory = {
   engagement: {
     id: 'save-the-date',
     title: 'Save-the-date session',
-    category: 'events',
+    category: 'weddings',
     width: 1717,
     height: 1135,
     src: '/images/work/save-the-date-1600.webp',

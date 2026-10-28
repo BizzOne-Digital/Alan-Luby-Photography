@@ -1,4 +1,4 @@
-export type PhotoCategory = 'events' | 'portraits' | 'sports' | 'performance';
+export type PhotoCategory = 'events' | 'weddings' | 'portraits' | 'sports' | 'performance';
 
 export interface PhotoItem {
   id: string;

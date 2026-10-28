@@ -107,7 +107,7 @@ export const Splash: React.FC = () => {
           </motion.div>
 
           <div className="absolute inset-x-5 bottom-6 flex items-end justify-between text-sm text-paper/60 sm:inset-x-10 sm:bottom-10">
-            <span>Events · Portraits · Sports · Performance</span>
+            <span>Events · Weddings · Portraits · Sports · Performance</span>
             <motion.span className="font-display text-4xl tabular-nums text-paper sm:text-6xl">{counter}</motion.span>
           </div>
           <motion.div className="absolute bottom-0 left-0 h-[3px] w-full origin-left bg-accent" style={{ scaleX: bar }} />

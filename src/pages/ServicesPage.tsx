@@ -18,13 +18,13 @@ export const ServicesPage: React.FC = () => (
   <>
     <PageMeta
       title="Services"
-      description="Event and celebration photography, portraits and business headshots, sports and live performance photography by Alan Luby in South Florida."
+      description="Event and celebration photography, weddings and engagements, portraits and business headshots, sports and live performance photography by Alan Luby in South Florida."
     />
 
     <section className="wrap pb-12 pt-12 sm:pt-16">
       <TextReveal as="h1" text="Services" className="text-4xl sm:text-5xl" />
       <p className="mt-4 max-w-2xl text-lg text-muted">
-        Alan photographs people at their occasions, in portraits, in competition and on stage. Here is what each kind of
+        Alan photographs people at their occasions and weddings, in portraits, in competition and on stage. Here is what each kind of
         coverage includes and how to start a conversation about yours.
       </p>
       <nav aria-label="Services on this page" className="mt-8 flex flex-wrap gap-x-6 gap-y-2">

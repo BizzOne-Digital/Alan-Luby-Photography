@@ -17,7 +17,7 @@ export const Footer: React.FC = () => (
       <div className="space-y-3 sm:col-span-2 xl:col-span-1">
         <Wordmark />
         <p className="max-w-xs text-[0.95rem] text-muted">
-          Event, portrait, sports and live performance photography. Based in Boynton Beach, Florida, serving South Florida.
+          Event, wedding, portrait, sports and live performance photography. Based in Boynton Beach, Florida, serving South Florida.
         </p>
       </div>
 

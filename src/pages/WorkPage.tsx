@@ -8,7 +8,7 @@ import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
 import { TextReveal } from '../components/Motion';
 
-const FILTERS: (PhotoCategory | null)[] = [null, 'events', 'portraits', 'sports', 'performance'];
+const FILTERS: (PhotoCategory | null)[] = [null, 'events', 'weddings', 'portraits', 'sports', 'performance'];
 
 export const WorkPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +20,7 @@ export const WorkPage: React.FC = () => {
     <>
       <PageMeta
         title={active ? `${categoryLabels[active]} photography` : 'Work'}
-        description="Selected photographs by Alan Luby: events and celebrations, portraits, sports and live performance across South Florida."
+        description="Selected photographs by Alan Luby: events and celebrations, weddings and engagements, portraits, sports and live performance across South Florida."
       />
 
       <section className="wrap pb-20 pt-12 sm:pt-16">

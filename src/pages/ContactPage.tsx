@@ -148,14 +148,14 @@ export const ContactPage: React.FC = () => {
     <>
       <PageMeta
         title="Inquire"
-        description="Contact Alan Luby about event, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 340-9310."
+        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 340-9310."
       />
 
       <section className="wrap grid gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
         <div>
           <TextReveal as="h1" text="Let’s talk about your photographs." className="text-4xl sm:text-5xl" />
           <p className="mt-4 max-w-xl text-lg text-muted">
-            Tell Alan about your event, portrait session, game or performance. A few details are enough to start the
+            Tell Alan about your event, wedding, portrait session, game or performance. A few details are enough to start the
             conversation.
           </p>
 
@@ -255,7 +255,7 @@ export const ContactPage: React.FC = () => {
           </div>
           <div className="space-y-2">
             <h2 className="font-sans text-lg font-semibold">Where Alan works</h2>
-            <p className="text-muted">Based in Boynton Beach, Florida, photographing events, portraits, sports and performances across South Florida.</p>
+            <p className="text-muted">Based in Boynton Beach, Florida, photographing events, weddings, portraits, sports and performances across South Florida.</p>
           </div>
           <div className="space-y-2">
             <h2 className="font-sans text-lg font-semibold">Helpful to include</h2>

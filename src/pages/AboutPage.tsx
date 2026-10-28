@@ -12,13 +12,23 @@ export const AboutPage: React.FC = () => (
   <>
     <PageMeta
       title="About Alan Luby"
-      description="Alan Luby is a Boynton Beach photographer with over 30 years of experience photographing events, portraits, sports and live performances."
+      description="Alan Luby is a Boynton Beach photographer with over 30 years of experience photographing events, weddings, portraits, sports and live performances."
     />
 
     <section className="wrap grid gap-10 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:pb-24">
       <div>
         <p className="eyebrow">About</p>
         <TextReveal as="h1" text="Alan Luby photographs people at their best moments." className="mt-3 text-4xl sm:text-5xl" />
+        <ImageReveal delay={0.2} className="mt-8 aspect-[4/5] max-w-md">
+          <img
+            src="/alan/AlanLuby.jpg"
+            alt="Portrait of photographer Alan Luby"
+            width={3000}
+            height={1995}
+            fetchPriority="high"
+            className="h-full w-full object-cover object-[55%_center]"
+          />
+        </ImageReveal>
       </div>
 
       <Reveal delay={0.3} className="max-w-2xl space-y-5 text-lg lg:pt-10">

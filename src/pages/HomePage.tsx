@@ -16,8 +16,8 @@ import { CountUp, ImageReveal, Magnetic, Reveal, TextReveal, Tilt, TextMarquee }
 const storyQuote = testimonialById('testimonial-4');
 
 const MARQUEE: [ReturnType<typeof photoById>[], ReturnType<typeof photoById>[]] = [
-  ['dsc-61146', '01600016', 'dsc-25324', 'dsc-7122', 'dsc-0833b', 'dsc-2023', 'dsc-303571', 'dsc-68234', 'dsc-7332', 'dsc-4970'].map(photoById),
-  ['dsc-95856', 'dsc-5526', 'dsc-40902', 'jws-37126', 'dsc-3973', 'dsc-55581', 'dsc-79685', 'dsc-39269', 'jws-02313', 'jws-85879-8x10'].map(photoById),
+  ['dsc-61146', 'dsc-6315', '01600016', 'dsc-25324', 'dsc-40001', 'dsc-7122', 'dsc-0833b', 'dsc-58824', 'dsc-2023', 'dsc-303571', 'dsc-6967', 'dsc-68234', 'dsc-7332', 'dsc-25825', 'dsc-4970'].map(photoById),
+  ['dsc-95856', 'dsc-1413', 'dsc-5526', 'dsc-40902', 'dsc-6031', 'jws-37126', 'dsc-3973', 'dsc-2897', 'dsc-55581', 'dsc-79685', 'dsc-16047', 'dsc-39269', 'jws-02313', 'dsc-3502', 'jws-85879-8x10'].map(photoById),
 ];
 import { introDelay } from '../components/Splash';
 
@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
         <motion.p className="eyebrow" {...fadeUp(0)}>Boynton Beach · South Florida</motion.p>
         <TextReveal as="h1" delay={d + 0.1} text="Event & portrait photography with personality." className="text-[2.5rem] sm:text-5xl xl:text-6xl" />
         <motion.p className="max-w-md text-lg text-muted" {...fadeUp(0.55)}>
-          Celebrations, gatherings and portraits that feel like the people in them, plus sports and live performances, photographed by Alan Luby across South Florida.
+          Celebrations, weddings and portraits that feel like the people in them, plus sports and live performances, photographed by Alan Luby across South Florida.
         </motion.p>
         <motion.div className="flex flex-wrap gap-3 pt-2" {...fadeUp(0.7)}>
           <Magnetic><Link to="/work" className="btn-primary">View selected work</Link></Magnetic>
@@ -61,12 +61,12 @@ const Hero: React.FC = () => {
 
 export const HomePage: React.FC = () => (
   <>
-    <PageMeta description="Alan Luby photographs events, celebrations and portraits across South Florida, along with sports and live performances. Based in Boynton Beach, Florida." />
+    <PageMeta description="Alan Luby photographs events, weddings, engagements and portraits across South Florida, along with sports and live performances. Based in Boynton Beach, Florida." />
 
     <Hero />
 
     <TextMarquee
-      text="Events · Portraits · Sports · Live performance ·"
+      text="Events · Weddings & engagements · Portraits · Sports · Live performance ·"
       className="border-y border-line py-5 font-display text-4xl text-ink/85 sm:text-6xl lg:text-7xl"
     />
     <div className="h-16 lg:h-24" />
@@ -87,15 +87,15 @@ export const HomePage: React.FC = () => (
       <div className="wrap">
         <div className="mb-12 max-w-2xl space-y-3">
           <TextReveal id="services" text="What Alan photographs" className="text-3xl sm:text-4xl" />
-          <p className="text-muted">Four kinds of work, one approach: be prepared, stay attentive, and let people be themselves.</p>
+          <p className="text-muted">Five kinds of work, one approach: be prepared, stay attentive, and let people be themselves.</p>
         </div>
-        <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {servicesData.map((s, i) => (
             <li key={s.id} className="flex flex-col">
               <Tilt>
               <Link to={`/services#${s.id}`} className="group block overflow-hidden" tabIndex={-1} aria-hidden>
                 <ImageReveal delay={i * 0.12} className="aspect-[4/5]">
-                  <Photo photo={s.image} cover sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.03]" />
+                  <Photo photo={s.image} cover sizes="(min-width: 1280px) 19vw, (min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.03]" />
                 </ImageReveal>
               </Link>
               </Tilt>
@@ -154,9 +154,12 @@ export const HomePage: React.FC = () => (
               <figcaption className="mt-2 text-sm text-muted">From another client · {attributionOf(storyQuote)}</figcaption>
             </figure>
           </Reveal>
-          <Reveal delay={0.25}>
-            <Link to={inquiryHref('Events & celebrations')} className="text-link inline-flex items-center gap-1.5">
-              Inquire about wedding and celebration coverage <ArrowRight className="h-4 w-4" aria-hidden />
+          <Reveal delay={0.25} className="flex flex-col items-start gap-3">
+            <Link to={inquiryHref('Weddings & engagements')} className="text-link inline-flex items-center gap-1.5">
+              Inquire about wedding and engagement coverage <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link to="/work?category=weddings" className="text-link inline-flex items-center gap-1.5">
+              See more wedding and engagement photos <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </Reveal>
         </div>
@@ -213,7 +216,7 @@ export const HomePage: React.FC = () => (
     </section>
 
     <InquiryBand
-      title="Planning an event, a portrait session, a game or a performance?"
+      title="Planning an event, a wedding, a portrait session, a game or a performance?"
       text="Tell Alan what you have in mind: the occasion, the date if you have one, and where it takes place."
     />
   </>
