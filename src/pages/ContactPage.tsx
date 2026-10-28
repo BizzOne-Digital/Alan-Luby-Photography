@@ -148,7 +148,7 @@ export const ContactPage: React.FC = () => {
     <>
       <PageMeta
         title="Inquire"
-        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 340-9310."
+        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 351-7373."
       />
 
       <section className="wrap grid gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
@@ -245,9 +245,10 @@ export const ContactPage: React.FC = () => {
             <p>
               <a href={PHONE_HREF} className="text-link text-lg">{PHONE}</a>
             </p>
-            {SOCIALS.map(([label, href]) => (
+            {SOCIALS.map(([label, href, Icon]) => (
               <p key={href}>
-                <a href={href} target="_blank" rel="noopener noreferrer" className="text-link text-lg">
+                <a href={href} target="_blank" rel="noopener noreferrer" className="text-link inline-flex items-center gap-2 text-lg">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                   {label}<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </p>

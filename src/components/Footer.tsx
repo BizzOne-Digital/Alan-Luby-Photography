@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Linkedin, PenLine, Youtube } from 'lucide-react';
 import { Wordmark } from './Header';
 import { servicesData } from '../data/services';
 
 export const EMAIL = 'aluby1441@aol.com';
-export const PHONE = '(561) 340-9310';
-export const PHONE_HREF = 'tel:+15613409310';
+export const PHONE = '(561) 351-7373';
+export const PHONE_HREF = 'tel:+15613517373';
 export const SOCIALS = [
-  ['Facebook', 'https://www.facebook.com/alan.luby'],
-  ['Instagram', 'https://www.instagram.com/alan_luby/'],
-];
+  ['Instagram', 'https://www.instagram.com/alanluby', Instagram],
+  ['YouTube', 'https://www.youtube.com/aluby1441', Youtube],
+  ['LinkedIn', 'https://www.linkedin.com/in/alan-luby-05449322/', Linkedin],
+  ['Facebook', 'https://www.facebook.com/profile.php?id=100063464860168', Facebook],
+  ['Blog', 'https://alanlubyphoto.blogspot.com/', PenLine],
+] as const;
 
 export const Footer: React.FC = () => (
   <footer className="border-t border-line bg-sand/60">
@@ -26,9 +30,10 @@ export const Footer: React.FC = () => (
         <ul className="space-y-2 text-[0.95rem]">
           <li><a href={`mailto:${EMAIL}`} className="text-muted hover:text-ink">{EMAIL}</a></li>
           <li><a href={PHONE_HREF} className="text-muted hover:text-ink">{PHONE}</a></li>
-          {SOCIALS.map(([label, href]) => (
+          {SOCIALS.map(([label, href, Icon]) => (
             <li key={href}>
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ink">
+              <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted hover:text-ink">
+                <Icon className="h-4 w-4" aria-hidden="true" />
                 {label}<span className="sr-only"> (opens in a new tab)</span>
               </a>
             </li>
