@@ -5,8 +5,10 @@ import { Wordmark } from './Header';
 import { servicesData } from '../data/services';
 
 export const EMAIL = 'aluby1441@aol.com';
-export const PHONE = '(561) 351-7373';
-export const PHONE_HREF = 'tel:+15613517373';
+export const PHONE = '(561) 340-9310';
+export const PHONE_HREF = 'tel:+15613409310';
+export const PHONE_2 = '(561) 351-7373';
+export const PHONE_2_HREF = 'tel:+15613517373';
 export const SOCIALS = [
   ['Instagram', 'https://www.instagram.com/alanluby', Instagram],
   ['YouTube', 'https://www.youtube.com/aluby1441', Youtube],
@@ -30,6 +32,7 @@ export const Footer: React.FC = () => (
         <ul className="space-y-2 text-[0.95rem]">
           <li><a href={`mailto:${EMAIL}`} className="text-muted hover:text-ink">{EMAIL}</a></li>
           <li><a href={PHONE_HREF} className="text-muted hover:text-ink">{PHONE}</a></li>
+          <li><a href={PHONE_2_HREF} className="text-muted hover:text-ink">{PHONE_2}</a></li>
           {SOCIALS.map(([label, href, Icon]) => (
             <li key={href}>
               <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted hover:text-ink">

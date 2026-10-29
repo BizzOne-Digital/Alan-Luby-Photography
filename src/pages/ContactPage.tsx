@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { inquiryOptions, parseInquiry } from '../data/services';
-import { EMAIL, PHONE, PHONE_HREF, SOCIALS } from '../components/Footer';
+import { EMAIL, PHONE, PHONE_2, PHONE_2_HREF, PHONE_HREF, SOCIALS } from '../components/Footer';
 import { PageMeta } from '../components/PageMeta';
 import { TextReveal } from '../components/Motion';
 
@@ -148,7 +148,7 @@ export const ContactPage: React.FC = () => {
     <>
       <PageMeta
         title="Inquire"
-        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 351-7373."
+        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 340-9310."
       />
 
       <section className="wrap grid gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
@@ -244,6 +244,9 @@ export const ContactPage: React.FC = () => {
             </p>
             <p>
               <a href={PHONE_HREF} className="text-link text-lg">{PHONE}</a>
+            </p>
+            <p>
+              <a href={PHONE_2_HREF} className="text-link text-lg">{PHONE_2}</a>
             </p>
             {SOCIALS.map(([label, href, Icon]) => (
               <p key={href}>
