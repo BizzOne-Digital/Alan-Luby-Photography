@@ -1,10 +1,14 @@
 /// <reference types="vite/client" />
 import React, { useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { inquiryOptions, parseInquiry } from '../data/services';
-import { EMAIL, PHONE, PHONE_2, PHONE_2_HREF, PHONE_HREF, SOCIALS } from '../components/Footer';
+import { Globe } from 'lucide-react';
+import { parseInquiry } from '../data/services';
+import { SOCIAL_ICONS } from '../components/Footer';
 import { PageMeta } from '../components/PageMeta';
 import { TextReveal } from '../components/Motion';
+import { api, apiEnabled } from '../lib/api';
+import { telHref } from '../site/content';
+import { useSite } from '../site/SiteProvider';
 
 type Field = 'name' | 'email' | 'service' | 'date' | 'location' | 'phone' | 'message';
 type Values = Record<Field, string>;
@@ -22,7 +26,7 @@ const validate = (v: Values): Partial<Record<Field, string>> => {
  * No form backend is configured, so submitting composes an email in the visitor's own email app.
  * The UI says so plainly and never claims the inquiry was delivered.
  */
-const buildMailto = (v: Values) => {
+const buildMailto = (v: Values, EMAIL: string) => {
   const details = [
     `Name: ${v.name}`,
     `Email: ${v.email}`,
@@ -37,14 +41,19 @@ const buildMailto = (v: Values) => {
 };
 
 /**
- * Optional direct submission. Set VITE_FORM_ENDPOINT (e.g. a Formspree form URL, or https://api.web3forms.com/submit
+ * Direct submission. With a backend configured (VITE_API_URL) the inquiry is stored there and appears in the admin.
+ * Otherwise, optionally set VITE_FORM_ENDPOINT (e.g. a Formspree form URL, or https://api.web3forms.com/submit
  * together with VITE_FORM_ACCESS_KEY) at build time. The inquiry is POSTed as JSON and only reported as sent when the
  * service confirms it. Without an endpoint the form falls back to composing an email.
  */
 const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const FORM_ACCESS_KEY = import.meta.env.VITE_FORM_ACCESS_KEY as string | undefined;
 
-const submitInquiry = async (v: Values, subject: string) => {
+const submitInquiry = async (v: Values, subject: string, trap: string) => {
+  if (apiEnabled) {
+    await api('/contact', { method: 'POST', body: { ...v, website: trap } });
+    return;
+  }
   const res = await fetch(FORM_ENDPOINT!, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -57,13 +66,19 @@ const submitInquiry = async (v: Values, subject: string) => {
 const inputClass =
   'mt-2 block w-full min-h-12 rounded-md border border-ink/20 bg-white px-4 py-3 text-base text-ink placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 aria-[invalid=true]:border-red-700';
 
+const CAN_SEND = apiEnabled || Boolean(FORM_ENDPOINT);
+
 export const ContactPage: React.FC = () => {
+  const site = useSite();
+  const { email: EMAIL, phone: PHONE, phone2: PHONE_2, socials: SOCIALS } = site.settings;
+  const PHONE_HREF = telHref(PHONE);
+  const { content: c, seoTitle, seoDescription } = site.page('contact');
   const [searchParams] = useSearchParams();
   const subject = searchParams.get('subject');
   const [values, setValues] = useState<Values>({
     name: '',
     email: '',
-    service: parseInquiry(searchParams.get('service')),
+    service: parseInquiry(searchParams.get('service'), site.inquiryOptions),
     date: '',
     location: '',
     phone: '',
@@ -92,13 +107,13 @@ export const ContactPage: React.FC = () => {
       formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
-    const mail = buildMailto(values);
+    const mail = buildMailto(values, EMAIL);
     setCopied(false);
-    if (FORM_ENDPOINT) {
-      if (trap) return; // honeypot filled in: almost certainly a bot
+    if (CAN_SEND) {
+      if (trap && !apiEnabled) return; // honeypot filled in: almost certainly a bot (the backend checks it itself)
       setSendState('sending');
       try {
-        await submitInquiry(values, mail.subject);
+        await submitInquiry(values, mail.subject, trap);
         setSendState('sent');
       } catch {
         setSendState('failed');
@@ -146,18 +161,12 @@ export const ContactPage: React.FC = () => {
 
   return (
     <>
-      <PageMeta
-        title="Inquire"
-        description="Contact Alan Luby about event, wedding, engagement, portrait, sports or live performance photography in South Florida. Email aluby1441@aol.com or call (561) 340-9310."
-      />
+      <PageMeta title={seoTitle || undefined} description={seoDescription} />
 
       <section className="wrap grid gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
         <div>
-          <TextReveal as="h1" text="Let’s talk about your photographs." className="text-4xl sm:text-5xl" />
-          <p className="mt-4 max-w-xl text-lg text-muted">
-            Tell Alan about your event, wedding, portrait session, game or performance. A few details are enough to start the
-            conversation.
-          </p>
+          <TextReveal as="h1" text={c.heading} className="text-4xl sm:text-5xl" />
+          <p className="mt-4 max-w-xl text-lg text-muted">{c.intro}</p>
 
           {sendState === 'sent' ? (
             <div ref={noticeRef} tabIndex={-1} className="mt-10 space-y-4 rounded-lg border border-accent/30 bg-white p-6 sm:p-8" role="status">
@@ -198,7 +207,7 @@ export const ContactPage: React.FC = () => {
           ) : (
             <form ref={formRef} onSubmit={onSubmit} noValidate className="mt-10 space-y-6" aria-describedby="form-note">
               <p id="form-note" className="rounded-md bg-sand px-4 py-3 text-[0.95rem]">
-                {FORM_ENDPOINT
+                {CAN_SEND
                   ? 'Your inquiry goes straight to Alan. Fields marked * are required.'
                   : 'This form prepares an email in your own email app. Nothing is sent until you press Send there. Fields marked * are required.'}
               </p>
@@ -211,7 +220,7 @@ export const ContactPage: React.FC = () => {
                 'What would you like photographed?',
                 <select {...a11y('service')}>
                   <option value="">Choose one (optional)</option>
-                  {inquiryOptions.map((o) => <option key={o} value={o}>{o}</option>)}
+                  {site.inquiryOptions.map((o) => <option key={o} value={o}>{o}</option>)}
                 </select>,
               )}
               <div className="grid gap-6 sm:grid-cols-2">
@@ -224,13 +233,13 @@ export const ContactPage: React.FC = () => {
                 'Tell Alan about it *',
                 <textarea rows={6} placeholder="The occasion, roughly how long, who will be there, anything else that matters." {...a11y('message')} />,
               )}
-              {FORM_ENDPOINT && (
+              {CAN_SEND && (
                 <div aria-hidden className="absolute -left-[9999px]">
                   <label>Leave this empty<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
                 </div>
               )}
               <button type="submit" className="btn-primary" disabled={sendState === 'sending'}>
-                {FORM_ENDPOINT ? (sendState === 'sending' ? 'Sending…' : 'Send inquiry') : 'Prepare email to Alan'}
+                {CAN_SEND ? (sendState === 'sending' ? 'Sending…' : 'Send inquiry') : 'Prepare email to Alan'}
               </button>
             </form>
           )}
@@ -238,38 +247,48 @@ export const ContactPage: React.FC = () => {
 
         <aside className="space-y-10 lg:pt-28">
           <div className="space-y-3">
-            <h2 className="font-sans text-lg font-semibold">Prefer to reach Alan directly?</h2>
+            <h2 className="font-sans text-lg font-semibold">{c.directHeading}</h2>
+            {EMAIL && (
             <p>
               <a href={`mailto:${EMAIL}`} className="text-link text-lg">{EMAIL}</a>
             </p>
+            )}
+            {PHONE && (
             <p>
               <a href={PHONE_HREF} className="text-link text-lg">{PHONE}</a>
             </p>
+            )}
+            {PHONE_2 && (
             <p>
-              <a href={PHONE_2_HREF} className="text-link text-lg">{PHONE_2}</a>
+              <a href={telHref(PHONE_2)} className="text-link text-lg">{PHONE_2}</a>
             </p>
-            {SOCIALS.map(([label, href, Icon]) => (
-              <p key={href}>
-                <a href={href} target="_blank" rel="noopener noreferrer" className="text-link inline-flex items-center gap-2 text-lg">
+            )}
+            {SOCIALS.map(({ label, url, icon }) => {
+              const Icon = SOCIAL_ICONS[icon] ?? Globe;
+              return (
+              <p key={url}>
+                <a href={url} target="_blank" rel="noopener noreferrer" className="text-link inline-flex items-center gap-2 text-lg">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                   {label}<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </p>
-            ))}
+              );
+            })}
           </div>
+          {c.whereText && (
           <div className="space-y-2">
-            <h2 className="font-sans text-lg font-semibold">Where Alan works</h2>
-            <p className="text-muted">Based in Boynton Beach, Florida, photographing events, weddings, portraits, sports and performances across South Florida.</p>
+            <h2 className="font-sans text-lg font-semibold">{c.whereHeading}</h2>
+            <p className="text-muted">{c.whereText}</p>
           </div>
+          )}
+          {c.helpfulItems.trim() && (
           <div className="space-y-2">
-            <h2 className="font-sans text-lg font-semibold">Helpful to include</h2>
+            <h2 className="font-sans text-lg font-semibold">{c.helpfulHeading}</h2>
             <ul className="space-y-1 text-muted">
-              <li>The type of occasion or session</li>
-              <li>The date, if it’s set</li>
-              <li>The venue or area</li>
-              <li>Anything you especially want captured</li>
+              {c.helpfulItems.split('\n').map((item) => item.trim()).filter(Boolean).map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
+          )}
         </aside>
       </section>
     </>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PhotoItem } from '../types';
-import { categoryLabels } from '../data/photography';
+import { useSite } from '../site/SiteProvider';
 import { Photo } from './Photo';
 import { Lightbox } from './Lightbox';
 import { motion } from 'motion/react';
@@ -15,6 +15,7 @@ interface GalleryProps {
 /** Uncropped photographs in justified rows; each opens the lightbox. */
 export const Gallery: React.FC<GalleryProps> = ({ photos, showCategory, fill }) => {
   const [active, setActive] = useState<number | null>(null);
+  const { categoryLabels } = useSite();
 
   return (
     <>

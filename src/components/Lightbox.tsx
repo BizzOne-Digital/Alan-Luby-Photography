@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { PhotoItem } from '../types';
-import { categoryLabels } from '../data/photography';
-import { inquiryHref, serviceById } from '../data/services';
+import { inquiryHref } from '../data/services';
+import { useSite } from '../site/SiteProvider';
 
 interface LightboxProps {
   photos: PhotoItem[];
@@ -20,6 +20,8 @@ export const Lightbox: React.FC<LightboxProps> = ({ photos, index, onChange }) =
   const opener = useRef<HTMLElement | null>(null);
   const open = index !== null;
   const photo = open ? photos[index] : null;
+  const { categoryLabels, service: serviceById } = useSite();
+  const service = photo ? serviceById(photo.category) : undefined;
 
   useEffect(() => {
     const dialog = ref.current;
@@ -69,8 +71,8 @@ export const Lightbox: React.FC<LightboxProps> = ({ photos, index, onChange }) =
             <img
               key={photo.id}
               src={photo.src}
-              srcSet={photo.srcSet}
-              sizes="100vw"
+              srcSet={photo.srcSet || undefined}
+              sizes={photo.srcSet ? '100vw' : undefined}
               alt={photo.alt}
               width={photo.width}
               height={photo.height}
@@ -96,10 +98,10 @@ export const Lightbox: React.FC<LightboxProps> = ({ photos, index, onChange }) =
               <span className="text-white/60"> · {categoryLabels[photo.category]}</span>
             </p>
             <Link
-              to={inquiryHref(serviceById(photo.category).inquiryValue)}
+              to={inquiryHref(service?.inquiryValue)}
               className="text-[0.95rem] font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
             >
-              Inquire about {serviceById(photo.category).title.toLowerCase()}
+              {service ? `Inquire about ${service.title.toLowerCase()}` : 'Inquire'}
             </Link>
           </div>
         </div>

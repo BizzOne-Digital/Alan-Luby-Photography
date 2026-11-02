@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { PageKey } from '../site/content';
+import { useSite } from '../site/SiteProvider';
 
-const NAV = [
-  { to: '/work', label: 'Work' },
-  { to: '/services', label: 'Services' },
-  { to: '/about', label: 'About' },
+const ALL_NAV: { to: string; label: string; key: PageKey }[] = [
+  { to: '/work', label: 'Work', key: 'work' },
+  { to: '/services', label: 'Services', key: 'services' },
+  { to: '/about', label: 'About', key: 'about' },
 ];
 
 export const Wordmark: React.FC = () => (
@@ -36,6 +38,10 @@ export const Header: React.FC = () => {
   const { pathname } = useLocation();
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
+  const { page } = useSite();
+  const NAV = ALL_NAV.filter((item) => page(item.key).published);
+  const contact = page('contact').published;
+  const testimonials = page('testimonials').published;
 
   // Slide away while scrolling down, return on any scroll up.
   useMotionValueEvent(scrollY, 'change', (y) => {
@@ -72,13 +78,15 @@ export const Header: React.FC = () => {
               {item.label}
             </NavLink>
           ))}
+          {contact && (
           <Link to="/contact" className="btn-primary min-h-11 px-5">
             Inquire
           </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-1 lg:hidden">
-        {pathname !== '/contact' && (
+        {contact && pathname !== '/contact' && (
           <Link to="/contact" className="btn-primary min-h-10 px-4 text-sm">
             Inquire
           </Link>
@@ -99,14 +107,16 @@ export const Header: React.FC = () => {
       {open && (
         <nav id="mobile-nav" aria-label="Main" className="border-t border-line bg-paper lg:hidden">
           <div className="wrap flex flex-col py-4">
-            {[...NAV, { to: '/testimonials', label: 'Testimonials' }].map((item) => (
+            {[...NAV, ...(testimonials ? [{ to: '/testimonials', label: 'Testimonials' }] : [])].map((item) => (
               <NavLink key={item.to} to={item.to} className={({ isActive }) => `py-3 text-lg ${isActive ? 'font-semibold text-ink' : 'text-muted'}`}>
                 {item.label}
               </NavLink>
             ))}
+            {contact && (
             <Link to="/contact" className="btn-primary mt-4 self-start">
               Inquire
             </Link>
+            )}
           </div>
         </nav>
       )}

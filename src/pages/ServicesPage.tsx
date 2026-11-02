@@ -1,41 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { inquiryHref, servicesData } from '../data/services';
-import { attributionOf, testimonialById } from '../data/testimonials';
+import { inquiryHref } from '../data/services';
+import { attributionOf } from '../data/testimonials';
 import { Photo } from '../components/Photo';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
 import { ImageReveal, Reveal, TextReveal } from '../components/Motion';
+import { useSite } from '../site/SiteProvider';
 
-const PROCESS = [
-  { title: 'Get in touch', text: 'Send a short inquiry or call. Mention the occasion, the date and the location if you know them.' },
-  { title: 'Plan together', text: 'Alan talks through the schedule, the people who matter most and the moments you want covered.' },
-  { title: 'The day itself', text: 'Alan arrives prepared and works quietly around your program, session, game or show.' },
-  { title: 'Your photographs', text: 'You receive edited, color-corrected digital images, ready to share and print.' },
-];
+export const ServicesPage: React.FC = () => {
+  const site = useSite();
+  const { content: c, seoTitle, seoDescription } = site.page('services');
+  const PROCESS = [1, 2, 3, 4].map((n) => ({ title: c[`step${n}Title`], text: c[`step${n}Text`] })).filter((s) => s.title);
 
-export const ServicesPage: React.FC = () => (
+  return (
   <>
-    <PageMeta
-      title="Services"
-      description="Event and celebration photography, weddings and engagements, portraits and business headshots, sports and live performance photography by Alan Luby in South Florida."
-    />
+    <PageMeta title={seoTitle || undefined} description={seoDescription} />
 
     <section className="wrap pb-12 pt-12 sm:pt-16">
-      <TextReveal as="h1" text="Services" className="text-4xl sm:text-5xl" />
-      <p className="mt-4 max-w-2xl text-lg text-muted">
-        Alan photographs people at their occasions and weddings, in portraits, in competition and on stage. Here is what each kind of
-        coverage includes and how to start a conversation about yours.
-      </p>
+      <TextReveal as="h1" text={c.heading} className="text-4xl sm:text-5xl" />
+      <p className="mt-4 max-w-2xl text-lg text-muted">{c.intro}</p>
       <nav aria-label="Services on this page" className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-        {servicesData.map((s) => (
+        {site.services.map((s) => (
           <a key={s.id} href={`#${s.id}`} className="text-link">{s.title}</a>
         ))}
       </nav>
     </section>
 
-    {servicesData.map((s, i) => {
-      const quote = s.testimonialId ? testimonialById(s.testimonialId) : null;
+    {site.services.map((s, i) => {
+      const quote = s.testimonialId ? site.testimonial(s.testimonialId) : null;
       const flip = i % 2 === 1;
       return (
         <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="border-t border-line py-16 lg:py-24">
@@ -56,10 +49,13 @@ export const ServicesPage: React.FC = () => (
             <div className={`space-y-6 lg:pt-4 ${flip ? 'lg:order-1' : ''}`}>
               <TextReveal id={`${s.id}-title`} text={s.title} className="text-3xl sm:text-4xl" />
               <Reveal><p className="text-lg">{s.summary}</p></Reveal>
+              {s.whoFor && (
               <div>
                 <h3 className="mb-1 text-base">Who it’s for</h3>
                 <p className="text-muted">{s.whoFor}</p>
               </div>
+              )}
+              {s.photographs.length > 0 && (
               <div>
                 <h3 className="mb-2 text-base">What Alan photographs</h3>
                 <ul className="space-y-1.5 text-muted">
@@ -71,9 +67,10 @@ export const ServicesPage: React.FC = () => (
                   ))}
                 </ul>
               </div>
+              )}
               {quote && (
                 <figure className="border-l-2 border-accent/40 pl-5">
-                  <blockquote className="font-display text-lg leading-snug">“{quote.excerpt}”</blockquote>
+                  <blockquote className="font-display text-lg leading-snug">“{quote.excerpt || quote.quote}”</blockquote>
                   <figcaption className="mt-2 text-sm text-muted">{attributionOf(quote)}</figcaption>
                 </figure>
               )}
@@ -87,9 +84,10 @@ export const ServicesPage: React.FC = () => (
       );
     })}
 
+    {PROCESS.length > 0 && (
     <section aria-labelledby="process" className="border-t border-line bg-sand/50 py-16 lg:py-24">
       <div className="wrap">
-        <TextReveal id="process" text="How it works" className="text-3xl sm:text-4xl" />
+        <TextReveal id="process" text={c.processHeading} className="text-3xl sm:text-4xl" />
         <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {PROCESS.map((step, i) => (
             <li key={step.title}>
@@ -103,7 +101,9 @@ export const ServicesPage: React.FC = () => (
         </ol>
       </div>
     </section>
+    )}
 
     <InquiryBand />
   </>
-);
+  );
+};

@@ -1,33 +1,35 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { categoryLabels, parseCategory, photographyCollection } from '../data/photography';
-import { inquiryHref, serviceById } from '../data/services';
-import { PhotoCategory } from '../types';
+import { parseCategory } from '../data/photography';
+import { inquiryHref } from '../data/services';
 import { Gallery } from '../components/Gallery';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
 import { TextReveal } from '../components/Motion';
-
-const FILTERS: (PhotoCategory | null)[] = [null, 'events', 'weddings', 'portraits', 'sports', 'performance'];
+import { useSite } from '../site/SiteProvider';
 
 export const WorkPage: React.FC = () => {
+  const site = useSite();
+  const { content: c, seoTitle, seoDescription } = site.page('work');
+  const { categoryLabels } = site;
   const [searchParams, setSearchParams] = useSearchParams();
-  const active = parseCategory(searchParams.get('category'));
-  const photos = active ? photographyCollection.filter((p) => p.category === active) : photographyCollection;
-  const service = active && serviceById(active);
+  const param = parseCategory(searchParams.get('category')) ?? searchParams.get('category');
+  const active = param && categoryLabels[param] ? param : null;
+  const photos = active ? site.workPhotos.filter((p) => p.category === active) : site.workPhotos;
+  const service = active ? site.service(active) : undefined;
+  // Only categories that have photos get a filter button.
+  const FILTERS: (string | null)[] = [null, ...site.services.map((s) => s.id).filter((id) => site.workPhotos.some((p) => p.category === id))];
 
   return (
     <>
       <PageMeta
-        title={active ? `${categoryLabels[active]} photography` : 'Work'}
-        description="Selected photographs by Alan Luby: events and celebrations, weddings and engagements, portraits, sports and live performance across South Florida."
+        title={active ? `${categoryLabels[active]} photography` : seoTitle || undefined}
+        description={seoDescription}
       />
 
       <section className="wrap pb-20 pt-12 sm:pt-16">
-        <TextReveal as="h1" text="Work" className="text-4xl sm:text-5xl" />
-        <p className="mt-4 max-w-xl text-lg text-muted">
-          A selection of recent photographs. Choose a category, or select any photograph to see it in full.
-        </p>
+        <TextReveal as="h1" text={c.heading} className="text-4xl sm:text-5xl" />
+        <p className="mt-4 max-w-xl text-lg text-muted">{c.intro}</p>
 
         <div role="group" aria-label="Filter by category" className="mt-10 flex flex-wrap gap-2 border-b border-line pb-6">
           {FILTERS.map((key) => {

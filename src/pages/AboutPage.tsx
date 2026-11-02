@@ -1,27 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { careerPhoto, photoById } from '../data/photography';
 import { Photo } from '../components/Photo';
 import { InquiryBand } from '../components/InquiryBand';
 import { PageMeta } from '../components/PageMeta';
 import { ImageReveal, Reveal, TextReveal } from '../components/Motion';
+import { mediaUrl } from '../lib/api';
+import { useSite } from '../site/SiteProvider';
 
-const examples = ['dsc-5575', 'dsc-46779', 'dsc-68467'].map(photoById);
+export const AboutPage: React.FC = () => {
+  const site = useSite();
+  const { content: c, seoTitle, seoDescription } = site.page('about');
+  const careerPhoto = site.photo(c.careerPhoto);
+  const examples = site.photoList(c.examplesPhotos);
+  const approach = [1, 2, 3, 4].map((n) => [c[`approach${n}Title`], c[`approach${n}Text`]]).filter(([term]) => term);
 
-export const AboutPage: React.FC = () => (
+  return (
   <>
-    <PageMeta
-      title="About Alan Luby"
-      description="Alan Luby is a Boynton Beach photographer with over 30 years of experience photographing events, weddings, portraits, sports and live performances."
-    />
+    <PageMeta title={seoTitle || undefined} description={seoDescription} />
 
     <section className="wrap grid gap-10 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:pb-24">
       <div>
-        <p className="eyebrow">About</p>
-        <TextReveal as="h1" text="Alan Luby photographs people at their best moments." className="mt-3 text-4xl sm:text-5xl" />
+        <p className="eyebrow">{c.eyebrow}</p>
+        <TextReveal as="h1" text={c.heading} className="mt-3 text-4xl sm:text-5xl" />
+        {c.portrait && (
         <ImageReveal delay={0.2} className="mt-8 aspect-[4/5] max-w-md">
           <img
-            src="/alan/AlanLuby.jpg"
+            src={mediaUrl(c.portrait)}
             alt="Portrait of photographer Alan Luby"
             width={3000}
             height={1995}
@@ -29,61 +33,39 @@ export const AboutPage: React.FC = () => (
             className="h-full w-full object-cover object-[55%_center]"
           />
         </ImageReveal>
+        )}
       </div>
 
       <Reveal delay={0.3} className="max-w-2xl space-y-5 text-lg lg:pt-10">
-        <p>
-          I'm a freelance photographer who currently resides in Boynton Beach. I am a member of the Black Chamber of
-          Commerce of Palm Beach County a former member of ASMP The American Society of Media Photographers. I have been
-          hired to cover events by the Miami Herald, Palm Beach Post, South Florida Times, South Florida Sun-Sentinel, the
-          Associated Press and numerous other publications. I have over 30 years of photography experience and was the
-          team photographer for the Florida Bobcats of the Arena Football League and the Florida Beachdogs of the
-          Continental Basketball Association.
-        </p>
-        <p className="text-muted">
-          As a freelance photographer I have had the opportunity to cover the Miami Dolphins, Miami Heat, Miami Marlins,
-          University of Miami, President Barack Obama, the victory party for Florida Gov. Rick Scott and numerous other
-          news, sports and feature assignments for various publications.
-        </p>
-        <p className="text-muted">
-          I’m also a portrait and wedding photographer that has done event photography with on-site printing for
-          Motorola, American Society of Kidney Patients, Palm Beach State College, Big Brothers, Big Sisters of Palm Beach
-          County, BB King's and numerous other profit and not-for-profit organizations.
-        </p>
+        {c.bio1 && <p>{c.bio1}</p>}
+        {c.bio2 && <p className="text-muted">{c.bio2}</p>}
+        {c.bio3 && <p className="text-muted">{c.bio3}</p>}
       </Reveal>
     </section>
 
     <section aria-labelledby="career" className="border-t border-line py-16 lg:py-24">
       <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:gap-20">
         <div className="space-y-4">
-          <p className="eyebrow">Career highlight</p>
-          <TextReveal id="career" text="Ready for the moment that matters" className="text-3xl sm:text-4xl" />
+          <p className="eyebrow">{c.careerEyebrow}</p>
+          <TextReveal id="career" text={c.careerHeading} className="text-3xl sm:text-4xl" />
           <Reveal>
-            <p className="text-muted">
-              Alan’s years covering news for South Florida publications included photographing President Barack Obama.
-              That experience of working fast, in crowds and under pressure, is the same calm he brings to events today.
-            </p>
+            <p className="text-muted">{c.careerText}</p>
           </Reveal>
         </div>
         <figure>
           <ImageReveal>
             <Photo photo={careerPhoto} sizes="(min-width: 1024px) 55vw, 100vw" />
           </ImageReveal>
-          <figcaption className="mt-2 text-sm text-muted">{careerPhoto.title}. Photograph by Alan Luby.</figcaption>
+          {careerPhoto.title && <figcaption className="mt-2 text-sm text-muted">{careerPhoto.title}. Photograph by Alan Luby.</figcaption>}
         </figure>
       </div>
     </section>
 
     <section aria-labelledby="approach" className="border-t border-line py-16 lg:py-24">
       <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
-        <TextReveal id="approach" text="How Alan works" className="text-3xl sm:text-4xl" />
+        <TextReveal id="approach" text={c.approachHeading} className="text-3xl sm:text-4xl" />
         <dl className="grid max-w-2xl gap-8 sm:grid-cols-2">
-          {[
-            ['Prepared and on time', 'He plans around your schedule and arrives ready, so the day runs smoothly.'],
-            ['People at ease', 'Relaxed direction helps portrait subjects and guests stop worrying about the camera.'],
-            ['Watching for moments', 'The laugh, the embrace and the reaction often happen between the planned moments.'],
-            ['Natural results', 'Careful editing keeps skin tones and colors true to the day.'],
-          ].map(([term, text]) => (
+          {approach.map(([term, text]) => (
             <div key={term}>
               <dt className="font-semibold">{term}</dt>
               <dd className="mt-1.5 text-muted">{text}</dd>
@@ -93,10 +75,11 @@ export const AboutPage: React.FC = () => (
       </div>
     </section>
 
+    {examples.length > 0 && (
     <section aria-labelledby="examples" className="border-t border-line py-16 lg:py-24">
       <div className="wrap">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <TextReveal id="examples" text="Examples of Alan’s work" className="text-3xl sm:text-4xl" />
+          <TextReveal id="examples" text={c.examplesHeading} className="text-3xl sm:text-4xl" />
           <Link to="/work" className="text-link">View the portfolio</Link>
         </div>
         <ul className="grid gap-4 sm:grid-cols-3">
@@ -113,7 +96,9 @@ export const AboutPage: React.FC = () => (
         </ul>
       </div>
     </section>
+    )}
 
-    <InquiryBand title="Have an occasion in mind?" />
+    <InquiryBand title={c.closingTitle} />
   </>
-);
+  );
+};

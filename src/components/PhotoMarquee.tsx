@@ -1,5 +1,6 @@
 import React from 'react';
 import { PhotoItem } from '../types';
+import { thumbOf } from './Photo';
 
 /** Two rows of photographs drifting in opposite directions. Decorative; the same photos are on the Work page. */
 export const PhotoMarquee: React.FC<{ rows: [PhotoItem[], PhotoItem[]] }> = ({ rows }) => (
@@ -9,7 +10,7 @@ export const PhotoMarquee: React.FC<{ rows: [PhotoItem[], PhotoItem[]] }> = ({ r
         {[...row, ...row].map((p, i) => (
           <img
             key={`${p.id}-${i}`}
-            src={`/images/work/${p.id}-640.webp`}
+            src={thumbOf(p)}
             alt=""
             width={p.width}
             height={p.height}

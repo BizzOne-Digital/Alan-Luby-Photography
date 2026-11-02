@@ -1,7 +1,7 @@
 import { PhotoCategory, ServiceItem } from '../types';
-import { photoById } from './photography';
+import { categoryLabels, photoById } from './photography';
 
-export const servicesData: ServiceItem[] = [
+export const servicesData: ServiceItem[] = ([
   {
     id: 'events',
     title: 'Events & celebrations',
@@ -92,7 +92,7 @@ export const servicesData: ServiceItem[] = [
     image: photoById('dsc-81284'),
     supporting: [photoById('jws-47274'), photoById('dsc-6696')],
   },
-];
+] as Omit<ServiceItem, 'categoryLabel'>[]).map((s) => ({ ...s, categoryLabel: categoryLabels[s.id] }));
 
 export const serviceById = (id: PhotoCategory) => servicesData.find((s) => s.id === id)!;
 
@@ -102,9 +102,9 @@ export const OTHER_INQUIRY = 'Something else';
 export const inquiryOptions = [...servicesData.map((s) => s.inquiryValue), OTHER_INQUIRY];
 
 /** Map current and retired `?service=` values onto a current form option. */
-export const parseInquiry = (value: string | null): string => {
+export const parseInquiry = (value: string | null, options: string[] = inquiryOptions): string => {
   if (!value) return '';
-  if (inquiryOptions.includes(value)) return value;
+  if (options.includes(value)) return value;
   const legacy: Record<string, string> = {
     'Event Photography': 'Events & celebrations',
     'Portrait Photography': 'Portraits',

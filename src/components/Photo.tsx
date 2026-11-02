@@ -11,11 +11,14 @@ interface PhotoProps {
   className?: string;
 }
 
+/** Smallest available version of a photo (first srcset entry), for thumbnails. Uploaded photos have a single size. */
+export const thumbOf = (photo: PhotoItem) => photo.srcSet.split(' ')[0] || photo.src;
+
 export const Photo: React.FC<PhotoProps> = ({ photo, sizes, priority, cover, className = '' }) => (
   <img
     src={photo.src}
-    srcSet={photo.srcSet}
-    sizes={sizes}
+    srcSet={photo.srcSet || undefined}
+    sizes={photo.srcSet ? sizes : undefined}
     width={photo.width}
     height={photo.height}
     alt={photo.alt}

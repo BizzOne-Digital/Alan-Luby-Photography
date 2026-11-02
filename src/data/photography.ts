@@ -339,6 +339,12 @@ export const heroPhoto = photoById('jws-24957');
 
 export const selectedWork = ['dsc-46779', 'dsc-45375', 'dsc-11003', 'dsc-16185', 'dsc-11768', 'dsc-1570', 'jws-33598', 'dsc-01779'].map(photoById);
 
+/** Homepage photo strip, two rows. */
+export const marqueeIds = [
+  ['dsc-61146', 'dsc-6315', '01600016', 'dsc-25324', 'dsc-40001', 'dsc-7122', 'dsc-0833b', 'dsc-58824', 'dsc-2023', 'dsc-303571', 'dsc-6967', 'dsc-68234', 'dsc-7332', 'dsc-25825', 'dsc-4970'],
+  ['dsc-95856', 'dsc-1413', 'dsc-5526', 'dsc-40902', 'dsc-6031', 'jws-37126', 'dsc-3973', 'dsc-2897', 'dsc-55581', 'dsc-79685', 'dsc-16047', 'dsc-39269', 'jws-02313', 'dsc-3502', 'jws-85879-8x10'],
+];
+
 export const categoryLabels: Record<PhotoCategory, string> = {
   events: 'Events',
   weddings: 'Weddings & Engagements',
